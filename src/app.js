@@ -1,3 +1,7 @@
+const spinner = document.querySelector(
+  "#paypal-button-container .loading-spinner"
+);
+
 window.paypal
   .Buttons({
     style: {
@@ -92,7 +96,10 @@ window.paypal
       }
     },
   })
-  .render("#paypal-button-container");
+  .render("#paypal-button-container")
+  .then(() => {
+    if (spinner) spinner.remove();
+  });
 
 function resultMessage(message) {
   const container = document.querySelector("#result-message");

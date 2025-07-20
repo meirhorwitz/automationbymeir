@@ -1,4 +1,13 @@
 /**
+ * This script handles the client-side logic for the PayPal payment flow.
+ */
+
+// Get the spinner element to show while PayPal buttons are loading.
+const spinner = document.querySelector(
+  "#paypal-button-container .loading-spinner"
+);
+
+/**
  * Renders the PayPal Buttons and handles the entire payment flow.
  */
 window.paypal
@@ -112,7 +121,6 @@ window.paypal
       } catch (error) {
         console.error("Server-side capture failed. Falling back to client-side.", error);
         // Fallback to client-side capture if the server call fails
-        // This is not a common practice for production apps but provides a fallback
         return actions.order
           .capture()
           .then((details) => {
@@ -130,7 +138,11 @@ window.paypal
       }
     },
   })
-  .render("#paypal-button-container");
+  .render("#paypal-button-container")
+  .then(() => {
+    // Remove the spinner once the buttons are rendered
+    if (spinner) spinner.remove();
+  });
 
 /**
  * Helper function to display a message to the user.
