@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Puzzle - Build Your Perfect Workflow</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #f8f9fa;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Background Animation */
+        
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(66, 133, 244, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(66, 133, 244, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Floating particles */
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(66, 133, 244, 0.8), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            50% { 
+                transform: translateY(-100vh) translateX(100px) scale(1.5);
+            }
+        }
+        
+        /* Main Container */
+        
+        .container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Service Panel */
+        
+        .service-panel {
+            width: 300px;
+            background: rgba(32, 33, 36, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(66, 133, 244, 0.3);
+            padding: 2rem;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .service-panel .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-panel .panel-header svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+        
+        .service-panel h2 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Service Categories */
+        
+        .service-category {
+            margin-bottom: 2rem;
+        }
+        
+        .category-title {
+            font-size: 0.875rem;
+            color: #5f6368;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Service Items */
+        
+        .service-item {
+            background: rgba(45, 45, 48, 0.8);
+            border: 1px solid rgba(95, 99, 104, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--service-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--service-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        
+        .service-item:hover::before {
+            opacity: 0.1;
+        }
+        
+        .service-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+        
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .service-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #f8f9fa;
+        }
+        
+        .service-desc {
+            font-size: 0.75rem;
+            color: #9aa0a6;
+            margin-top: 0.25rem;
+        }
+        
+        /* Canvas Area */
+        
+        .canvas-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        /* Connection Lines */
+        
+        #connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Dropped Service */
+        
+        .dropped-service {
+            position: absolute;
+            background: rgba(32, 33, 36, 0.95);
+            border: 2px solid var(--service-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: move;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            animation: dropIn 0.5s ease;
+            z-index: 10;
+        }
+        
+        @keyframes dropIn {
+            0% {
+                transform: scale(0.8) translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .dropped-service:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+        }
+        
+        .dropped-service.selected {
+            border-color: #FBBC04;
+            box-shadow: 0 0 0 3px rgba(251, 188, 4, 0.3);
+        }
+        
+        .dropped-service .remove-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #EA4335;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropped-service .remove-btn:hover {
+            transform: scale(1.2);
+            background: #ff5847;
+        }
+        
+        /* Connection Points */
+        
+        .connection-point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #4285F4;
+            border: 2px solid #f8f9fa;
+            border-radius: 50%;
+            cursor: crosshair;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+        
+        .connection-point.input {
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #34A853;
+        }
+        
+        .connection-point.output {
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #FBBC04;
+        }
+        
+        .connection-point:hover {
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.3);
+        }
+        
+        /* Info Panel */
+        
+        .info-panel {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(32, 33, 36, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 300px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .info-panel h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #4285F4;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: rgba(66, 133, 244, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(66, 133, 244, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--stat-color);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: #9aa0a6;
+            margin-top: 0.25rem;
+        }
+        
+        /* Action Buttons */
+        
+        .action-buttons {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(66, 133, 244, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(45, 45, 48, 0.8);
+            color: #f8f9fa;
+            border: 1px solid rgba(95, 99, 104, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(60, 60, 60, 0.8);
+            border-color: rgba(66, 133, 244, 0.5);
+        }
+        
+        /* Success Animation */
+        
+        .success-pulse {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 168, 83, 0.8), transparent);
+            animation: pulse 1s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+        
+        /* Mobile Responsive */
+        
+        @media (max-width: 768px) {
+            .service-panel {
+                width: 250px;
+            }
+            
+            .info-panel {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+            
+            .action-buttons {
+                top: 1rem;
+                right: 1rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+    
+    <div class="container">
+        <!-- Service Panel -->
+        <div class="service-panel">
+            <div class="panel-header">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 48H8C5.79086 48 4 46.2091 4 44V4C4 1.79086 5.79086 0 8 0H30L44 14V44C44 46.2091 42.2091 48 40 48Z" fill="#2D2D30"/><path d="M30 0L44 14H34C31.7909 14 30 12.2091 30 10V0Z" fill="#424242"/><path d="M22 26L18 30L22 34" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26L34 30L30 34" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 40L24 36L28 40" stroke="#FBBC04" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <h2>Service Blocks</h2>
+            </div>
+            
+            <div class="service-category">
+                <div class="category-title">Google Services</div>
+                <div class="service-item" draggable="true" data-service="sheets" style="--service-color: #34A853;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#34A853" rx="8"/>
+                        <path d="M16 16h16v2H16zm0 6h16v2H16zm0 6h10v2H16z" fill="white"/>
+                    </svg>
+                    <div class="service-name">Google Sheets</div>
+                    <div class="service-desc">Spreadsheet automation</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="gmail" style="--service-color: #EA4335;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#EA4335" rx="8"/>
+                        <path d="M12 18l12 9 12-9v12H12z" fill="white"/>
+                    </svg>
+                    <div class="service-name">Gmail</div>
+                    <div class="service-desc">Email automation</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="drive" style="--service-color: #FBBC04;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#FBBC04" rx="8"/>
+                        <path d="M24 12l8 14h-16z" fill="white"/>
+                    </svg>
+                    <div class="service-name">Google Drive</div>
+                    <div class="service-desc">File management</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="calendar" style="--service-color: #4285F4;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#4285F4" rx="8"/>
+                        <rect x="12" y="16" width="24" height="20" fill="white" rx="2"/>
+                        <text x="24" y="30" text-anchor="middle" fill="#4285F4" font-size="14" font-weight="bold">31</text>
+                    </svg>
+                    <div class="service-name">Google Calendar</div>
+                    <div class="service-desc">Schedule automation</div>
+                </div>
+            </div>
+            
+            <div class="service-category">
+                <div class="category-title">AI Services</div>
+                <div class="service-item" draggable="true" data-service="openai" style="--service-color: #10a37f;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#10a37f" rx="8"/>
+                        <circle cx="24" cy="24" r="10" fill="white"/>
+                    </svg>
+                    <div class="service-name">OpenAI GPT</div>
+                    <div class="service-desc">AI text generation</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="claude" style="--service-color: #6366f1;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#6366f1" rx="8"/>
+                        <path d="M24 14c-5.5 0-10 4.5-10 10s4.5 10 10 10" fill="none" stroke="white" stroke-width="3"/>
+                    </svg>
+                    <div class="service-name">Claude AI</div>
+                    <div class="service-desc">Advanced reasoning</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="gemini" style="--service-color: #8e44ad;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#8e44ad" rx="8"/>
+                        <path d="M24 16l4 8-4 8-4-8z" fill="white"/>
+                    </svg>
+                    <div class="service-name">Google Gemini</div>
+                    <div class="service-desc">Multimodal AI</div>
+                </div>
+            </div>
+            
+            <div class="service-category">
+                <div class="category-title">Integration Tools</div>
+                <div class="service-item" draggable="true" data-service="webhook" style="--service-color: #e74c3c;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#e74c3c" rx="8"/>
+                        <path d="M16 24h16M24 16v16" stroke="white" stroke-width="3"/>
+                    </svg>
+                    <div class="service-name">Webhook</div>
+                    <div class="service-desc">HTTP triggers</div>
+                </div>
+                
+                <div class="service-item" draggable="true" data-service="firebase" style="--service-color: #ff9800;">
+                    <svg class="service-icon" viewBox="0 0 48 48">
+                        <rect width="48" height="48" fill="#ff9800" rx="8"/>
+                        <path d="M24 14l6 20h-12z" fill="white"/>
+                    </svg>
+                    <div class="service-name">Firebase</div>
+                    <div class="service-desc">Real-time database</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Canvas Area -->
+        <div class="canvas-area">
+            <svg id="connections"></svg>
+            <div class="canvas" id="canvas"></div>
+        </div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn btn-secondary" onclick="window.location.href='index.html'">Home</button>
+        <button class="btn btn-secondary" onclick="clearCanvas()">Clear All</button>
+        <button class="btn btn-primary" onclick="runAutomation()">Run Automation</button>
+    </div>
+    
+    <!-- Info Panel -->
+    <div class="info-panel">
+        <h3>Your Automation</h3>
+        <p style="color: #9aa0a6; font-size: 0.875rem;">Drag services to the canvas and connect them to build your workflow.</p>
+        <div class="stats">
+            <div class="stat" style="--stat-color: #4285F4;">
+                <div class="stat-value" id="serviceCount">0</div>
+                <div class="stat-label">Services</div>
+            </div>
+            <div class="stat" style="--stat-color: #34A853;">
+                <div class="stat-value" id="connectionCount">0</div>
+                <div class="stat-label">Connections</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Global variables ---
+        let droppedServices = [];
+        let connections = [];
+        let currentConnection = null;
+        let serviceIdCounter = 0;
+
+        // --- Initialization ---
+        function createParticles() {
+            const particleContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // --- Drag and Drop functionality ---
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+        });
+
+        const canvas = document.getElementById('canvas');
+        canvas.addEventListener('dragover', handleDragOver);
+        canvas.addEventListener('drop', handleDrop);
+
+        function handleDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'copy';
+            e.dataTransfer.setData('service', e.target.dataset.service);
+            e.dataTransfer.setData('color', e.target.style.getPropertyValue('--service-color'));
+            e.dataTransfer.setData('name', e.target.querySelector('.service-name').textContent);
+            e.dataTransfer.setData('icon', e.target.querySelector('.service-icon').outerHTML);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            
+            const service = e.dataTransfer.getData('service');
+            const color = e.dataTransfer.getData('color');
+            const name = e.dataTransfer.getData('name');
+            const icon = e.dataTransfer.getData('icon');
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left - 75; // Adjust for element width
+            const y = e.clientY - rect.top - 50;  // Adjust for element height
+            
+            createDroppedService(service, color, name, icon, x, y);
+        }
+
+        function createDroppedService(service, color, name, icon, x, y) {
+            const id = 'service-' + serviceIdCounter++;
+            const div = document.createElement('div');
+            div.className = 'dropped-service';
+            div.id = id;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.style.setProperty('--service-color', color);
+            
+            div.innerHTML = `
+                ${icon}
+                <div class="service-name">${name}</div>
+                <button class="remove-btn" onclick="removeService('${id}')">×</button>
+                <div class="connection-point input" data-service="${id}" data-type="input"></div>
+                <div class="connection-point output" data-service="${id}" data-type="output"></div>
+            `;
+            
+            canvas.appendChild(div);
+            
+            makeDraggable(div);
+            
+            div.querySelectorAll('.connection-point').forEach(point => {
+                point.addEventListener('click', handleConnectionClick);
+            });
+            
+            droppedServices.push({ id, service, name, color, x, y });
+            
+            updateStats();
+            
+            createSuccessAnimation(x + 75, y + 50);
+        }
+
+        function makeDraggable(element) {
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            element.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            function dragStart(e) {
+                if (e.target.classList.contains('connection-point') || 
+                    e.target.classList.contains('remove-btn')) {
+                    return;
+                }
+                
+                const transform = window.getComputedStyle(element).transform;
+                if (transform && transform !== 'none') {
+                    const matrix = new DOMMatrix(transform);
+                    xOffset = matrix.m41;
+                    yOffset = matrix.m42;
+                } else {
+                    xOffset = 0;
+                    yOffset = 0;
+                }
+                
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+
+                if (e.target === element || element.contains(e.target)) {
+                    isDragging = true;
+                }
+            }
+
+            function drag(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+
+                    element.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                    
+                    updateConnections();
+                }
+            }
+
+            function dragEnd(e) {
+                if (isDragging) {
+                    const service = droppedServices.find(s => s.id === element.id);
+                    if (service) {
+                        const transform = window.getComputedStyle(element).transform;
+                        if (transform && transform !== 'none') {
+                           const matrix = new DOMMatrix(transform);
+                           service.x = element.offsetLeft + matrix.m41;
+                           service.y = element.offsetTop + matrix.m42;
+                        }
+                    }
+                }
+                isDragging = false;
+            }
+        }
+
+        function handleConnectionClick(e) {
+            const point = e.target;
+            const serviceId = point.dataset.service;
+            const type = point.dataset.type;
+            
+            if (!currentConnection) {
+                // Start a new connection
+                if (type === 'output') {
+                    currentConnection = {
+                        from: serviceId,
+                        element: point
+                    };
+                    point.style.transform = 'translateY(-50%) scale(2)';
+                }
+            } else {
+                // Complete the connection
+                if (currentConnection.from !== serviceId && type === 'input') {
+                    const connection = {
+                        from: currentConnection.from,
+                        to: serviceId,
+                        id: 'connection-' + connections.length
+                    };
+                    
+                    connections.push(connection);
+                    drawConnections();
+                    updateStats();
+                }
+                
+                // Reset
+                currentConnection.element.style.transform = 'translateY(-50%) scale(1)';
+                currentConnection = null;
+            }
+        }
+
+        function drawConnections() {
+            const svg = document.getElementById('connections');
+            svg.innerHTML = ''; // Clear existing lines
+            connections.forEach(connection => {
+                const fromElement = document.getElementById(connection.from);
+                const toElement = document.getElementById(connection.to);
+                
+                if (!fromElement || !toElement) return;
+                
+                const fromPoint = fromElement.querySelector('.connection-point.output');
+                const toPoint = toElement.querySelector('.connection-point.input');
+                
+                const fromRect = fromPoint.getBoundingClientRect();
+                const toRect = toPoint.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                const x1 = fromRect.left - svgRect.left + fromRect.width / 2;
+                const y1 = fromRect.top - svgRect.top + fromRect.height / 2;
+                const x2 = toRect.left - svgRect.left + toRect.width / 2;
+                const y2 = toRect.top - svgRect.top + toRect.height / 2;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const d = `M ${x1} ${y1} C ${x1 + 100} ${y1}, ${x2 - 100} ${y2}, ${x2} ${y2}`;
+                
+                path.setAttribute('d', d);
+                path.setAttribute('id', connection.id);
+                path.setAttribute('stroke', '#4285F4');
+                path.setAttribute('stroke-width', '3');
+                path.setAttribute('fill', 'none');
+                path.style.filter = 'drop-shadow(0 0 6px rgba(66, 133, 244, 0.6))';
+                
+                // Animate the path
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                path.style.animation = 'drawPath 0.5s ease forwards';
+                
+                svg.appendChild(path);
+            });
+        }
+
+        function updateConnections() {
+            drawConnections();
+        }
+
+        function removeService(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.remove();
+                droppedServices = droppedServices.filter(s => s.id !== id);
+                connections = connections.filter(c => c.from !== id && c.to !== id);
+                updateConnections();
+                updateStats();
+            }
+        }
+
+        function clearCanvas() {
+            document.querySelectorAll('.dropped-service').forEach(el => el.remove());
+            droppedServices = [];
+            connections = [];
+            updateConnections();
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('serviceCount').textContent = droppedServices.length;
+            document.getElementById('connectionCount').textContent = connections.length;
+        }
+
+        function createSuccessAnimation(x, y) {
+            const pulse = document.createElement('div');
+            pulse.className = 'success-pulse';
+            pulse.style.left = (x - 150) + 'px';
+            pulse.style.top = (y - 150) + 'px';
+            canvas.appendChild(pulse);
+            
+            setTimeout(() => pulse.remove(), 1000);
+        }
+
+        function runAutomation() {
+            if (droppedServices.length === 0) {
+                 showCompletionMessage('Build a Workflow!', 'error');
+                return;
+            }
+            
+            const runBtn = document.querySelector('.btn-primary');
+            runBtn.disabled = true;
+            runBtn.textContent = 'Running...';
+            
+            const flow = createAutomationFlow();
+            
+            executeFlow(flow, () => {
+                runBtn.disabled = false;
+                runBtn.textContent = 'Run Automation';
+                showCompletionMessage('Automation Complete! 🎉', 'success');
+            });
+        }
+        
+        function createAutomationFlow() {
+            const flow = [];
+            const processed = new Set();
+            
+            const startNodes = droppedServices.filter(service => 
+                !connections.some(conn => conn.to === service.id)
+            );
+            
+            startNodes.forEach(startNode => {
+                const path = buildPath(startNode.id, processed);
+                if (path.length > 0) {
+                    flow.push(path);
+                }
+            });
+            
+            return flow;
+        }
+        
+        function buildPath(nodeId, processed) {
+            if (processed.has(nodeId)) return [];
+            
+            const path = [nodeId];
+            processed.add(nodeId);
+            
+            const outgoing = connections.filter(conn => conn.from === nodeId);
+            outgoing.forEach(conn => {
+                const nextPath = buildPath(conn.to, processed);
+                path.push(...nextPath);
+            });
+            
+            return path;
+        }
+        
+        async function executeFlow(flow, callback) {
+            for (const path of flow) {
+                for (let i = 0; i < path.length - 1; i++) {
+                    const fromId = path[i];
+                    const toId = path[i + 1];
+                    const connection = connections.find(c => c.from === fromId && c.to === toId);
+                    
+                    if (connection) {
+                        await animateDataTransfer(fromId, toId, connection.id);
+                    }
+                }
+            }
+            
+            setTimeout(callback, 500);
+        }
+        
+        async function animateDataTransfer(fromId, toId, connectionId) {
+            const fromService = droppedServices.find(s => s.id === fromId);
+            const toService = droppedServices.find(s => s.id === toId);
+            
+            if (!fromService || !toService) return;
+            
+            const path = document.getElementById(connectionId);
+            if (path) {
+                path.style.stroke = '#34A853';
+                path.style.strokeWidth = '4';
+                path.style.filter = 'drop-shadow(0 0 10px rgba(52, 168, 83, 0.8))';
+            }
+            
+            const dataViz = createDataVisualization(fromService, toService);
+            
+            await animateData(fromId, toId, dataViz);
+            
+            if (path) {
+                path.style.stroke = '#4285F4';
+                path.style.strokeWidth = '3';
+                path.style.filter = 'drop-shadow(0 0 6px rgba(66, 133, 244, 0.6))';
+            }
+        }
+        
+        function createDataVisualization(fromService, toService) {
+            const visualizations = {
+                'sheets-gmail': { particleIcon: '✉️', description: 'Sending spreadsheet data as emails' },
+                'gmail-calendar': { particleIcon: '📅', description: 'Creating calendar events from emails' },
+                'sheets-calendar': { particleIcon: '📅', description: 'Scheduling events from spreadsheet data' },
+                'openai-gmail': { particleIcon: '✉️', description: 'AI composing personalized emails' },
+                'openai-sheets': { particleIcon: '📊', description: 'AI analyzing and updating spreadsheet' },
+                'claude-gmail': { particleIcon: '✉️', description: 'AI composing personalized emails' },
+                'gemini-gmail': { particleIcon: '✉️', description: 'AI composing personalized emails' },
+                'drive-openai': { particleIcon: '📄', description: 'AI processing documents from Drive' },
+                'sheets-openai': { particleIcon: '🤖', description: 'AI analyzing spreadsheet data' },
+                'webhook-firebase': { particleIcon: '🔥', description: 'Storing webhook data in Firebase' },
+                'firebase-gmail': { particleIcon: '✉️', description: 'Sending emails based on database changes' }
+            };
+            
+            const key = `${fromService.service}-${toService.service}`;
+            return visualizations[key] || { particleIcon: '📦', description: 'Processing data' };
+        }
+        
+        function animateData(fromId, toId, visualization) {
+            const fromElement = document.getElementById(fromId);
+            const toElement = document.getElementById(toId);
+            
+            if (!fromElement || !toElement) return Promise.resolve();
+            
+            const fromRect = fromElement.getBoundingClientRect();
+            const toRect = toElement.getBoundingClientRect();
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const fromService = droppedServices.find(s => s.id === fromId);
+            const isLLMInvolved = fromService && ['openai', 'claude', 'gemini'].includes(fromService.service);
+            
+            if (isLLMInvolved) {
+                return new Promise(resolve => {
+                    showChatAnimation(fromRect, canvasRect, visualization, () => {
+                        animateDataFlow(fromRect, toRect, canvasRect, visualization).then(resolve);
+                    });
+                });
+            } else {
+                return animateDataFlow(fromRect, toRect, canvasRect, visualization);
+            }
+        }
+        
+        function showChatAnimation(serviceRect, canvasRect, visualization, callback) {
+            const chatWidth = 350;
+            const chatHeight = 450;
+            
+            let leftPos = serviceRect.left - canvasRect.left + serviceRect.width / 2;
+            let topPos = serviceRect.top - canvasRect.top + serviceRect.height / 2;
+            
+            const minLeft = chatWidth / 2 + 20;
+            const maxLeft = canvasRect.width - chatWidth / 2 - 20;
+            const minTop = chatHeight / 2 + 20;
+            const maxTop = canvasRect.height - chatHeight / 2 - 20;
+            
+            leftPos = Math.max(minLeft, Math.min(leftPos, maxLeft));
+            topPos = Math.max(minTop, Math.min(topPos, maxTop));
+            
+            const chatWindow = document.createElement('div');
+            chatWindow.style.cssText = `
+                position: absolute; left: ${leftPos}px; top: ${topPos}px;
+                transform: translate(-50%, -50%) scale(0); width: ${chatWidth}px; height: ${chatHeight}px;
+                background: rgba(32, 33, 36, 0.98); border: 2px solid rgba(66, 133, 244, 0.5);
+                border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+                z-index: 2000; overflow: hidden;
+                transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            `;
+            
+            const chatHeader = document.createElement('div');
+            chatHeader.style.cssText = `
+                background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); padding: 1rem; color: white;
+                font-family: 'Inter', Arial, sans-serif; font-weight: 600; font-size: 1.1rem;
+                display: flex; align-items: center; gap: 0.5rem;
+            `;
+            chatHeader.innerHTML = `<span style="font-size: 1.5rem;">🤖</span><span>AI Assistant</span>`;
+            
+            const chatBody = document.createElement('div');
+            chatBody.style.cssText = `
+                padding: 1.5rem; height: calc(100% - 60px); display: flex;
+                flex-direction: column; gap: 1rem;
+            `;
+            
+            const messagesContainer = document.createElement('div');
+            messagesContainer.style.cssText = `
+                flex: 1; overflow-y: auto; display: flex;
+                flex-direction: column; gap: 1rem;
+            `;
+            
+            const inputArea = document.createElement('div');
+            inputArea.style.cssText = `
+                display: flex; gap: 0.5rem; align-items: center;
+                background: rgba(45, 45, 48, 0.8); border-radius: 25px;
+                padding: 0.5rem 1rem; border: 1px solid rgba(66, 133, 244, 0.3);
+            `;
+            
+            const input = document.createElement('div');
+            input.style.cssText = `
+                flex: 1; color: #cbd5e1; font-family: 'Inter', Arial, sans-serif; font-size: 0.9rem;
+            `;
+            
+            const sendButton = document.createElement('div');
+            sendButton.style.cssText = `
+                width: 36px; height: 36px;
+                background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+                border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                color: white; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s ease;
+            `;
+            sendButton.innerHTML = '→';
+            
+            inputArea.appendChild(input);
+            inputArea.appendChild(sendButton);
+            chatBody.appendChild(messagesContainer);
+            chatBody.appendChild(inputArea);
+            chatWindow.appendChild(chatHeader);
+            chatWindow.appendChild(chatBody);
+            canvas.appendChild(chatWindow);
+            
+            setTimeout(() => { chatWindow.style.transform = 'translate(-50%, -50%) scale(1)'; }, 100);
+            
+            const prompts = {
+                'AI composing personalized emails': 'Write a professional follow-up email to our clients',
+                'AI analyzing and updating spreadsheet': 'Process this data and update the analysis column',
+                'AI processing documents from Drive': 'Summarize the main points from this document',
+                'AI analyzing spreadsheet data': 'Analyze this data and find key insights',
+            };
+            
+            const userPrompt = prompts[visualization.description] || 'Help me automate this task';
+            
+            setTimeout(() => {
+                let charIndex = 0;
+                const typeInterval = setInterval(() => {
+                    if (charIndex <= userPrompt.length) {
+                        input.textContent = userPrompt.substring(0, charIndex++);
+                    } else {
+                        clearInterval(typeInterval);
+                        setTimeout(() => {
+                            sendButton.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                sendButton.style.transform = 'scale(1)';
+                                const userMessage = createChatMessage(userPrompt, 'user');
+                                messagesContainer.appendChild(userMessage);
+                                input.textContent = '';
+                                const typingIndicator = createTypingIndicator();
+                                messagesContainer.appendChild(typingIndicator);
+                                setTimeout(() => {
+                                    typingIndicator.remove();
+                                    const aiResponse = getAIResponse(visualization.description);
+                                    const aiMessage = createChatMessage(aiResponse, 'ai');
+                                    messagesContainer.appendChild(aiMessage);
+                                    const successGlow = document.createElement('div');
+                                    successGlow.style.cssText = `
+                                        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                                        background: radial-gradient(circle at center, rgba(52, 168, 83, 0.3), transparent);
+                                        pointer-events: none; animation: pulse 1s ease;
+                                    `;
+                                    chatWindow.appendChild(successGlow);
+                                    setTimeout(() => {
+                                        chatWindow.style.transform = 'translate(-50%, -50%) scale(0)';
+                                        setTimeout(() => {
+                                            chatWindow.remove();
+                                            callback();
+                                        }, 500);
+                                    }, 1500);
+                                }, 1500);
+                            }, 100);
+                        }, 500);
+                    }
+                }, 30);
+            }, 800);
+        }
+        
+        function createChatMessage(text, type) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                padding: 0.75rem 1rem; border-radius: 18px; max-width: 80%;
+                font-family: 'Inter', Arial, sans-serif; font-size: 0.9rem; line-height: 1.4;
+                animation: messageSlide 0.3s ease;
+                ${type === 'user' ? `
+                    background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); color: white;
+                    align-self: flex-end; margin-left: auto;
+                ` : `
+                    background: rgba(45, 45, 48, 0.8); color: #cbd5e1;
+                    align-self: flex-start; border: 1px solid rgba(66, 133, 244, 0.2);
+                `}
+            `;
+            message.textContent = text;
+            return message;
+        }
+        
+        function createTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.style.cssText = `
+                padding: 0.75rem 1rem; border-radius: 18px; background: rgba(45, 45, 48, 0.8);
+                border: 1px solid rgba(66, 133, 244, 0.2); align-self: flex-start;
+                display: flex; gap: 0.3rem;
+            `;
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.style.cssText = `
+                    width: 8px; height: 8px; background: #4285F4; border-radius: 50%;
+                    animation: typingDot 1.4s infinite; animation-delay: ${i * 0.2}s;
+                `;
+                indicator.appendChild(dot);
+            }
+            
+            return indicator;
+        }
+        
+        function getAIResponse(description) {
+            const responses = {
+                'AI composing personalized emails': 'Professional follow-up email created with personalized greeting and relevant content for each client.',
+                'AI analyzing and updating spreadsheet': 'Data analysis complete. Updated 45 rows with insights and recommendations.',
+                'AI processing documents from Drive': 'Document processed. Extracted 5 main points and created an executive summary.',
+                'AI analyzing spreadsheet data': 'Analysis complete! Found 3 key trends and 2 anomalies in your data. Insights have been summarized.',
+            };
+            
+            return responses[description] || 'Task completed successfully! Your data has been processed.';
+        }
+        
+        function animateDataFlow(fromRect, toRect, canvasRect, visualization) {
+            return new Promise(resolve => {
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        createMovingIcon(
+                            fromRect.left - canvasRect.left + fromRect.width / 2,
+                            fromRect.top - canvasRect.top + fromRect.height / 2,
+                            toRect.left - canvasRect.left + toRect.width / 2,
+                            toRect.top - canvasRect.top + toRect.height / 2,
+                            visualization.particleIcon
+                        );
+                    }, i * 200);
+                }
+                
+                setTimeout(resolve, 2000);
+            });
+        }
+        
+        function createMovingIcon(x1, y1, x2, y2, icon) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute; left: ${x1}px; top: ${y1}px;
+                font-size: 24px;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+                transform: translate(-50%, -50%); z-index: 999; pointer-events: none;
+                transition: all 1.5s cubic-bezier(0.4, 0, 0.6, 1);
+            `;
+            particle.innerHTML = icon;
+            canvas.appendChild(particle);
+            
+            particle.offsetHeight; // Force reflow
+            
+            particle.style.left = x2 + 'px';
+            particle.style.top = y2 + 'px';
+            particle.style.transform = 'translate(-50%, -50%) scale(0.5)';
+            particle.style.opacity = '0';
+            
+            setTimeout(() => particle.remove(), 1500);
+        }
+        
+        function showCompletionMessage(text, type) {
+            const existingMessage = document.querySelector('.completion-message');
+            if (existingMessage) existingMessage.remove();
+
+            const message = document.createElement('div');
+            message.className = 'completion-message';
+            const borderColor = type === 'success' ? 'rgba(52, 168, 83, 0.5)' : 'rgba(234, 67, 53, 0.5)';
+            const titleColor = type === 'success' ? '#34A853' : '#EA4335';
+
+            message.style.cssText = `
+                position: fixed; top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(32, 33, 36, 0.95); backdrop-filter: blur(10px);
+                border: 2px solid ${borderColor};
+                border-radius: 20px; padding: 2rem 3rem; text-align: center;
+                z-index: 2000; animation: scaleIn 0.5s ease;
+            `;
+            
+            let contentHTML = '';
+            if (type === 'success') {
+                contentHTML = `
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
+                        Your workflow has been executed successfully.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn btn-secondary" onclick="this.closest('.completion-message').remove()">
+                            Close
+                        </button>
+                        <a href="index.html#contact" target="_blank" class="btn btn-primary">
+                            Start Your Project Now
+                        </a>
+                    </div>
+                `;
+            } else {
+                contentHTML = `
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
+                        Please add services to the canvas and connect them.
+                    </p>
+                    <button class="btn btn-primary" onclick="this.closest('.completion-message').remove()">
+                        Close
+                    </button>
+                `;
+            }
+
+            message.innerHTML = `
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; color: ${titleColor};">
+                    ${text}
+                </h2>
+                ${contentHTML}
+            `;
+            
+            document.body.appendChild(message);
+            
+            if (type === 'error') {
+                setTimeout(() => {
+                    const msg = document.querySelector('.completion-message');
+                    if(msg) msg.remove();
+                }, 5000);
+            }
+        }
+
+        // --- Add Keyframes and Initializations ---
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes drawPath { to { stroke-dashoffset: 0; } }
+            @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+            @keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+            @keyframes messageSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.7; } 30% { transform: translateY(-10px); opacity: 1; } }
+            @keyframes scaleIn { from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize on load
+        createParticles();
+    </script>
+</body>
+</html>
