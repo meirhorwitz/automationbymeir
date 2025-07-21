@@ -54,9 +54,14 @@
         .logo { font-family: 'Marck Script', cursive; font-size: 1.5rem; font-weight: 400; color: var(--light); text-decoration: none; display: flex; align-items: center; gap: 0.8rem; }
         .logo svg { width: 3rem; height: 3rem; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: var(--light); text-decoration: none; transition: all 0.3s ease; position: relative; }
+        .nav-links li { position: relative; }
+        .nav-links a { color: var(--light); text-decoration: none; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a::before { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s ease; }
         .nav-links a:hover::before { width: 100%; }
+        .dropdown { display: none; flex-direction: column; position: absolute; top: calc(100% + 0.5rem); left: 0; background: rgba(32, 33, 36, 0.9); padding: 0.5rem 0; border-radius: 8px; min-width: 250px; }
+        .dropdown li { width: 100%; }
+        .dropdown a { padding: 0.5rem 1rem; display: block; }
+        .submenu:hover > .dropdown { display: flex; }
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; color: var(--light); padding: 2rem; }
         .hero-content { text-align: center; max-width: 900px; z-index: 1; }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 1rem; background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC04 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite; line-height: 1.1; }
@@ -114,8 +119,12 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li><a href="showcase1.html">Showcase - Crypto Wallet Tracker</a></li>
-                <li><a href="showcase2.html">Showcase - Enterprise Analytics Dashboard</a></li>
+                <li class="submenu"><a href="#">Showcases</a>
+                    <ul class="dropdown">
+                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+                        <li><a href="showcase2.html">Enterprise Analytics Dashboard</a></li>
+                    </ul>
+                </li>
                 <li><a href="#about">About</a></li>
                 <li><a href="payment.html">Payments</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -288,7 +297,7 @@
                     </div>
                     <div id="step2" class="form-step">
                         <h3>Select a Time for a 30-Minute Consultation</h3>
-                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
+                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone (Israel Daylight Time).</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
                         <div id="timeSlots" class="time-slots-container"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
@@ -376,7 +385,7 @@
             for (const day in groupedSlots) {
                 html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
                 groupedSlots[day].forEach(slotISO => {
-                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false, timeZoneName: 'short' });
                     html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
                 });
             }
