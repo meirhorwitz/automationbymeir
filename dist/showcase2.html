@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Analytics Dashboard - Advanced Business Intelligence Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 188, 135, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1DBF73 0%, #00BC87 50%, #95979D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #95979D;
+            margin-bottom: 3rem;
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            max-width: 100%;
+            height: auto;
+            margin: 3rem auto;
+            perspective: 1000px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            background: #0f0f0f;
+        }
+
+        .section:nth-child(even) {
+            background: #1a1a1a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #1DBF73;
+            box-shadow: 0 10px 30px rgba(29, 191, 115, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1DBF73;
+        }
+
+        .feature-description {
+            color: #95979D;
+            line-height: 1.6;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: rgba(29, 191, 115, 0.1);
+            border: 2px solid #1DBF73;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #1DBF73;
+        }
+
+        .process-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .process-description {
+            color: #95979D;
+            font-size: 0.9rem;
+        }
+
+        /* Technical Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .tech-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.05);
+            border-color: #1DBF73;
+        }
+
+        /* Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(29, 191, 115, 0.1), rgba(0, 188, 135, 0.1));
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1DBF73;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #95979D;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #1DBF73 0%, #00BC87 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(29, 191, 115, 0.5);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Dashboard mockup styles */
+        .dashboard-mockup {
+            background: #f7f7f7;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-mockup:hover {
+            transform: rotateX(0deg);
+        }
+
+        .mockup-header {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mockup-logo {
+            width: 100px;
+            height: 24px;
+            background: #222325;
+            border-radius: 4px;
+        }
+
+        .mockup-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mockup-btn {
+            width: 80px;
+            height: 30px;
+            background: #e4e5e7;
+            border-radius: 4px;
+        }
+
+        .mockup-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+        }
+
+        .mockup-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            height: 300px;
+        }
+
+        .mockup-stat {
+            margin-bottom: 15px;
+            background: #f7f7f7;
+            border-radius: 4px;
+            padding: 10px;
+            height: 50px;
+        }
+
+        .mockup-main {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .mockup-table {
+            background: #f7f7f7;
+            height: 250px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-row {
+            height: 30px;
+            background: white;
+            margin: 5px;
+            border-radius: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .process-flow {
+                flex-direction: column;
+            }
+            .mockup-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Enterprise Analytics Dashboard</h1>
+            <p class="subtitle">Advanced Business Intelligence & Automated Report Generation System</p>
+            
+            <!-- Dashboard Mockup -->
+            <div class="dashboard-preview">
+                <div class="dashboard-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-logo"></div>
+                        <div class="mockup-buttons">
+                            <div class="mockup-btn"></div>
+                            <div class="mockup-btn"></div>
+                            <div class="mockup-btn" style="background: #222325;"></div>
+                        </div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="mockup-sidebar">
+                            <div class="mockup-stat"></div>
+                            <div class="mockup-stat"></div>
+                            <div class="mockup-stat"></div>
+                            <div class="mockup-stat"></div>
+                        </div>
+                        <div class="mockup-main">
+                            <div class="mockup-table">
+                                <div class="mockup-row"></div>
+                                <div class="mockup-row"></div>
+                                <div class="mockup-row"></div>
+                                <div class="mockup-row"></div>
+                                <div class="mockup-row"></div>
+                                <div class="mockup-row"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Overview -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Intelligent Analytics at Scale</h2>
+            
+            <svg viewBox="0 0 1200 600" style="max-width: 100%; height: auto;">
+                <!-- Background -->
+                <rect width="1200" height="600" fill="none"/>
+                
+                <!-- Data Sources -->
+                <g transform="translate(100, 100)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(29, 191, 115, 0.1)" stroke="#1DBF73" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#1DBF73" font-size="16" font-weight="bold">User Data</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Business Accounts</text>
+                </g>
+                
+                <g transform="translate(100, 250)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(29, 191, 115, 0.1)" stroke="#1DBF73" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#1DBF73" font-size="16" font-weight="bold">Metrics Data</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Transaction History</text>
+                </g>
+                
+                <g transform="translate(100, 400)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(29, 191, 115, 0.1)" stroke="#1DBF73" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#1DBF73" font-size="16" font-weight="bold">Tier Data</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Premium / Standard</text>
+                </g>
+                
+             
+                
+                <!-- Outputs -->
+                <g transform="translate(900, 100)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(255, 255, 255, 0.05)" stroke="#95979D" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#95979D" font-size="16" font-weight="bold">Admin Dashboard</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Real-time Monitoring</text>
+                </g>
+                
+                <g transform="translate(900, 250)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(255, 255, 255, 0.05)" stroke="#95979D" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#95979D" font-size="16" font-weight="bold">HTML Reports</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Interactive Analytics</text>
+                </g>
+                
+                <g transform="translate(900, 400)">
+                    <rect x="0" y="0" width="200" height="100" rx="10" fill="rgba(255, 255, 255, 0.05)" stroke="#95979D" stroke-width="2"/>
+                    <text x="100" y="40" text-anchor="middle" fill="#95979D" font-size="16" font-weight="bold">Google Drive</text>
+                    <text x="100" y="65" text-anchor="middle" fill="#95979D" font-size="12">Organized Storage</text>
+                </g>
+                
+                <!-- Animated Connections -->
+                <g class="pulsing">
+                    <path d="M300,150 L350,300" stroke="#1DBF73" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M300,300 L350,300" stroke="#1DBF73" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M300,450 L350,300" stroke="#1DBF73" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <path d="M650,300 L900,150" stroke="#95979D" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M650,300 L900,300" stroke="#95979D" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M650,300 L900,450" stroke="#95979D" stroke-width="2" stroke-dasharray="5,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <circle cx="30" cy="30" r="25" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <path d="M30 15V30L40 40" stroke="#1DBF73" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="30" cy="30" r="4" fill="#1DBF73"/>
+                    </svg>
+                    <h3 class="feature-title">Real-Time Analytics</h3>
+                    <p class="feature-description">Process thousands of user accounts and transactions in real-time with automatic eligibility checking and threshold validation.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <rect x="10" y="10" width="40" height="40" rx="5" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <path d="M20 25H40M20 30H35M20 35H40" stroke="#1DBF73" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="45" cy="45" r="10" fill="#1DBF73" opacity="0.2"/>
+                        <path d="M45 41V49M41 45H49" stroke="#1DBF73" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="feature-title">Automated Report Generation</h3>
+                    <p class="feature-description">Generate beautiful, interactive HTML reports with charts, KPIs, and insights. Automatically organized in Google Drive with year/month structure.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <path d="M30 5L40 15V45L30 55L20 55L10 45V15L20 5H30Z" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <circle cx="30" cy="30" r="8" fill="#1DBF73" opacity="0.3"/>
+                        <path d="M30 25V35M25 30H35" stroke="#1DBF73" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="feature-title">Smart Batch Processing</h3>
+                    <p class="feature-description">Intelligent indexing system prevents duplicate reports. Process hundreds of reports in optimized batches with progress tracking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <rect x="15" y="20" width="30" height="20" rx="3" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <path d="M15 30H45" stroke="#1DBF73" stroke-width="2"/>
+                        <circle cx="20" cy="25" r="2" fill="#1DBF73"/>
+                        <circle cx="25" cy="25" r="2" fill="#1DBF73"/>
+                        <circle cx="30" cy="25" r="2" fill="#1DBF73"/>
+                    </svg>
+                    <h3 class="feature-title">Admin Dashboard</h3>
+                    <p class="feature-description">Comprehensive web interface for monitoring, filtering, and managing users. Export data, generate reports, and track performance metrics.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <path d="M20 15C20 15 25 10 30 10C35 10 40 15 40 15V40C40 40 35 45 30 45C25 45 20 40 20 40V15Z" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <path d="M25 25L30 30L35 20" stroke="#1DBF73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 class="feature-title">Tier-Based Logic</h3>
+                    <p class="feature-description">Sophisticated eligibility rules for Premium, Standard, and Advanced tier users. Automatic threshold checking with detailed reason tracking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 60 60" fill="none">
+                        <rect x="10" y="15" width="15" height="30" rx="2" fill="#1DBF73" opacity="0.3"/>
+                        <rect x="25" y="20" width="15" height="25" rx="2" fill="#1DBF73" opacity="0.5"/>
+                        <rect x="40" y="10" width="15" height="35" rx="2" fill="#1DBF73" opacity="0.7"/>
+                        <path d="M5 50H55" stroke="#1DBF73" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="feature-title">Interactive Charts</h3>
+                    <p class="feature-description">Dynamic Chart.js visualizations including monthly trends, category breakdowns, and spending analysis with drill-down capabilities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Flow -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Automated Workflow</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="process-icon">📊</div>
+                    <h3 class="process-title">Data Import</h3>
+                    <p class="process-description">Import user data from multiple sheets with automatic validation</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-icon">🔍</div>
+                    <h3 class="process-title">Eligibility Check</h3>
+                    <p class="process-description">Apply business rules and thresholds to determine eligible users</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-icon">📑</div>
+                    <h3 class="process-title">Report Generation</h3>
+                    <p class="process-description">Create personalized HTML reports with charts and insights</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-icon">☁️</div>
+                    <h3 class="process-title">Drive Storage</h3>
+                    <p class="process-description">Organize reports in structured folders by user and date</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-icon">📧</div>
+                    <h3 class="process-title">Distribution</h3>
+                    <p class="process-description">Share reports with stakeholders automatically</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Stack -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Built with Modern Technology</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <rect x="10" y="10" width="40" height="40" rx="5" fill="#1DBF73" opacity="0.2"/>
+                        <text x="30" y="35" text-anchor="middle" fill="#1DBF73" font-size="20" font-weight="bold">GAS</text>
+                    </svg>
+                    <p>Google Apps Script</p>
+                </div>
+                
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <rect x="10" y="10" width="40" height="40" rx="5" fill="#95979D" opacity="0.2"/>
+                        <rect x="20" y="20" width="20" height="5" fill="#95979D"/>
+                        <rect x="20" y="30" width="20" height="5" fill="#95979D" opacity="0.7"/>
+                    </svg>
+                    <p>Google Sheets API</p>
+                </div>
+                
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <path d="M15 20L30 10L45 20V40L30 50L15 40V20Z" stroke="#1DBF73" stroke-width="2" fill="none"/>
+                        <circle cx="30" cy="30" r="5" fill="#1DBF73"/>
+                    </svg>
+                    <p>Google Drive API</p>
+                </div>
+                
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <rect x="10" y="10" width="40" height="40" rx="5" fill="#1DBF73" opacity="0.2"/>
+                        <text x="30" y="35" text-anchor="middle" fill="#1DBF73" font-size="14" font-weight="bold">HTML</text>
+                    </svg>
+                    <p>HTML Templates</p>
+                </div>
+                
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <circle cx="30" cy="30" r="20" fill="none" stroke="#95979D" stroke-width="2"/>
+                        <path d="M20 30L25 35L40 20" stroke="#1DBF73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>Chart.js</p>
+                </div>
+                
+                <div class="tech-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
+                        <rect x="10" y="10" width="40" height="40" rx="20" fill="#1DBF73" opacity="0.2"/>
+                        <text x="30" y="35" text-anchor="middle" fill="#1DBF73" font-size="16" font-weight="bold">JS</text>
+                    </svg>
+                    <p>JavaScript</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Impact & Performance</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number">1000+</div>
+                    <div class="result-label">Users Processed Daily</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">50x</div>
+                    <div class="result-label">Faster Report Generation</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">100%</div>
+                    <div class="result-label">Automated Workflow</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">0</div>
+                    <div class="result-label">Manual Errors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Preview -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Interactive Report Example</h2>
+            <div style="background: #f7f7f7; border-radius: 12px; padding: 2rem; margin: 2rem auto; max-width: 1000px;">
+                <div style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h3 style="color: #222325; margin-bottom: 1rem;">Business Analytics Report</h3>
+                    
+                    <!-- KPI Cards Preview -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: #f7f7f7; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="color: #62646A; font-size: 0.9rem; margin-bottom: 0.5rem;">Total Order Value</div>
+                            <div style="color: #404145; font-size: 2rem; font-weight: bold;">$145,320</div>
+                        </div>
+                        <div style="background: #f7f7f7; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="color: #62646A; font-size: 0.9rem; margin-bottom: 0.5rem;">Cost Savings</div>
+                            <div style="color: #404145; font-size: 2rem; font-weight: bold;">$7,266</div>
+                        </div>
+                        <div style="background: #f7f7f7; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                            <div style="color: #62646A; font-size: 0.9rem; margin-bottom: 0.5rem;">Total Transactions</div>
+                            <div style="color: #404145; font-size: 2rem; font-weight: bold;">427</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Preview -->
+                    <div style="background: #f7f7f7; padding: 1.5rem; border-radius: 8px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #95979D;">
+                            <svg width="100" height="100" viewBox="0 0 100 100" style="margin-bottom: 1rem;">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#1DBF73" stroke-width="8" stroke-dasharray="125 125" transform="rotate(-90 50 50)"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#95979D" stroke-width="8" stroke-dasharray="0 125" stroke-dashoffset="-125" transform="rotate(-90 50 50)"/>
+                            </svg>
+                            <div>Interactive Charts & Analytics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="section-title">Transform Your Business Analytics</h2>
+        <p style="color: #95979D; font-size: 1.2rem; margin-bottom: 2rem;">
+            Get a custom analytics solution tailored to your business needs
+        </p>
+        <a href="/index.html#contact" class="cta-button">Start Your Project</a>
+    </section>
+
+    <script>
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all feature cards and sections
+            document.querySelectorAll('.feature-card, .process-step, .result-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Dashboard mockup interaction
+            const mockup = document.querySelector('.dashboard-mockup');
+            if (mockup) {
+                mockup.addEventListener('mousemove', (e) => {
+                    const rect = mockup.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    mockup.style.transform = `perspective(1000px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
+                });
+                
+                mockup.addEventListener('mouseleave', () => {
+                    mockup.style.transform = 'rotateX(5deg)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
