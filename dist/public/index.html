@@ -106,8 +106,6 @@
         .playground-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(66, 133, 244, 0.05) 0%, transparent 50%); animation: rotate 30s linear infinite; }
         @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 3rem; } .services-grid, .projects-grid, .stats { grid-template-columns: 1fr; } }
     </style>
-  <script type="module" crossorigin src="/assets/main-CS1fVmae.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
     <div class="bg-animation"></div>
@@ -299,7 +297,7 @@
                     </div>
                     <div id="step2" class="form-step">
                         <h3>Select a Time for a 30-Minute Consultation</h3>
-                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
+                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone (Israel Daylight Time).</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
                         <div id="timeSlots" class="time-slots-container"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
@@ -315,5 +313,135 @@
     <footer>
         <p>&copy; 2025 Automation by Meir. All rights reserved.</p>
     </footer>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
+            authDomain: "automationbymeir.firebaseapp.com",
+            projectId: "automationbymeir",
+            storageBucket: "automationbymeir.firebasestorage.app",
+            messagingSenderId: "216703427811",
+            appId: "1:216703427811:web:a2c848833870a1415c91d6",
+            measurementId: "G-D8GQDGVR08"
+        };
+        const app = initializeApp(firebaseConfig);
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYDJcrt8eT52qSQJf6sQ842LyUNjZQm-DGLaM_g757DDdC0viqZSgAyUilmOmxgJ_Cyw/exec";
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const toStep2Btn = document.getElementById('toStep2');
+        const toStep1Btn = document.getElementById('toStep1');
+        const form = document.getElementById('projectForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const slotsLoader = document.getElementById('slotsLoader');
+        const timeSlotsContainer = document.getElementById('timeSlots');
+        const formMessage = document.getElementById('form-message');
+        let selectedSlot = null;
+        toStep2Btn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                fetchAvailableSlots();
+            } else {
+                form.reportValidity();
+            }
+        });
+        toStep1Btn.addEventListener('click', () => {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        });
+        async function fetchAvailableSlots() {
+            slotsLoader.style.display = 'block';
+            timeSlotsContainer.innerHTML = '';
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                if (data.success) {
+                    displaySlots(data.slots);
+                } else {
+                    throw new Error(data.error || 'Failed to load slots.');
+                }
+            } catch (error) {
+                console.error('Error fetching slots:', error);
+                timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
+            } finally {
+                slotsLoader.style.display = 'none';
+            }
+        }
+        function displaySlots(slots) {
+            if (slots.length === 0) {
+                timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
+                return;
+            }
+            const groupedSlots = slots.reduce((acc, slot) => {
+                const date = new Date(slot);
+                const day = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+                if (!acc[day]) {
+                    acc[day] = [];
+                }
+                acc[day].push(slot);
+                return acc;
+            }, {});
+            let html = '';
+            for (const day in groupedSlots) {
+                html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
+                groupedSlots[day].forEach(slotISO => {
+                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false, timeZoneName: 'short' });
+                    html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
+                });
+            }
+            timeSlotsContainer.innerHTML = html;
+        }
+        timeSlotsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('time-slot')) {
+                document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedSlot = e.target.dataset.value;
+            }
+        });
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedSlot) {
+                alert('Please select a time slot.');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Scheduling...';
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                details: formData.get('details'),
+                dateTime: selectedSlot,
+                lang: 'en'
+            };
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                form.style.display = 'none';
+                formMessage.style.display = 'block';
+                formMessage.className = 'success';
+                formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                formMessage.style.display = 'block';
+                formMessage.className = 'error';
+                formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Schedule';
+            }
+        });
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>

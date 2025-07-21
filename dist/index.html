@@ -297,7 +297,7 @@
                     </div>
                     <div id="step2" class="form-step">
                         <h3>Select a Time for a 30-Minute Consultation</h3>
-                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
+                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone (Israel Daylight Time).</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
                         <div id="timeSlots" class="time-slots-container"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
@@ -385,7 +385,7 @@
             for (const day in groupedSlots) {
                 html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
                 groupedSlots[day].forEach(slotISO => {
-                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false, timeZoneName: 'short' });
                     html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
                 });
             }
