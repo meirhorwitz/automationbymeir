@@ -124,6 +124,15 @@ app.post("/api/orders/:orderID/capture", async(req, res) => {
     }
 });
 
+// Dynamic sitemap for SEO
+app.get('/sitemap.xml', (req, res) => {
+    const base = `${req.protocol}://${req.get('host')}`;
+    const pages = ['', 'index-he.html', 'automation-playground.html', 'payment.html', 'showcase1.html', 'showcase2.html', 'why-automation.html'];
+    const urls = pages.map(p => `<url><loc>${base}/${p}</loc></url>`).join('');
+    res.header('Content-Type', 'application/xml');
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`);
+});
+
 app.listen(PORT, () => {
     console.log(`Node server listening at http://localhost:${PORT}/`);
 });
