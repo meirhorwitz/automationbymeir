@@ -13,6 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automation by Meir - Transform Your Business with Custom Automation</title>
+    <meta name="description" content="Custom automation solutions using Google Apps Script and Firebase to streamline your business." />
+    <link rel="canonical" href="https://automationbymeir.web.app/" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
         :root {
@@ -69,9 +71,9 @@
         .nav-links a::before { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s ease; }
         .nav-links a:hover::before { width: 100%; }
         .dropdown { display: none; flex-direction: column; position: absolute; top: calc(100% + 0.5rem); left: 0; background: rgba(32, 33, 36, 0.9); padding: 0.5rem 0; border-radius: 8px; min-width: 250px; }
+        .dropdown.show { display: flex; }
         .dropdown li { width: 100%; }
         .dropdown a { padding: 0.5rem 1rem; display: block; }
-        .submenu:hover > .dropdown { display: flex; }
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; color: var(--light); padding: 2rem; }
         .hero-content { text-align: center; max-width: 900px; z-index: 1; }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 1rem; background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC04 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite; line-height: 1.1; }
@@ -126,6 +128,11 @@
                 padding: 1rem 2rem;
             }
             .nav-links.show { display: flex; }
+            .nav-links .dropdown {
+                position: static;
+                background: transparent;
+                padding: 0 0 0 1rem;
+            }
             .nav-toggle {
                 display: block;
                 background: none;
@@ -138,7 +145,7 @@
             .services-grid, .projects-grid, .stats { grid-template-columns: 1fr; }
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-LowqyxsX.js"></script>
+  <script type="module" crossorigin src="/assets/main-DYUWzt6C.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
@@ -166,6 +173,7 @@
                 </li>
                 <li><a href="#about">About</a></li>
                 <li><a href="payment.html">Payments</a></li>
+                <li><a href="why-automation.html">Why Automation?</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="lang-switcher">
