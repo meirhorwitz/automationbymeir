@@ -83,11 +83,12 @@
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.querySelector('.nav-links');
         const submenu = document.querySelector('.submenu');
+        const submenuLink = document.querySelector('.submenu > a');
         const dropdown = document.querySelector('.submenu .dropdown');
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
-        submenu.addEventListener('click', (e) => {
+        submenuLink.addEventListener('click', (e) => {
             e.preventDefault();
             dropdown.classList.toggle('show');
         });
