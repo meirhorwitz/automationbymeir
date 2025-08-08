@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automation Puzzle - Build Your Perfect Workflow</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;400;600;700&display=swap');
 
         :root {
             --primary: #00e676;
@@ -39,11 +39,15 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #000;
             color: #f8f9fa;
             overflow: hidden;
             position: relative;
+        }
+
+        h1 {
+            font-weight: 200;
         }
 
         nav {
@@ -1217,7 +1221,7 @@
             const chatHeader = document.createElement('div');
             chatHeader.style.cssText = `
                 background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); padding: 1rem; color: white;
-                font-family: 'Inter', Arial, sans-serif; font-weight: 600; font-size: 1.1rem;
+                font-family: 'IBM Plex Sans', Arial, sans-serif; font-weight: 600; font-size: 1.1rem;
                 display: flex; align-items: center; gap: 0.5rem;
             `;
             chatHeader.innerHTML = `<span style="font-size: 1.5rem;">🤖</span><span>AI Assistant</span>`;
@@ -1243,7 +1247,7 @@
             
             const input = document.createElement('div');
             input.style.cssText = `
-                flex: 1; color: #cbd5e1; font-family: 'Inter', Arial, sans-serif; font-size: 0.9rem;
+                flex: 1; color: #cbd5e1; font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 0.9rem;
             `;
             
             const sendButton = document.createElement('div');
@@ -1321,7 +1325,7 @@
             const message = document.createElement('div');
             message.style.cssText = `
                 padding: 0.75rem 1rem; border-radius: 18px; max-width: 80%;
-                font-family: 'Inter', Arial, sans-serif; font-size: 0.9rem; line-height: 1.4;
+                font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 0.9rem; line-height: 1.4;
                 animation: messageSlide 0.3s ease;
                 ${type === 'user' ? `
                     background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); color: white;

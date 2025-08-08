@@ -15,7 +15,7 @@
     <meta name="description" content="Custom Google Apps Script & Firebase Solutions That Scale. Streamline workflows with intelligent automation." />
     <link rel="canonical" href="https://automationbymeir.web.app/" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         
         :root {
             --primary: #00e676;
@@ -40,11 +40,16 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--dark);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 200;
         }
         
         /* Navigation */
@@ -130,6 +135,10 @@
             width: 100%;
         }
 
+        .submenu {
+            position: relative;
+        }
+
         .dropdown {
             display: none;
             flex-direction: column;
@@ -196,7 +205,7 @@
         
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
+            font-weight: 200;
             line-height: 1.2;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
