@@ -48,7 +48,6 @@
         }
         
         /* Navigation */
-        
         nav {
             position: fixed;
             top: 0;
@@ -98,6 +97,10 @@
             gap: 2.5rem;
             align-items: center;
         }
+
+        .nav-links li {
+            position: relative;
+        }
         
         .nav-links a {
             color: var(--text-secondary);
@@ -126,9 +129,35 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0;
+            border-radius: 8px;
+            min-width: 200px;
+            z-index: 10;
+        }
+
+        .dropdown a {
+            padding: 0.5rem 1.5rem;
+            white-space: nowrap;
+        }
+
+        .dropdown a:hover {
+            background: var(--dark-tertiary);
+        }
+
+        .dropdown.show {
+            display: flex;
+        }
         
         /* Hero Section */
-        
         .hero {
             min-height: 100vh;
             display: flex;
@@ -142,7 +171,6 @@
         }
         
         /* Wave Net Animation */
-        
         .wave-net {
             position: absolute;
             top: -80px;
@@ -204,7 +232,6 @@
         }
         
         /* Experience Section */
-        
         .experience-section {
             padding: 4rem 2rem;
             background: var(--dark-secondary);
@@ -248,7 +275,6 @@
         }
         
         /* Services Section */
-        
         .services {
             padding: 5rem 2rem;
             background: var(--dark);
@@ -321,7 +347,6 @@
         }
         
         /* Featured Projects */
-        
         .projects {
             padding: 5rem 2rem;
             background: var(--dark-secondary);
@@ -368,7 +393,6 @@
         }
         
         /* About Section */
-        
         .about {
             padding: 5rem 2rem;
             background: var(--dark);
@@ -447,7 +471,6 @@
         }
         
         /* Contact Section */
-        
         .contact {
             padding: 5rem 2rem;
             background: var(--dark-secondary);
@@ -492,7 +515,7 @@
             min-height: 120px;
             resize: vertical;
         }
-        
+
         .btn {
             padding: 1rem 2rem;
             border: none;
@@ -501,40 +524,39 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary {
             background: var(--primary);
             color: var(--dark);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
         }
-        
+
         .btn-secondary {
             background: transparent;
             color: var(--light);
             border: 2px solid var(--secondary);
         }
-        
+
         .btn-secondary:hover {
             background: var(--secondary);
             color: var(--dark);
             transform: translateY(-2px);
         }
-        
+
         .form-step { display: none; }
-        
         .form-step.active { display: block; }
-        
+
         .time-slots-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .time-slot {
             background: var(--dark);
             color: var(--light);
@@ -545,18 +567,18 @@
             transition: all 0.2s ease;
             text-align: center;
         }
-        
+
         .time-slot:hover {
             background: var(--dark-tertiary);
             border-color: var(--primary);
         }
-        
+
         .time-slot.selected {
             background: var(--secondary);
             border-color: var(--secondary);
             color: var(--light);
         }
-        
+
         #form-message {
             margin-top: 1rem;
             padding: 1rem;
@@ -564,17 +586,17 @@
             text-align: center;
             display: none;
         }
-        
+
         #form-message.success {
             background-color: rgba(0, 230, 118, 0.2);
             color: var(--primary);
         }
-        
+
         #form-message.error {
             background-color: rgba(234, 67, 53, 0.2);
             color: var(--danger);
         }
-        
+
         .loader {
             width: 48px;
             height: 48px;
@@ -586,14 +608,13 @@
             animation: rotation 1s linear infinite;
             margin: 2rem auto;
         }
-        
+
         @keyframes rotation {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         
         /* Footer */
-        
         footer {
             background: var(--dark);
             color: var(--text-secondary);
@@ -603,7 +624,6 @@
         }
         
         /* Responsive */
-        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -615,9 +635,20 @@
                 padding: 1rem 2rem;
                 border: 1px solid var(--border-color);
             }
-            
+
             .nav-links.show {
                 display: flex;
+            }
+
+            .nav-links .dropdown {
+                position: static;
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+
+            .dropdown a {
+                padding: 0.5rem 0;
             }
             
             .nav-toggle {
@@ -649,7 +680,6 @@
         }
         
         /* Animations */
-        
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -669,7 +699,6 @@
         }
         
         /* Particle Background */
-        
         .particles {
             position: fixed;
             top: 0;
@@ -699,8 +728,6 @@
             }
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-CAm-l_-v.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
     <!-- Particle Background -->
@@ -724,9 +751,15 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li><a href="#about">Showcases</a></li>
-                <li><a href="#why">Why Automate</a></li>
+                <li class="submenu"><a href="#">Showcases</a>
+                    <ul class="dropdown">
+                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+                        <li><a href="showcase2.html">Enterprise Analytics Dashboard</a></li>
+                    </ul>
+                </li>
+                <li><a href="why-automation.html">Why Automate</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="index-he.html">עברית</a></li>
             </ul>
         </div>
     </nav>
@@ -858,7 +891,7 @@
             <div class="about-content">
                 <div class="about-header">
                     <div class="profile-photo">
-                        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzFhMWExYSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iODAiIGZpbGw9IiMyYTJhMmEiLz4KICA8dGV4dCB4PSIxMDAiIHk9IjExNSIgZm9udC1zaXplPSI2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzlmOWY5ZiIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNjAwIj5NPC90ZXh0Pgo8L3N2Zz4K" alt="Meir" />
+                        <img src="profile.svg" alt="Meir" />
                     </div>
                     <div>
                         <p class="about-text">
@@ -929,6 +962,128 @@
     <footer>
         <p>&copy; 2025 Automations by Meir. All rights reserved.</p>
     </footer>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
+            authDomain: "automationbymeir.firebaseapp.com",
+            projectId: "automationbymeir",
+            storageBucket: "automationbymeir.firebasestorage.app",
+            messagingSenderId: "216703427811",
+            appId: "1:216703427811:web:a2c848833870a1415c91d6",
+            measurementId: "G-D8GQDGVR08"
+        };
+        const app = initializeApp(firebaseConfig);
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYDJcrt8eT52qSQJf6sQ842LyUNjZQm-DGLaM_g757DDdC0viqZSgAyUilmOmxgJ_Cyw/exec";
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const toStep2Btn = document.getElementById('toStep2');
+        const toStep1Btn = document.getElementById('toStep1');
+        const form = document.getElementById('projectForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const slotsLoader = document.getElementById('slotsLoader');
+        const timeSlotsContainer = document.getElementById('timeSlots');
+        const formMessage = document.getElementById('form-message');
+        let selectedSlot = null;
+        toStep2Btn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                fetchAvailableSlots();
+            } else {
+                form.reportValidity();
+            }
+        });
+        toStep1Btn.addEventListener('click', () => {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        });
+        async function fetchAvailableSlots() {
+            slotsLoader.style.display = 'block';
+            timeSlotsContainer.innerHTML = '';
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                if (data.success) {
+                    displaySlots(data.slots);
+                } else {
+                    throw new Error(data.error || 'Failed to load slots.');
+                }
+            } catch (error) {
+                console.error('Error fetching slots:', error);
+                timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
+            } finally {
+                slotsLoader.style.display = 'none';
+            }
+        }
+        function displaySlots(slots) {
+            if (slots.length === 0) {
+                timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
+                return;
+            }
+            const groupedSlots = slots.reduce((acc, slot) => {
+                const date = new Date(slot);
+                const day = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+                if (!acc[day]) {
+                    acc[day] = [];
+                }
+                acc[day].push(slot);
+                return acc;
+            }, {});
+            let html = '';
+            for (const day in groupedSlots) {
+                html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
+                groupedSlots[day].forEach(slotISO => {
+                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+                    html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
+                });
+            }
+            timeSlotsContainer.innerHTML = html;
+        }
+        timeSlotsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('time-slot')) {
+                document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedSlot = e.target.dataset.value;
+            }
+        });
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedSlot) {
+                alert('Please select a time slot.');
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Scheduling...';
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                details: formData.get('details'),
+                dateTime: selectedSlot,
+                lang: 'en'
+            };
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                form.style.display = 'none';
+                formMessage.style.display = 'block';
+                formMessage.className = 'success';
+                formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                formMessage.style.display = 'block';
+                formMessage.className = 'error';
+                formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Schedule';
+            }
+        });
+    </script>
 
     <script>
         // Wave Net Animation
@@ -1096,9 +1251,23 @@
         // Navigation toggle
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.querySelector('.nav-links');
-        
+        const submenu = document.querySelector('.submenu');
+        const submenuLink = document.querySelector('.submenu > a');
+        const dropdown = document.querySelector('.submenu .dropdown');
+
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
+        });
+
+        submenuLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!submenu.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
         });
         
         // Scroll effect for navigation
