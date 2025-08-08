@@ -522,11 +522,11 @@
         /* Action Buttons */
         .action-buttons {
             position: fixed;
-            top: 2rem;
+            top: 6rem;
             right: 2rem;
             display: flex;
             gap: 1rem;
-            z-index: 100;
+            z-index: 1100;
         }
 
         .btn {
@@ -1064,7 +1064,7 @@
                 return;
             }
             
-            const runBtn = document.querySelector('.btn-primary');
+            const runBtn = document.querySelector('.action-buttons .btn-primary');
             runBtn.disabled = true;
             runBtn.textContent = 'Running...';
             
