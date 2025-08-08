@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D8GQDGVR08');
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automation by Meir - Transform Your Business with Custom Automation</title>
+    <meta name="description" content="Custom automation solutions using Google Apps Script and Firebase to streamline your business." />
+    <link rel="canonical" href="https://automationbymeir.web.app/" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
         :root {
@@ -53,15 +64,16 @@
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-family: 'Marck Script', cursive; font-size: 1.5rem; font-weight: 400; color: var(--light); text-decoration: none; display: flex; align-items: center; gap: 0.8rem; }
         .logo svg { width: 3rem; height: 3rem; }
+        .nav-toggle { display: none; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
         .nav-links li { position: relative; }
         .nav-links a { color: var(--light); text-decoration: none; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a::before { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s ease; }
         .nav-links a:hover::before { width: 100%; }
         .dropdown { display: none; flex-direction: column; position: absolute; top: calc(100% + 0.5rem); left: 0; background: rgba(32, 33, 36, 0.9); padding: 0.5rem 0; border-radius: 8px; min-width: 250px; }
+        .dropdown.show { display: flex; }
         .dropdown li { width: 100%; }
         .dropdown a { padding: 0.5rem 1rem; display: block; }
-        .submenu:hover > .dropdown { display: flex; }
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; color: var(--light); padding: 2rem; }
         .hero-content { text-align: center; max-width: 900px; z-index: 1; }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 1rem; background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC04 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite; line-height: 1.1; }
@@ -104,10 +116,41 @@
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(66, 133, 244, 0.4); }
         .playground-section { position: relative; overflow: hidden; }
         .playground-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(66, 133, 244, 0.05) 0%, transparent 50%); animation: rotate 30s linear infinite; }
-        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 3rem; } .services-grid, .projects-grid, .stats { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: rgba(32, 33, 36, 0.95);
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 2rem;
+            }
+            .nav-links.show { display: flex; }
+            .nav-links .dropdown {
+                position: static;
+                background: transparent;
+                padding: 0 0 0 1rem;
+            }
+            .nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--light);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            .hero h1 { font-size: 3rem; }
+            .services-grid, .projects-grid, .stats { grid-template-columns: 1fr; }
+        }
     </style>
+  <script type="module" crossorigin src="/assets/main-9qDhL76m.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ9XZMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bg-animation"></div>
     <nav id="navbar">
         <div class="nav-container">
@@ -115,6 +158,7 @@
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 48H8C5.79086 48 4 46.2091 4 44V4C4 1.79086 5.79086 0 8 0H30L44 14V44C44 46.2091 42.2091 48 40 48Z" fill="#2D2D30"/><path d="M30 0L44 14H34C31.7909 14 30 12.2091 30 10V0Z" fill="#424242"/><path d="M22 26L18 30L22 34" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26L34 30L30 34" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 40L24 36L28 40" stroke="#FBBC04" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Automation by Meir
             </a>
+            <button class="nav-toggle" id="navToggle">&#9776;</button>
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -127,6 +171,7 @@
                 </li>
                 <li><a href="#about">About</a></li>
                 <li><a href="payment.html">Payments</a></li>
+                <li><a href="why-automation.html">Why Automation?</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="lang-switcher">
@@ -297,7 +342,7 @@
                     </div>
                     <div id="step2" class="form-step">
                         <h3>Select a Time for a 30-Minute Consultation</h3>
-                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
+                        <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone (Israel Daylight Time).</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
                         <div id="timeSlots" class="time-slots-container"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
@@ -313,135 +358,5 @@
     <footer>
         <p>&copy; 2025 Automation by Meir. All rights reserved.</p>
     </footer>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        const firebaseConfig = {
-            apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
-            authDomain: "automationbymeir.firebaseapp.com",
-            projectId: "automationbymeir",
-            storageBucket: "automationbymeir.firebasestorage.app",
-            messagingSenderId: "216703427811",
-            appId: "1:216703427811:web:a2c848833870a1415c91d6",
-            measurementId: "G-D8GQDGVR08"
-        };
-        const app = initializeApp(firebaseConfig);
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYDJcrt8eT52qSQJf6sQ842LyUNjZQm-DGLaM_g757DDdC0viqZSgAyUilmOmxgJ_Cyw/exec";
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
-        const toStep2Btn = document.getElementById('toStep2');
-        const toStep1Btn = document.getElementById('toStep1');
-        const form = document.getElementById('projectForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const slotsLoader = document.getElementById('slotsLoader');
-        const timeSlotsContainer = document.getElementById('timeSlots');
-        const formMessage = document.getElementById('form-message');
-        let selectedSlot = null;
-        toStep2Btn.addEventListener('click', () => {
-            if (form.checkValidity()) {
-                step1.classList.remove('active');
-                step2.classList.add('active');
-                fetchAvailableSlots();
-            } else {
-                form.reportValidity();
-            }
-        });
-        toStep1Btn.addEventListener('click', () => {
-            step2.classList.remove('active');
-            step1.classList.add('active');
-        });
-        async function fetchAvailableSlots() {
-            slotsLoader.style.display = 'block';
-            timeSlotsContainer.innerHTML = '';
-            try {
-                const response = await fetch(SCRIPT_URL);
-                const data = await response.json();
-                if (data.success) {
-                    displaySlots(data.slots);
-                } else {
-                    throw new Error(data.error || 'Failed to load slots.');
-                }
-            } catch (error) {
-                console.error('Error fetching slots:', error);
-                timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
-            } finally {
-                slotsLoader.style.display = 'none';
-            }
-        }
-        function displaySlots(slots) {
-            if (slots.length === 0) {
-                timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
-                return;
-            }
-            const groupedSlots = slots.reduce((acc, slot) => {
-                const date = new Date(slot);
-                const day = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
-                if (!acc[day]) {
-                    acc[day] = [];
-                }
-                acc[day].push(slot);
-                return acc;
-            }, {});
-            let html = '';
-            for (const day in groupedSlots) {
-                html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
-                groupedSlots[day].forEach(slotISO => {
-                    const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-                    html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
-                });
-            }
-            timeSlotsContainer.innerHTML = html;
-        }
-        timeSlotsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('time-slot')) {
-                document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
-                e.target.classList.add('selected');
-                selectedSlot = e.target.dataset.value;
-            }
-        });
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!selectedSlot) {
-                alert('Please select a time slot.');
-                return;
-            }
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Scheduling...';
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                details: formData.get('details'),
-                dateTime: selectedSlot,
-                lang: 'en'
-            };
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                form.style.display = 'none';
-                formMessage.style.display = 'block';
-                formMessage.className = 'success';
-                formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                formMessage.style.display = 'block';
-                formMessage.className = 'error';
-                formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit & Schedule';
-            }
-        });
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    </script>
 </body>
 </html>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D8GQDGVR08');
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automation Puzzle - Build Your Perfect Workflow</title>
@@ -427,26 +436,43 @@
         /* Mobile Responsive */
         
         @media (max-width: 768px) {
-            .service-panel {
-                width: 250px;
+            .container {
+                flex-direction: column;
             }
-            
+
+            .service-panel {
+                width: 100%;
+                height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid rgba(66, 133, 244, 0.3);
+            }
+
+            .canvas-area {
+                height: 60vh;
+            }
+
             .info-panel {
-                bottom: 1rem;
-                right: 1rem;
-                left: 1rem;
+                position: static;
+                margin: 1rem;
                 max-width: none;
             }
-            
+
             .action-buttons {
-                top: 1rem;
-                right: 1rem;
-                flex-direction: column;
+                position: fixed;
+                bottom: 1rem;
+                top: auto;
+                left: 0;
+                right: 0;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ9XZMFL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="bg-grid"></div>
     
     <!-- Floating Particles -->
