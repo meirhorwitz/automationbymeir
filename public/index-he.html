@@ -16,6 +16,7 @@
     <meta name="description" content="פתרונות אוטומציה מותאמים אישית לעסק שלכם" />
     <link rel="canonical" href="https://automationbymeir.web.app/index-he.html" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&display=swap');
         :root {
             --primary: #00e676;
@@ -76,8 +77,23 @@
         @keyframes float { from { transform: translateY(100vh) translateX(0); } to { transform: translateY(-100px) translateX(100px); } }
         nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; border-bottom: 1px solid rgba(51, 51, 51, 0.5); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.25rem; font-weight: 600; color: var(--light); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Sans Hebrew', sans-serif; }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'IBM Plex Sans', 'IBM Plex Sans Hebrew', sans-serif;
+            direction: ltr;
+        }
         .logo svg { width: 40px; height: 40px; }
+        .logo .by-meir {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.8em;
+        }
         .nav-toggle { display: none; }
         .nav-links { display: flex; gap: 2rem; list-style: none; padding-right: 0; }
         .nav-links a { color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease; position: relative; font-size: 0.9rem; font-weight: 500; }
@@ -208,7 +224,7 @@
                     <path d="M16 14L14 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 Automations
-                <span style="color: var(--text-secondary); font-weight: 400;">BY MEIR</span>
+                <span class="by-meir">by Meir</span>
             </a>
             <button class="nav-toggle" id="navToggle">&#9776;</button>
             <ul class="nav-links">
