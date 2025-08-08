@@ -97,6 +97,10 @@
             gap: 2.5rem;
             align-items: center;
         }
+
+        .nav-links li {
+            position: relative;
+        }
         
         .nav-links a {
             color: var(--text-secondary);
@@ -124,6 +128,33 @@
         
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0;
+            border-radius: 8px;
+            min-width: 200px;
+            z-index: 10;
+        }
+
+        .dropdown a {
+            padding: 0.5rem 1.5rem;
+            white-space: nowrap;
+        }
+
+        .dropdown a:hover {
+            background: var(--dark-tertiary);
+        }
+
+        .dropdown.show {
+            display: flex;
         }
         
         /* Hero Section */
@@ -604,9 +635,20 @@
                 padding: 1rem 2rem;
                 border: 1px solid var(--border-color);
             }
-            
+
             .nav-links.show {
                 display: flex;
+            }
+
+            .nav-links .dropdown {
+                position: static;
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+
+            .dropdown a {
+                padding: 0.5rem 0;
             }
             
             .nav-toggle {
@@ -709,9 +751,15 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li><a href="#about">Showcases</a></li>
-                <li><a href="#why">Why Automate</a></li>
+                <li class="submenu"><a href="#">Showcases</a>
+                    <ul class="dropdown">
+                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+                        <li><a href="showcase2.html">Enterprise Analytics Dashboard</a></li>
+                    </ul>
+                </li>
+                <li><a href="why-automation.html">Why Automate</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="index-he.html">עברית</a></li>
             </ul>
         </div>
     </nav>
@@ -1203,9 +1251,23 @@
         // Navigation toggle
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.querySelector('.nav-links');
-        
+        const submenu = document.querySelector('.submenu');
+        const submenuLink = document.querySelector('.submenu > a');
+        const dropdown = document.querySelector('.submenu .dropdown');
+
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
+        });
+
+        submenuLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!submenu.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
         });
         
         // Scroll effect for navigation
