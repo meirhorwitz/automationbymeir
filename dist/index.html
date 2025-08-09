@@ -90,6 +90,11 @@
             border-radius: 8px;
             padding: 8px;
         }
+        .logo .by-meir {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.8em;
+        }
         
         .nav-toggle {
             display: none;
@@ -317,6 +322,9 @@
             border-radius: 0;
             padding: 2rem;
             transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
         
         .service-card:hover {
@@ -335,6 +343,25 @@
         .service-description {
             color: var(--text-secondary);
             line-height: 1.6;
+        }
+
+        .platform-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .platform-logos img {
+            height: 40px;
+        }
+
+        .linkedin-logo {
+            width: 24px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
         }
         
         /* Featured Projects */
@@ -731,7 +758,7 @@
                     <path d="M16 14L14 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 Automations
-                <span style="color: var(--text-secondary); font-weight: 400;">BY MEIR</span>
+                <span class="by-meir">by Meir</span>
             </a>
             <button class="nav-toggle" id="navToggle">☰</button>
             <ul class="nav-links">
@@ -769,7 +796,7 @@
         <div class="experience-content">
             <h2>Experience Automation in Action</h2>
             <p>Try our interactive automation playground and build your own workflow by connecting Google services and AI tools</p>
-            <a href="#contact" class="cta-secondary">Start your project</a>
+            <a href="automation-playground.html" class="cta-secondary">Try it live</a>
         </div>
     </section>
     
@@ -779,31 +806,42 @@
             <div class="section-header">
                 <h2 class="section-title">Services</h2>
             </div>
+            <div class="platforms">
+                <h3 class="platforms-title">Automation Platforms We Use</h3>
+                <div class="platform-logos">
+                    <img src="logos/googleappsscript.svg" alt="Google Apps Script">
+                    <img src="logos/firebase.svg" alt="Firebase">
+                    <img src="logos/openai.svg" alt="OpenAI">
+                    <img src="logos/claude.svg" alt="Claude">
+                    <img src="logos/googlegemini.svg" alt="Gemini">
+                    <img src="logos/grok.svg" alt="Grok">
+                </div>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
+                <a href="services/ai-powered-systems.html" class="service-card">
                     <h3 class="service-title">AI-Powered Systems</h3>
                     <p class="service-description">Custom AI agents, LLM integrations, and intelligent automation systems that understand and adapt to your business needs.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/data-dashboards.html" class="service-card">
                     <h3 class="service-title">Data Dashboards</h3>
                     <p class="service-description">Beautiful, interactive dashboards that transform spreadsheet data into actionable insights with stunning visualizations.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/api-integration.html" class="service-card">
                     <h3 class="service-title">API Integration</h3>
                     <p class="service-description">Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/process-automation.html" class="service-card">
                     <h3 class="service-title">Process Automation</h3>
                     <p class="service-description">Streamline workflows with custom automation for emails, reports, data processing, and complex business operations.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/document-generation.html" class="service-card">
                     <h3 class="service-title">Document Generation</h3>
                     <p class="service-description">Dynamic PDF creation systems with custom parameters, graphics, and professional layouts.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/web-development.html" class="service-card">
                     <h3 class="service-title">Web Development</h3>
                     <p class="service-description">Full-stack web applications with modern interfaces and robust backend automation.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -868,7 +906,11 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">About Meir</h2>
+            <h2 class="section-title">About Meir
+                <a href="https://www.linkedin.com/in/meir-horwitz-81972189/" target="_blank">
+                    <img src="logos/linkedin.svg" alt="LinkedIn" class="linkedin-logo">
+                </a>
+            </h2>
             <div class="about-content">
                 <div class="about-header">
                     <div class="profile-photo">

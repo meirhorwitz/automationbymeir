@@ -16,6 +16,7 @@
     <meta name="description" content="פתרונות אוטומציה מותאמים אישית לעסק שלכם" />
     <link rel="canonical" href="https://automationbymeir.web.app/index-he.html" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&display=swap');
         :root {
             --primary: #00e676;
@@ -76,8 +77,23 @@
         @keyframes float { from { transform: translateY(100vh) translateX(0); } to { transform: translateY(-100px) translateX(100px); } }
         nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; border-bottom: 1px solid rgba(51, 51, 51, 0.5); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.25rem; font-weight: 600; color: var(--light); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; font-family: 'IBM Plex Sans Hebrew', sans-serif; }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'IBM Plex Sans', 'IBM Plex Sans Hebrew', sans-serif;
+            direction: ltr;
+        }
         .logo svg { width: 40px; height: 40px; }
+        .logo .by-meir {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.8em;
+        }
         .nav-toggle { display: none; }
         .nav-links { display: flex; gap: 2rem; list-style: none; padding-right: 0; }
         .nav-links a { color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease; position: relative; font-size: 0.9rem; font-weight: 500; }
@@ -140,7 +156,7 @@
         .services-grid, .projects-grid, .stats-grid { display: grid; gap: 2rem; }
         .services-grid, .stats-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         .projects-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-        .service-card, .project-card { background: rgba(41, 42, 46, 0.7); border-radius: 0; border: 1px solid rgba(66, 133, 244, 0.2); transition: all 0.3s ease; padding: 2rem; }
+        .service-card, .project-card { background: rgba(41, 42, 46, 0.7); border-radius: 0; border: 1px solid rgba(66, 133, 244, 0.2); transition: all 0.3s ease; padding: 2rem; display: block; text-decoration: none; color: inherit; }
         .service-card:hover, .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(66, 133, 244, 0.3); }
         .service-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--secondary); }
         .service-description, .project-description, .about-text, .stat-label { color: #cbd5e1; }
@@ -165,6 +181,9 @@
         .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(66, 133, 244, 0.4); }
         .playground-section { position: relative; overflow: hidden; }
         .playground-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(66, 133, 244, 0.05) 0%, transparent 50%); animation: rotate 30s linear infinite; }
+        .platform-logos { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 2rem; }
+        .platform-logos img { height: 40px; }
+        .linkedin-logo { width: 24px; margin-right: 0.5rem; vertical-align: middle; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
             .nav-links {
@@ -208,7 +227,7 @@
                     <path d="M16 14L14 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 Automations
-                <span style="color: var(--text-secondary); font-weight: 400;">BY MEIR</span>
+                <span class="by-meir">by Meir</span>
             </a>
             <button class="nav-toggle" id="navToggle">&#9776;</button>
             <ul class="nav-links">
@@ -254,31 +273,42 @@
     <section class="services" id="services">
         <div class="container">
             <h2 class="section-title">מה אני בונה</h2>
+            <div class="platforms">
+                <h3 class="platforms-title">המערכות שאיתן אנחנו בונים אוטומציות</h3>
+                <div class="platform-logos">
+                    <img src="logos/googleappsscript.svg" alt="Google Apps Script">
+                    <img src="logos/firebase.svg" alt="Firebase">
+                    <img src="logos/openai.svg" alt="OpenAI">
+                    <img src="logos/claude.svg" alt="Claude">
+                    <img src="logos/googlegemini.svg" alt="Gemini">
+                    <img src="logos/grok.svg" alt="Grok">
+                </div>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
+                <a href="services/ai-powered-systems.html" class="service-card">
                     <h3 class="service-title">מערכות מבוססות AI</h3>
                     <p class="service-description">סוכני AI מותאמים אישית, אינטגרציות LLM ומערכות אוטומציה חכמות שמבינות ומתאימות את עצמן לצרכים העסקיים שלכם.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/data-dashboards.html" class="service-card">
                     <h3 class="service-title">דשבורדים וניתוח נתונים</h3>
                     <p class="service-description">דשבורדים אינטראקטיביים שהופכים נתונים מורכבים לתובנות עסקיות ברורות עם ויזואליזציות מרשימות.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/process-automation.html" class="service-card">
                     <h3 class="service-title">אוטומציה של תהליכים</h3>
                     <p class="service-description">ייעול תהליכי עבודה עם אוטומציה מותאמת אישית למיילים, דוחות, עיבוד נתונים ותהליכים עסקיים מורכבים.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/api-integration.html" class="service-card">
                     <h3 class="service-title">אינטגרציית API</h3>
                     <p class="service-description">חיבור חלק בין פלטפורמות, מודלי שפה ושירותים שונים ליצירת פתרונות משולבים ועוצמתיים.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/document-generation.html" class="service-card">
                     <h3 class="service-title">יצירת מסמכים</h3>
                     <p class="service-description">מערכות ליצירת קבצי PDF דינמיים עם פרמטרים מותאמים אישית, גרפיקה ועיצובים מקצועיים.</p>
-                </div>
-                <div class="service-card">
+                </a>
+                <a href="services/web-development.html" class="service-card">
                     <h3 class="service-title">פיתוח אתרים</h3>
                     <p class="service-description">יישומי רשת Full-stack עם ממשקים מודרניים ואוטומציה חזקה בצד השרת.</p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -330,7 +360,11 @@
     </section>
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">אודות מאיר</h2>
+            <h2 class="section-title">אודות מאיר
+                <a href="https://www.linkedin.com/in/meir-horwitz-81972189/" target="_blank">
+                    <img src="logos/linkedin.svg" alt="LinkedIn" class="linkedin-logo">
+                </a>
+            </h2>
             <div class="about-content">
                 <div class="about-header">
                     <div class="profile-photo">
