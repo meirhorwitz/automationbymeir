@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80">
-  <defs>
-    <style>@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
-      text { font-family: 'Orbitron', sans-serif; font-weight: 600; }
-    </style>
-  </defs>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40" fill="#00e676">TrendingTech Daily</text>
-</svg>
