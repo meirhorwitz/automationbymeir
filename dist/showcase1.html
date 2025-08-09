@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-D8GQDGVR08');
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Wallet Tracker - Automated Portfolio Management System</title>
-    <link rel="icon" href="/profile.jpeg" type="image/jpeg">
+    <title>Crypto Wallet Tracker - Enterprise Blockchain Analytics</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
         :root {
             --primary: #00e676;
             --primary-dark: #00c853;
@@ -29,765 +21,1416 @@
             --border-color: #333;
             --accent: #fbbc04;
             --danger: #ea4335;
-            --gray: #5f6368;
+            --success: #00e676;
+            --warning: #ff9800;
+            --btc-orange: #f7931a;
+            --eth-purple: #627eea;
+            --usdt-green: #26a17b;
+            --usdc-blue: #2775ca;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
-            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .showcase-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, rgba(98, 126, 234, 0.1), rgba(247, 147, 26, 0.1));
+            border: 1px solid var(--eth-purple);
+            border-radius: 50px;
+            color: var(--eth-purple);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         h1 {
+            font-size: 3rem;
             font-weight: 200;
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
         }
-        nav {
-            position: fixed;
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* System Architecture Section */
+        .system-architecture {
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-architecture::before {
+            content: '';
+            position: absolute;
             top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
         }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+
+        .architecture-title {
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .process-step {
+            background: var(--dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--eth-purple);
+            box-shadow: 0 10px 30px rgba(98, 126, 234, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            color: var(--light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Central Processing Engine */
+        .central-processor {
+            background: var(--dark);
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--dark), var(--dark)), 
+                              linear-gradient(135deg, var(--eth-purple), var(--btc-orange));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            position: relative;
+            box-shadow: 0 0 40px rgba(98, 126, 234, 0.3);
+        }
+
+        .processor-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .processor-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .feature-chip {
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .feature-chip:hover {
+            border-color: var(--eth-purple);
+            background: rgba(98, 126, 234, 0.1);
+        }
+
+        /* Workflow Section */
+        .workflow-section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .workflow-step {
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .workflow-step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .workflow-number {
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .workflow-title {
+            font-size: 1.5rem;
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        /* Spreadsheet Mock */
+        .spreadsheet-mock {
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .sheet-header {
+            background: #2d2d30;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sheets-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sheets-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .sheet-title {
+            color: #cccccc;
+            font-size: 14px;
+        }
+
+        .sheet-tabs {
+            display: flex;
+            background: #252526;
+            border-bottom: 1px solid #3e3e42;
+            overflow-x: auto;
+        }
+
+        .sheet-tab {
+            padding: 8px 16px;
+            color: #969696;
+            font-size: 13px;
+            border-right: 1px solid #3e3e42;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .sheet-tab:hover {
+            background: #2d2d30;
+        }
+
+        .sheet-tab.active {
+            background: #1e1e1e;
+            color: #ffffff;
+            border-bottom: 2px solid var(--eth-purple);
+        }
+
+        .spreadsheet-content {
+            overflow-x: auto;
+            background: #1e1e1e;
+        }
+
+        .spreadsheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .spreadsheet-table th {
+            background: #2d2d30;
+            color: #cccccc;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #3e3e42;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .spreadsheet-table td {
+            padding: 6px 8px;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+        }
+
+        .spreadsheet-table tr:hover {
+            background: #252526;
+        }
+
+        .cell-date {
+            color: #9cdcfe;
+        }
+
+        .cell-crypto {
+            font-weight: 600;
+        }
+
+        .cell-eth { color: var(--eth-purple); }
+        .cell-btc { color: var(--btc-orange); }
+        .cell-usdt { color: var(--usdt-green); }
+        .cell-usdc { color: var(--usdc-blue); }
+
+        .cell-usd {
+            color: #4ec9b0;
+            font-weight: 500;
+        }
+
+        .cell-address {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #858585;
+        }
+
+        /* Dashboard Mock */
+        .dashboard-mock {
+            background: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            background: #2d2d30;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .dash-btn {
+            padding: 8px 16px;
+            border: 1px solid #3e3e42;
+            border-radius: 6px;
+            background: #252526;
+            color: #cccccc;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dash-btn:hover {
+            background: #2d2d30;
+            border-color: var(--eth-purple);
+        }
+
+        .dash-btn.primary {
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            color: white;
+            border: none;
+        }
+
+        .dash-btn.primary:hover {
+            opacity: 0.9;
+        }
+
+        .dashboard-content {
+            padding: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--eth-purple);
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #969696;
+        }
+
+        .stat-change {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .stat-change.positive {
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(234, 67, 53, 0.1);
+            color: var(--danger);
+        }
+
+        /* Wallet List */
+        .wallet-list {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .wallet-list-header {
+            padding: 1rem 1.5rem;
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
+
+        .wallet-list-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .wallet-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .wallet-table th {
+            background: #2d2d30;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #969696;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .wallet-table td {
+            padding: 12px;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 14px;
+            color: #d4d4d4;
+        }
+
+        .wallet-table tr:hover {
+            background: #2d2d30;
+        }
+
+        .wallet-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-eth {
+            background: rgba(98, 126, 234, 0.2);
+            color: var(--eth-purple);
+        }
+
+        .badge-btc {
+            background: rgba(247, 147, 26, 0.2);
+            color: var(--btc-orange);
+        }
+
+        /* Transaction Flow Visualization */
+        .transaction-flow {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .flow-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .flow-items {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--light);
-            font-size: 1.25rem;
-            font-weight: 600;
-            font-family: 'IBM Plex Sans', sans-serif;
+            justify-content: space-between;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
         }
-        .logo svg {
+
+        .flow-item {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-item::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--eth-purple);
+            font-size: 20px;
+        }
+
+        .flow-item:last-child::after {
+            display: none;
+        }
+
+        .flow-icon {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
-            padding: 8px;
+            margin: 0 auto 0.5rem;
         }
-        .logo .by-meir {
-            color: var(--text-secondary);
-            font-weight: 400;
-            font-size: 0.8em;
+
+        .flow-label {
+            font-size: 13px;
+            color: #969696;
+            margin-bottom: 0.25rem;
         }
-        .nav-toggle { display: none; }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
+
+        .flow-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
         }
-        .nav-links li { position: relative; }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
+
+        /* Features Grid */
+        .features-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
-        .nav-links a:hover { color: var(--light); }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        .dropdown {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: calc(100% + 0.5rem);
-            left: 0;
-            background: var(--dark-secondary);
+
+        .feature-card {
+            background: var(--dark);
             border: 1px solid var(--border-color);
-            padding: 0.5rem 0;
-            border-radius: 8px;
-            min-width: 200px;
-            z-index: 10;
-        }
-        .dropdown a {
-            padding: 0.5rem 1.5rem;
-            white-space: nowrap;
-        }
-        .dropdown a:hover { background: var(--dark-tertiary); }
-        .dropdown.show { display: flex; }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background: var(--dark);
-                flex-direction: column;
-                padding: 1rem 2rem;
-                border: 1px solid var(--border-color);
-            }
-            .nav-links.show { display: flex; }
-            .nav-links .dropdown {
-                position: static;
-                background: transparent;
-                border: none;
-                padding: 0;
-            }
-            .dropdown a { padding: 0.5rem 0; }
-            .nav-toggle {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--light);
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-        }
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: radial-gradient(circle at 20% 50%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(251, 188, 4, 0.1) 0%, transparent 50%);
-            padding: 2rem;
-        }
-        .hero-content {
+            border-radius: 12px;
+            padding: 1.5rem;
             text-align: center;
-            max-width: 1200px;
-            width: 100%;
-            padding: 2rem;
-            margin: 0 auto;
+            transition: all 0.3s ease;
         }
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC04 100%);
+
+        .feature-card:hover {
+            border-color: var(--eth-purple);
+            background: rgba(98, 126, 234, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--dark);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .big-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.3;
-            padding: 0 1rem;
+            margin-bottom: 0.25rem;
         }
-        .subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            color: #8b9dc3;
-            margin-bottom: 3rem;
-            padding: 0 1rem;
+
+        .big-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .info-title {
+            background: linear-gradient(135deg, var(--eth-purple) 0%, var(--btc-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             line-height: 1.5;
         }
-        /* System Architecture Diagram */
-        .architecture-section {
-            padding: 4rem 2rem;
-            background: #0f0f0f;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #ffffff;
-        }
-        .diagram-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-        /* Features Grid */
-        .features-section {
-            padding: 4rem 2rem;
-            background: #1a1a1a;
-        }
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: #4285F4;
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
-        }
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-        }
-        .feature-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #4285F4;
-        }
-        .feature-description {
-            color: #8b9dc3;
-            line-height: 1.6;
-        }
-        /* Data Flow Animation */
-        .flow-section {
-            padding: 4rem 2rem;
-            background: #0f0f0f;
-        }
-        .flow-diagram {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-        /* Technical Stack */
-        .tech-section {
-            padding: 4rem 2rem;
-            background: #1a1a1a;
-        }
-        .tech-grid {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        .tech-item {
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .tech-item:hover {
-            transform: scale(1.05);
-            border-color: #34A853;
-        }
-        /* Results Section */
-        .results-section {
-            padding: 4rem 2rem;
-            background: #0f0f0f;
-        }
-        .results-grid {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        .result-card {
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .result-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #FBBC04;
-            margin-bottom: 0.5rem;
-        }
-        .result-label {
-            color: #8b9dc3;
-        }
-        /* Call to Action */
-        .cta-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-            text-align: center;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.5);
-        }
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        .pulsing {
-            animation: pulse 2s ease-in-out infinite;
-        }
+
         /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            h1 {
-                 font-size: 2rem;
-                padding: 0 0.5rem;
+            h1 { font-size: 2rem; }
+            .process-flow { grid-template-columns: 1fr; }
+            .features-showcase { grid-template-columns: 1fr; }
+            .dashboard-header { flex-direction: column; }
+            .dashboard-actions { width: 100%; justify-content: space-between; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .flow-items { flex-direction: column; }
+            .flow-item::after { display: none; }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            .subtitle {
-                 font-size: 1.1rem;
-                padding: 0 0.5rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .section-title { font-size: 2rem; }
-            .hero-content {
-                padding: 1rem;
-            }
+        }
+
+        .workflow-step {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Glow Effect */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(98, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(98, 126, 234, 0.8), 0 0 40px rgba(247, 147, 26, 0.4); }
         }
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ9XZMFL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 3L5 7L9 11" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 3L19 7L15 11" stroke="#448aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 14L8 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M16 14L14 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Automations <span class="by-meir">by Meir</span>
-            </a>
-            <button class="nav-toggle" id="navToggle">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li class="submenu"><a href="#">Showcases</a>
-                    <ul class="dropdown">
-                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
-                        <li><a href="showcase2.html">Business Analytics System</a></li>
-                        <li><a href="showcase-job-post-pro.html">Job Post Pro System</a></li>
-                    </ul>
-                </li>
-                <li><a href="why-automation.html">Why Automate</a></li>
-                <li><a href="payment.html">Payments</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-                <li><a href="index-he.html">עברית</a></li>
-            </ul>
+    <div class="showcase-container">
+        <!-- Header -->
+        <div class="header">
+            <span class="badge">BLOCKCHAIN ANALYTICS PLATFORM</span>
+            <h1>ETH/BTC Wallet Tracker</h1>
+            <p class="subtitle">Real-time Cryptocurrency Portfolio Management & FIFO Tracking System</p>
         </div>
-    </nav>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Crypto Wallet Tracker System</h1>
-            <p class="subtitle">Real-time Ethereum & Bitcoin Portfolio Management with Advanced FIFO Tracking</p>
+
+        <!-- System Architecture Overview -->
+        <div class="system-architecture">
+            <h2 class="architecture-title">System Architecture & Data Flow</h2>
             
-            <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
-                <defs>
-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                    </pattern>
+            <!-- Process Flow Steps -->
+            <div class="process-flow">
+                <div class="process-step">
+                    <span class="step-number">1</span>
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#627eea"/>
+                    </svg>
+                    <h3 class="step-title">Blockchain Monitoring</h3>
+                    <p class="step-description">Real-time scanning of Ethereum & Bitcoin networks via Etherscan & Mempool APIs</p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-number">2</span>
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" fill="#f7931a"/>
+                    </svg>
+                    <h3 class="step-title">Transaction Processing</h3>
+                    <p class="step-description">FIFO-based tracking with gas fee calculation and historical price fetching</p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-number">3</span>
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="#26a17b" stroke-width="2"/>
+                        <path d="M7 7H17M7 12H17M7 17H12" stroke="#26a17b" stroke-width="2"/>
+                    </svg>
+                    <h3 class="step-title">Data Organization</h3>
+                    <p class="step-description">Automated monthly sheets with client categorization and affiliate tracking</p>
+                </div>
+
+                <div class="process-step">
+                    <span class="step-number">4</span>
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="#2775ca" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" stroke="#2775ca" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3 class="step-title">Real-time Updates</h3>
+                    <p class="step-description">15-minute automated sync with current market prices from CoinMarketCap</p>
+                </div>
+            </div>
+
+            <!-- Central Processing Engine -->
+            <div class="central-processor glow">
+                <h3 class="processor-title">Blockchain Processing Engine</h3>
+                <div class="processor-features">
+                    <div class="feature-chip">ETH Network Scanner</div>
+                    <div class="feature-chip">BTC Network Scanner</div>
+                    <div class="feature-chip">ERC-20 Token Support</div>
+                    <div class="feature-chip">Gas Fee Calculator</div>
+                    <div class="feature-chip">FIFO Algorithm</div>
+                    <div class="feature-chip">Historical Prices</div>
+                    <div class="feature-chip">Duplicate Prevention</div>
+                    <div class="feature-chip">Balance Verification</div>
+                    <div class="feature-chip">Error Recovery</div>
+                    <div class="feature-chip">Batch Sync</div>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="features-showcase">
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#627eea"/>
+                    </svg>
+                    <div class="feature-name">Multi-Chain Support</div>
+                    <div class="feature-detail">ETH, BTC, USDT, USDC</div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" fill="#f7931a"/>
+                    </svg>
+                    <div class="feature-name">FIFO Tracking</div>
+                    <div class="feature-detail">Accurate profit/loss calc</div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#26a17b" stroke-width="2"/>
+                    </svg>
+                    <div class="feature-name">Auto Organization</div>
+                    <div class="feature-detail">Monthly sheet creation</div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" fill="#2775ca"/>
+                    </svg>
+                    <div class="feature-name">Historical Data</div>
+                    <div class="feature-detail">Price at deposit time</div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" fill="#627eea"/>
+                    </svg>
+                    <div class="feature-name">Live Prices</div>
+                    <div class="feature-detail">Real-time USD values</div>
+                </div>
+
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#f7931a"/>
+                    </svg>
+                    <div class="feature-name">Error Handling</div>
+                    <div class="feature-detail">Auto-recovery system</div>
+                </div>
+            </div>
+
+            <!-- Performance Stats -->
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="big-stat-value">100+</div>
+                    <div class="big-stat-label">Wallets Tracked</div>
+                </div>
+                <div class="stat">
+                    <div class="big-stat-value">15 min</div>
+                    <div class="big-stat-label">Update Frequency</div>
+                </div>
+                <div class="stat">
+                    <div class="big-stat-value">4 APIs</div>
+                    <div class="big-stat-label">Data Sources</div>
+                </div>
+                <div class="stat">
+                    <div class="big-stat-value">24/7</div>
+                    <div class="big-stat-label">Monitoring</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Section -->
+        <div class="workflow-section">
+            <div class="section-header">
+                <h2 class="section-title">Live System Interface</h2>
+                <p class="section-subtitle">See how the tracker manages wallets and processes transactions</p>
+            </div>
+
+            <!-- Step 1: Control Dashboard -->
+            <div class="workflow-step">
+                <div class="workflow-step-header">
+                    <div class="workflow-number">1</div>
+                    <h3 class="workflow-title">Wallet Management Dashboard</h3>
+                </div>
+                
+                <div class="dashboard-mock">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">🔐 Crypto Wallet Tracker</div>
+                        <div class="dashboard-actions">
+                            <button class="dash-btn">📊 View Reports</button>
+                            <button class="dash-btn">🔄 Run Tracker</button>
+                            <button class="dash-btn">💰 Update Prices</button>
+                            <button class="dash-btn primary">⚡ Full Sync</button>
+                        </div>
+                    </div>
                     
-                    <linearGradient id="ethGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#627EEA;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#4752C4;stop-opacity:1" />
-                    </linearGradient>
+                    <div class="dashboard-content">
+                        <!-- Stats Grid -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="#627eea" stroke-width="2"/>
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10" stroke="#627eea" stroke-width="2"/>
+                                </svg>
+                                <div class="stat-value">$2,847,392</div>
+                                <div class="stat-label">Total Portfolio Value</div>
+                                <span class="stat-change positive">+12.4%</span>
+                            </div>
+                            <div class="stat-card">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#f7931a"/>
+                                </svg>
+                                <div class="stat-value">47 ETH</div>
+                                <div class="stat-label">Total Ethereum</div>
+                                <span class="stat-change positive">+5.2 ETH</span>
+                            </div>
+                            <div class="stat-card">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" fill="#f7931a"/>
+                                    <path d="M9 12h6M12 9v6" stroke="white" stroke-width="2"/>
+                                </svg>
+                                <div class="stat-value">3.82 BTC</div>
+                                <div class="stat-label">Total Bitcoin</div>
+                                <span class="stat-change negative">-0.15 BTC</span>
+                            </div>
+                            <div class="stat-card">
+                                <svg class="stat-icon" viewBox="0 0 24 24" fill="none">
+                                    <rect x="4" y="4" width="16" height="16" stroke="#26a17b" stroke-width="2"/>
+                                    <path d="M8 12h8" stroke="#26a17b" stroke-width="2"/>
+                                </svg>
+                                <div class="stat-value">$124,850</div>
+                                <div class="stat-label">Stablecoins</div>
+                                <span class="stat-change positive">+$8,400</span>
+                            </div>
+                        </div>
+
+                        <!-- Wallet List -->
+                        <div class="wallet-list">
+                            <div class="wallet-list-header">
+                                <h3 class="wallet-list-title">Active Wallets</h3>
+                                <button class="dash-btn">+ Add Wallet</button>
+                            </div>
+                            <table class="wallet-table">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Wallet Address</th>
+                                        <th>Type</th>
+                                        <th>Balance</th>
+                                        <th>USD Value</th>
+                                        <th>Last Activity</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Diamond Trading Co.</td>
+                                        <td class="cell-address">0x742d35Cc6634C053...2a65</td>
+                                        <td><span class="wallet-badge badge-eth">ETH</span></td>
+                                        <td>12.45 ETH</td>
+                                        <td class="cell-usd">$37,350</td>
+                                        <td>2 hours ago</td>
+                                        <td style="color: #00e676;">● Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crypto Holdings LLC</td>
+                                        <td class="cell-address">bc1qxy2kgdygjrsqtz...p2pkh</td>
+                                        <td><span class="wallet-badge badge-btc">BTC</span></td>
+                                        <td>1.82 BTC</td>
+                                        <td class="cell-usd">$172,900</td>
+                                        <td>12 hours ago</td>
+                                        <td style="color: #00e676;">● Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tech Ventures</td>
+                                        <td class="cell-address">0x08c65872dd31315a...2620</td>
+                                        <td><span class="wallet-badge badge-eth">ETH</span></td>
+                                        <td>8.73 ETH</td>
+                                        <td class="cell-usd">$26,190</td>
+                                        <td>1 day ago</td>
+                                        <td style="color: #fbbc04;">● Pending</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Transaction Flow -->
+                        <div class="transaction-flow">
+                            <h3 class="flow-title">Recent Transaction Flow</h3>
+                            <div class="flow-items">
+                                <div class="flow-item">
+                                    <svg class="flow-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2v20M2 12h20" stroke="#00e676" stroke-width="2"/>
+                                    </svg>
+                                    <div class="flow-label">Deposits</div>
+                                    <div class="flow-value">24</div>
+                                </div>
+                                <div class="flow-item">
+                                    <svg class="flow-icon" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="#627eea" stroke-width="2"/>
+                                        <path d="M8 12h8" stroke="#627eea" stroke-width="2"/>
+                                    </svg>
+                                    <div class="flow-label">Processing</div>
+                                    <div class="flow-value">FIFO</div>
+                                </div>
+                                <div class="flow-item">
+                                    <svg class="flow-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 22V2M2 12h10" stroke="#ea4335" stroke-width="2"/>
+                                    </svg>
+                                    <div class="flow-label">Withdrawals</div>
+                                    <div class="flow-value">18</div>
+                                </div>
+                                <div class="flow-item">
+                                    <svg class="flow-icon" viewBox="0 0 24 24" fill="none">
+                                        <rect x="4" y="4" width="16" height="16" stroke="#fbbc04" stroke-width="2"/>
+                                    </svg>
+                                    <div class="flow-label">Balance</div>
+                                    <div class="flow-value">Updated</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-title">🔍 Real-time Monitoring</div>
+                        <div class="info-text">Continuous blockchain scanning with 15-minute update intervals for all tracked wallets</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">⚡ Instant Sync</div>
+                        <div class="info-text">One-click full synchronization processes entire transaction history with duplicate prevention</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">📊 Portfolio Analytics</div>
+                        <div class="info-text">Live portfolio valuation with historical tracking and profit/loss calculations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Transaction Sheets -->
+            <div class="workflow-step">
+                <div class="workflow-step-header">
+                    <div class="workflow-number">2</div>
+                    <h3 class="workflow-title">Automated Google Sheets Data Structure</h3>
+                </div>
+                
+                <div class="spreadsheet-mock">
+                    <div class="sheet-header">
+                        <div class="sheets-logo">
+                            <svg class="sheets-icon" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z" fill="#0f9d58"/>
+                                <path d="M14 2v6h6" fill="#0f9d58" opacity="0.5"/>
+                                <rect x="8" y="12" width="8" height="2" fill="white"/>
+                                <rect x="8" y="15" width="8" height="2" fill="white"/>
+                            </svg>
+                            <span class="sheet-title">Crypto_Transactions_Tracker</span>
+                        </div>
+                    </div>
                     
-                    <linearGradient id="btcGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#F7931A;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#F79319;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                
-                <rect width="800" height="400" fill="url(#grid)"/>
-                
-                <g transform="translate(50, 100)">
-                    <circle cx="0" cy="0" r="40" fill="url(#ethGradient)" opacity="0.2"/>
-                    <path d="M-15,-20 L0,-30 L15,-20 L0,-5 Z M-15,-15 L0,0 L15,-15 M-15,-10 L0,15 L15,-10"
-                           stroke="#627EEA" stroke-width="2" fill="none"/>
-                    <text x="0" y="60" text-anchor="middle" fill="#627EEA" font-size="14">Ethereum</text>
-                </g>
-                
-                <g transform="translate(50, 250)">
-                    <circle cx="0" cy="0" r="40" fill="url(#btcGradient)" opacity="0.2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#F7931A" font-size="24" font-weight="bold">₿</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#F7931A" font-size="14">Bitcoin</text>
-                </g>
-                
-                <g class="pulsing">
-                    <path d="M90,100 Q200,100 300,150" stroke="#4285F4" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                    </path>
-                    <path d="M90,250 Q200,250 300,200" stroke="#4285F4" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                    </path>
-                </g>
-                
-            
-                
-                <g class="pulsing">
-                    <path d="M500,175 Q600,175 700,100" stroke="#34A853" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                    </path>
-                    <path d="M500,175 Q600,175 700,250" stroke="#34A853" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                    </path>
-                </g>
-                
-                <g transform="translate(700, 100)">
-                    <rect x="-40" y="-30" width="80" height="60" rx="5" fill="rgba(52, 168, 83, 0.2)"
-                           stroke="#34A853" stroke-width="2"/>
-                    <rect x="-30" y="-20" width="60" height="10" fill="#34A853" opacity="0.3"/>
-                    <rect x="-30" y="-5" width="60" height="5" fill="#34A853" opacity="0.2"/>
-                    <rect x="-30" y="5" width="60" height="5" fill="#34A853" opacity="0.2"/>
-                    <rect x="-30" y="15" width="60" height="5" fill="#34A853" opacity="0.2"/>
-                    <text x="0" y="50" text-anchor="middle" fill="#34A853" font-size="12">Transactions</text>
-                </g>
-                
-                <g transform="translate(700, 250)">
-                    <rect x="-40" y="-30" width="80" height="60" rx="5" fill="rgba(52, 168, 83, 0.2)"
-                           stroke="#34A853" stroke-width="2"/>
-                    <rect x="-30" y="-20" width="60" height="40" fill="#34A853" opacity="0.1"/>
-                    <circle cx="-10" cy="0" r="15" fill="#FBBC04" opacity="0.3"/>
-                    <circle cx="10" cy="0" r="15" fill="#EA4335" opacity="0.3"/>
-                    <text x="0" y="50" text-anchor="middle" fill="#34A853" font-size="12">Analytics</text>
-                </g>
-                
-                <g transform="translate(400, 50)">
-                    <circle cx="0" cy="0" r="5" fill="#EA4335">
-                        <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
-                        <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <text x="15" y="5" fill="#EA4335" font-size="12">LIVE</text>
-                </g>
-            </svg>
-        </div>
-    </section>
+                    <div class="sheet-tabs">
+                        <div class="sheet-tab">January-2025</div>
+                        <div class="sheet-tab">February-2025</div>
+                        <div class="sheet-tab">March-2025</div>
+                        <div class="sheet-tab active">April-2025</div>
+                        <div class="sheet-tab">May-2025</div>
+                        <div class="sheet-tab">June-2025</div>
+                        <div class="sheet-tab">July-2025</div>
+                        <div class="sheet-tab">August-2025</div>
+                        <div class="sheet-tab">Error Logs</div>
+                    </div>
+                    
+                    <div class="spreadsheet-content">
+                        <table class="spreadsheet-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>ClientName</th>
+                                    <th>Token</th>
+                                    <th>USDatDeposit</th>
+                                    <th>AmountRemainingCRYPTO</th>
+                                    <th>AmountRemainingUSD</th>
+                                    <th>AmountWithdrawnTotalUSD</th>
+                                    <th>TotalUSD</th>
+                                    <th>Affiliate</th>
+                                    <th>Advertiser</th>
+                                    <th>Wallet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="cell-date">2025-04-01 09:15:22</td>
+                                    <td>Diamond Trading Co.</td>
+                                    <td class="cell-crypto cell-eth">ETH</td>
+                                    <td class="cell-usd">$15,000.00</td>
+                                    <td>5.00000000</td>
+                                    <td class="cell-usd">$15,250.00</td>
+                                    <td class="cell-usd">$0.00</td>
+                                    <td class="cell-usd">$15,250.00</td>
+                                    <td>Partner A</td>
+                                    <td>Campaign X</td>
+                                    <td class="cell-address">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-date">2025-04-02 14:30:45</td>
+                                    <td>Crypto Holdings LLC</td>
+                                    <td class="cell-crypto cell-btc">BTC</td>
+                                    <td class="cell-usd">$95,000.00</td>
+                                    <td>1.00000000</td>
+                                    <td class="cell-usd">$97,500.00</td>
+                                    <td class="cell-usd">$0.00</td>
+                                    <td class="cell-usd">$97,500.00</td>
+                                    <td>Direct</td>
+                                    <td>Organic</td>
+                                    <td class="cell-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-date">2025-04-03 11:45:18</td>
+                                    <td>Tech Ventures</td>
+                                    <td class="cell-crypto cell-usdt">USDT</td>
+                                    <td class="cell-usd">$50,000.00</td>
+                                    <td>50,000.00</td>
+                                    <td class="cell-usd">$50,000.00</td>
+                                    <td class="cell-usd">$0.00</td>
+                                    <td class="cell-usd">$50,000.00</td>
+                                    <td>Partner B</td>
+                                    <td>Campaign Y</td>
+                                    <td class="cell-address">0x08c65872dd31315aa668700ac9067da19cac2620</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-date">2025-04-05 16:20:33</td>
+                                    <td>Diamond Trading Co.</td>
+                                    <td class="cell-crypto cell-eth">ETH</td>
+                                    <td class="cell-usd">$9,000.00</td>
+                                    <td>2.85000000</td>
+                                    <td class="cell-usd">$8,692.50</td>
+                                    <td class="cell-usd">$1,500.00</td>
+                                    <td class="cell-usd">$10,192.50</td>
+                                    <td>Partner A</td>
+                                    <td>Campaign X</td>
+                                    <td class="cell-address">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-date">2025-04-07 08:55:12</td>
+                                    <td>Investment Group</td>
+                                    <td class="cell-crypto cell-usdc">USDC</td>
+                                    <td class="cell-usd">$25,000.00</td>
+                                    <td>25,000.00</td>
+                                    <td class="cell-usd">$25,000.00</td>
+                                    <td class="cell-usd">$0.00</td>
+                                    <td class="cell-usd">$25,000.00</td>
+                                    <td>Partner C</td>
+                                    <td>Campaign Z</td>
+                                    <td class="cell-address">0xBBA11906333a9096b03e360a0bFB30869e68d382</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-date">2025-04-08 13:10:45</td>
+                                    <td>Crypto Holdings LLC</td>
+                                    <td class="cell-crypto cell-btc">BTC</td>
+                                    <td class="cell-usd">$47,500.00</td>
+                                    <td>0.42000000</td>
+                                    <td class="cell-usd">$40,950.00</td>
+                                    <td class="cell-usd">$8,450.00</td>
+                                    <td class="cell-usd">$49,400.00</td>
+                                    <td>Direct</td>
+                                    <td>Organic</td>
+                                    <td class="cell-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-    <section class="architecture-section">
-        <h2 class="section-title">System Architecture</h2>
-        <div class="diagram-container">
-            <svg viewBox="0 0 1000 600" style="max-width: 100%; height: auto;">
-                <g transform="translate(100, 100)">
-                    <rect x="0" y="0" width="180" height="80" rx="10" fill="rgba(66, 133, 244, 0.2)" stroke="#4285F4" stroke-width="2"/>
-                    <text x="90" y="30" text-anchor="middle" fill="#4285F4" font-weight="bold">Blockchain APIs</text>
-                    <text x="90" y="50" text-anchor="middle" fill="#8b9dc3" font-size="12">Etherscan</text>
-                    <text x="90" y="65" text-anchor="middle" fill="#8b9dc3" font-size="12">Mempool.space</text>
-                </g>
-                
-                <g transform="translate(100, 250)">
-                    <rect x="0" y="0" width="180" height="80" rx="10" fill="rgba(251, 188, 4, 0.2)" stroke="#FBBC04" stroke-width="2"/>
-                    <text x="90" y="30" text-anchor="middle" fill="#FBBC04" font-weight="bold">Price APIs</text>
-                    <text x="90" y="50" text-anchor="middle" fill="#8b9dc3" font-size="12">CoinMarketCap</text>
-                    <text x="90" y="65" text-anchor="middle" fill="#8b9dc3" font-size="12">CryptoCompare</text>
-                </g>
-                
-                <g transform="translate(400, 175)">
-                    <rect x="0" y="0" width="200" height="120" rx="10" fill="rgba(52, 168, 83, 0.2)" stroke="#34A853" stroke-width="2"/>
-                    <text x="100" y="25" text-anchor="middle" fill="#34A853" font-weight="bold">Google Apps Script</text>
-                    <text x="100" y="45" text-anchor="middle" fill="#8b9dc3" font-size="12">Transaction Processing</text>
-                    <text x="100" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">FIFO Calculations</text>
-                    <text x="100" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Fee Management</text>
-                    <text x="100" y="90" text-anchor="middle" fill="#8b9dc3" font-size="12">Data Validation</text>
-                    <text x="100" y="105" text-anchor="middle" fill="#8b9dc3" font-size="12">Error Handling</text>
-                </g>
-                
-                <g transform="translate(720, 100)">
-                    <rect x="0" y="0" width="180" height="80" rx="10" fill="rgba(234, 67, 53, 0.2)" stroke="#EA4335" stroke-width="2"/>
-                    <text x="90" y="30" text-anchor="middle" fill="#EA4335" font-weight="bold">Metadata Sheet</text>
-                    <text x="90" y="50" text-anchor="middle" fill="#8b9dc3" font-size="12">Wallet Addresses</text>
-                    <text x="90" y="65" text-anchor="middle" fill="#8b9dc3" font-size="12">Client Information</text>
-                </g>
-                
-                <g transform="translate(720, 250)">
-                    <rect x="0" y="0" width="180" height="80" rx="10" fill="rgba(234, 67, 53, 0.2)" stroke="#EA4335" stroke-width="2"/>
-                    <text x="90" y="30" text-anchor="middle" fill="#EA4335" font-weight="bold">Transaction Sheets</text>
-                    <text x="90" y="50" text-anchor="middle" fill="#8b9dc3" font-size="12">Monthly Organization</text>
-                    <text x="90" y="65" text-anchor="middle" fill="#8b9dc3" font-size="12">Real-time Updates</text>
-                </g>
-                
-                <path d="M280,140 L400,200" stroke="#4285F4" stroke-width="2" marker-end="url(#arrowhead)"/>
-                <path d="M280,290 L400,240" stroke="#FBBC04" stroke-width="2" marker-end="url(#arrowhead)"/>
-                <path d="M600,235 L720,140" stroke="#34A853" stroke-width="2" marker-end="url(#arrowhead)"/>
-                <path d="M600,235 L720,290" stroke="#34A853" stroke-width="2" marker-end="url(#arrowhead)"/>
-                
-                <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                        <polygon points="0 0, 10 3.5, 0 7" fill="#8b9dc3"/>
-                    </marker>
-                </defs>
-                
-                <circle cx="500" cy="235" r="50" fill="none" stroke="#4285F4" stroke-width="1" opacity="0.3">
-                    <animate attributeName="r" values="50;60;50" dur="3s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-        </div>
-    </section>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-title">📅 Monthly Organization</div>
+                        <div class="info-text">Automatic creation of monthly sheets with chronological sorting for easy navigation and reporting</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">💎 FIFO Tracking</div>
+                        <div class="info-text">First-In-First-Out algorithm ensures accurate profit/loss calculations and remaining balances</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">🔢 Precision Handling</div>
+                        <div class="info-text">8 decimal places for crypto amounts, automatic USD formatting, and gas fee deduction tracking</div>
+                    </div>
+                </div>
+            </div>
 
-    <section class="features-section">
-        <h2 class="section-title">Key Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <circle cx="40" cy="40" r="35" stroke="#4285F4" stroke-width="2" opacity="0.3"/>
-                    <path d="M40 20V40L50 50" stroke="#4285F4" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="40" cy="40" r="5" fill="#4285F4"/>
-                    <path d="M25 15L30 10M55 15L50 10" stroke="#FBBC04" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <h3 class="feature-title">Real-Time Tracking</h3>
-                <p class="feature-description">Monitors Ethereum and Bitcoin wallets every 15 minutes, automatically detecting and processing new transactions as they occur on the blockchain.</p>
-            </div>
-            
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <rect x="15" y="20" width="50" height="40" rx="5" stroke="#34A853" stroke-width="2" fill="none"/>
-                    <circle cx="25" cy="30" r="3" fill="#34A853"/>
-                    <circle cx="35" cy="40" r="3" fill="#FBBC04"/>
-                    <circle cx="45" cy="35" r="3" fill="#EA4335"/>
-                    <circle cx="55" cy="45" r="3" fill="#4285F4"/>
-                    <path d="M25 30L35 40L45 35L55 45" stroke="#34A853" stroke-width="2" fill="none"/>
-                </svg>
-                <h3 class="feature-title">FIFO Cost Basis</h3>
-                <p class="feature-description">Implements First-In-First-Out accounting for accurate profit/loss calculations, essential for tax compliance and portfolio performance tracking.</p>
-            </div>
-            
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <path d="M20 30L40 20L60 30V50L40 60L20 50V30Z" stroke="#EA4335" stroke-width="2" fill="none"/>
-                    <path d="M30 35L40 40L50 35M30 45L40 50L50 45" stroke="#EA4335" stroke-width="2" opacity="0.5"/>
-                    <circle cx="40" cy="40" r="5" fill="#EA4335"/>
-                </svg>
-                <h3 class="feature-title">Gas Fee Management</h3>
-                <p class="feature-description">Automatically tracks and deducts Ethereum gas fees from deposits, ensuring accurate balance calculations and true cost basis.</p>
-            </div>
-            
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <rect x="20" y="15" width="40" height="50" rx="5" stroke="#FBBC04" stroke-width="2" fill="none"/>
-                    <line x1="30" y1="25" x2="50" y2="25" stroke="#FBBC04" stroke-width="2"/>
-                    <line x1="30" y1="35" x2="45" y2="35" stroke="#FBBC04" stroke-width="1" opacity="0.7"/>
-                    <line x1="30" y1="45" x2="50" y2="45" stroke="#FBBC04" stroke-width="1" opacity="0.7"/>
-                    <line x1="30" y1="55" x2="40" y2="55" stroke="#FBBC04" stroke-width="1" opacity="0.7"/>
-                </svg>
-                <h3 class="feature-title">Organized Reporting</h3>
-                <p class="feature-description">Automatically organizes transactions by month, generates detailed reports with client attribution, and maintains comprehensive audit trails.</p>
-            </div>
-            
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <circle cx="40" cy="40" r="30" stroke="#4285F4" stroke-width="2" fill="none"/>
-                    <path d="M40 25V40H55" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M30 55L35 60L45 50" stroke="#34A853" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <h3 class="feature-title">Historical Price Data</h3>
-                <p class="feature-description">Fetches accurate historical prices at transaction time for precise USD valuations, with fallback mechanisms for reliability.</p>
-            </div>
-            
-            <div class="feature-card">
-                <svg class="feature-icon" viewBox="0 0 80 80" fill="none">
-                    <rect x="15" y="25" width="20" height="30" rx="3" stroke="#EA4335" stroke-width="2" fill="none"/>
-                    <rect x="30" y="20" width="20" height="35" rx="3" stroke="#FBBC04" stroke-width="2" fill="none"/>
-                    <rect x="45" y="15" width="20" height="40" rx="3" stroke="#34A853" stroke-width="2" fill="none"/>
-                    <path d="M25 40V60M40 40V60M55 40V60" stroke="#4285F4" stroke-width="1" opacity="0.5"/>
-                </svg>
-                <h3 class="feature-title">Multi-Token Support</h3>
-                <p class="feature-description">Tracks ETH, BTC, USDT, and USDC across multiple wallets with automatic token detection and proper decimal handling.</p>
-            </div>
-        </div>
-    </section>
+            <!-- Step 3: Metadata Management -->
+            <div class="workflow-step">
+                <div class="workflow-step-header">
+                    <div class="workflow-number">3</div>
+                    <h3 class="workflow-title">Metadata & Client Management Sheet</h3>
+                </div>
+                
+                <div class="spreadsheet-mock">
+                    <div class="sheet-header">
+                        <div class="sheets-logo">
+                            <svg class="sheets-icon" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z" fill="#0f9d58"/>
+                                <path d="M14 2v6h6" fill="#0f9d58" opacity="0.5"/>
+                            </svg>
+                            <span class="sheet-title">Wallet_Metadata_Registry</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sheet-tabs">
+                        <div class="sheet-tab active">ETH Wallets</div>
+                        <div class="sheet-tab">BTC Wallets</div>
+                        <div class="sheet-tab">Analytics</div>
+                        <div class="sheet-tab">Reports</div>
+                    </div>
+                    
+                    <div class="spreadsheet-content">
+                        <table class="spreadsheet-table">
+                            <thead>
+                                <tr>
+                                    <th>Wallet Address</th>
+                                    <th>Client Name</th>
+                                    <th>Affiliate</th>
+                                    <th>Advertiser</th>
+                                    <th>Total Remaining USD</th>
+                                    <th>Registration Date</th>
+                                    <th>Last Updated</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="cell-address">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</td>
+                                    <td>Diamond Trading Co.</td>
+                                    <td>Partner A</td>
+                                    <td>Campaign X</td>
+                                    <td class="cell-usd">$37,350.00</td>
+                                    <td class="cell-date">2024-01-15</td>
+                                    <td class="cell-date">2025-08-09 14:30</td>
+                                    <td style="color: #00e676;">Active</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-address">0x08c65872dd31315aa668700ac9067da19cac2620</td>
+                                    <td>Tech Ventures</td>
+                                    <td>Partner B</td>
+                                    <td>Campaign Y</td>
+                                    <td class="cell-usd">$26,190.00</td>
+                                    <td class="cell-date">2024-03-20</td>
+                                    <td class="cell-date">2025-08-09 14:30</td>
+                                    <td style="color: #00e676;">Active</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-address">0xd3Ae43f5F3d20331a1Df2cFFF238b792773a60A0</td>
+                                    <td>Hedge Fund Alpha</td>
+                                    <td>Direct</td>
+                                    <td>Organic</td>
+                                    <td class="cell-usd">$142,800.00</td>
+                                    <td class="cell-date">2024-02-10</td>
+                                    <td class="cell-date">2025-08-09 14:30</td>
+                                    <td style="color: #00e676;">Active</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-address">0xBBA11906333a9096b03e360a0bFB30869e68d382</td>
+                                    <td>Investment Group</td>
+                                    <td>Partner C</td>
+                                    <td>Campaign Z</td>
+                                    <td class="cell-usd">$89,450.00</td>
+                                    <td class="cell-date">2024-05-05</td>
+                                    <td class="cell-date">2025-08-09 14:30</td>
+                                    <td style="color: #00e676;">Active</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-address">0x5aAeb6053f3E94C9b9A09f33669435E7Ef1BeAed</td>
+                                    <td>Crypto Miners Inc.</td>
+                                    <td>Partner A</td>
+                                    <td>Campaign W</td>
+                                    <td class="cell-usd">$0.00</td>
+                                    <td class="cell-date">2024-06-12</td>
+                                    <td class="cell-date">2025-08-09 14:30</td>
+                                    <td style="color: #fbbc04;">Inactive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-    <section class="flow-section">
-        <h2 class="section-title">Automated Data Flow</h2>
-        <div class="flow-diagram">
-            <svg viewBox="0 0 1000 400" style="max-width: 100%; height: auto;">
-                <g transform="translate(50, 200)">
-                    <circle cx="0" cy="0" r="40" fill="rgba(66, 133, 244, 0.2)" stroke="#4285F4" stroke-width="2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#4285F4" font-weight="bold">1</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">Blockchain</text>
-                    <text x="0" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Query</text>
-                </g>
-                
-                <g transform="translate(250, 200)">
-                    <circle cx="0" cy="0" r="40" fill="rgba(52, 168, 83, 0.2)" stroke="#34A853" stroke-width="2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#34A853" font-weight="bold">2</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">Transaction</text>
-                    <text x="0" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Detection</text>
-                </g>
-                
-                <g transform="translate(450, 200)">
-                    <circle cx="0" cy="0" r="40" fill="rgba(251, 188, 4, 0.2)" stroke="#FBBC04" stroke-width="2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#FBBC04" font-weight="bold">3</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">Price</text>
-                    <text x="0" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Lookup</text>
-                </g>
-                
-                <g transform="translate(650, 200)">
-                    <circle cx="0" cy="0" r="40" fill="rgba(234, 67, 53, 0.2)" stroke="#EA4335" stroke-width="2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#EA4335" font-weight="bold">4</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">FIFO</text>
-                    <text x="0" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Processing</text>
-                </g>
-                
-                <g transform="translate(850, 200)">
-                    <circle cx="0" cy="0" r="40" fill="rgba(66, 133, 244, 0.2)" stroke="#4285F4" stroke-width="2"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#4285F4" font-weight="bold">5</text>
-                    <text x="0" y="60" text-anchor="middle" fill="#8b9dc3" font-size="12">Sheet</text>
-                    <text x="0" y="75" text-anchor="middle" fill="#8b9dc3" font-size="12">Update</text>
-                </g>
-                
-                <path d="M90,200 L210,200" stroke="#4285F4" stroke-width="3" fill="none">
-                    <animate attributeName="stroke-dasharray" values="0 100;100 0" dur="2s" repeatCount="indefinite"/>
-                </path>
-                <path d="M290,200 L410,200" stroke="#34A853" stroke-width="3" fill="none">
-                    <animate attributeName="stroke-dasharray" values="0 100;100 0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
-                </path>
-                <path d="M490,200 L610,200" stroke="#FBBC04" stroke-width="3" fill="none">
-                    <animate attributeName="stroke-dasharray" values="0 100;100 0" dur="2s" begin="1s" repeatCount="indefinite"/>
-                </path>
-                <path d="M690,200 L810,200" stroke="#EA4335" stroke-width="3" fill="none">
-                    <animate attributeName="stroke-dasharray" values="0 100;100 0" dur="2s" begin="1.5s" repeatCount="indefinite"/>
-                </path>
-                
-                <g transform="translate(500, 50)">
-                    <rect x="-150" y="-20" width="300" height="40" rx="20" fill="rgba(255, 255, 255, 0.05)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1"/>
-                    <text x="0" y="5" text-anchor="middle" fill="#ffffff" font-size="14">Processes every 15 minutes automatically</text>
-                </g>
-            </svg>
-        </div>
-    </section>
-
-    <section class="tech-section">
-        <h2 class="section-title">Technical Implementation</h2>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
-                    <rect x="10" y="10" width="40" height="40" rx="5" fill="#4285F4" opacity="0.2"/>
-                    <text x="30" y="35" text-anchor="middle" fill="#4285F4" font-size="20" font-weight="bold">GAS</text>
-                </svg>
-                <p>Google Apps Script</p>
-            </div>
-            <div class="tech-item">
-                <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
-                    <circle cx="30" cy="30" r="20" fill="#627EEA" opacity="0.2"/>
-                    <path d="M30 15L30 35M20 25L40 25" stroke="#627EEA" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-                <p>Etherscan API</p>
-            </div>
-            <div class="tech-item">
-                <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
-                    <circle cx="30" cy="30" r="20" fill="#F7931A" opacity="0.2"/>
-                    <text x="30" y="38" text-anchor="middle" fill="#F7931A" font-size="28" font-weight="bold">₿</text>
-                </svg>
-                <p>Mempool API</p>
-            </div>
-            <div class="tech-item">
-                <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom: 1rem;">
-                    <rect x="10" y="10" width="40" height="40" rx="5" fill="#34A853" opacity="0.2"/>
-                    <rect x="20" y="20" width="20" height="5" fill="#34A853"/>
-                    <rect x="20" y="30" width="20" height="5" fill="#34A853" opacity="0.7"/>
-                    <rect x="20" y="40" width="20" height="5" fill="#34A853" opacity="0.5"/>
-                </svg>
-                <p>Google Sheets</p>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-title">👥 Client Registry</div>
+                        <div class="info-text">Centralized management of all wallet addresses with client mapping and affiliate tracking</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">💵 Live Balances</div>
+                        <div class="info-text">Real-time USD value aggregation across all transactions for each wallet</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">📈 Analytics Ready</div>
+                        <div class="info-text">Structured data perfect for reporting, analysis, and business intelligence</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-
-    <section class="results-section">
-        <h2 class="section-title">System Performance</h2>
-        <div class="results-grid">
-            <div class="result-card">
-                <div class="result-number">15min</div>
-                <div class="result-label">Update Frequency</div>
-            </div>
-            <div class="result-card">
-                <div class="result-number">100%</div>
-                <div class="result-label">Transaction Accuracy</div>
-            </div>
-            <div class="result-card">
-                <div class="result-number">24/7</div>
-                <div class="result-label">Automated Operation</div>
-            </div>
-            <div class="result-card">
-                <div class="result-number">∞</div>
-                <div class="result-label">Scalable Wallets</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2 class="section-title">Ready to Automate Your Crypto Portfolio?</h2>
-        <p style="color: #8b9dc3; font-size: 1.2rem; margin-bottom: 2rem;">
-            This advanced wallet tracking system can be customized for your specific needs
-        </p>
-        <a href="/index.html#contact" class="cta-button">Get Your Custom Solution</a>
-    </section>
+    </div>
 
     <script>
-        // Add interactive hover effects
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+        // Add interactive effects
+        document.querySelectorAll('.process-step, .feature-card').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-5px) scale(1)';
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat, .workflow-step').forEach(stat => {
+            observer.observe(stat);
+        });
+
+        // Simulate sheet tab switching
+        document.querySelectorAll('.sheet-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs in this sheet
+                this.parentElement.querySelectorAll('.sheet-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Simulate dashboard button interactions
+        document.querySelectorAll('.dash-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.classList.contains('primary')) {
+                    this.style.background = '#2d2d30';
+                    setTimeout(() => {
+                        this.style.background = '#252526';
+                    }, 200);
                 }
             });
         });
-    </script>
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.querySelector('.nav-links');
-        const submenu = document.querySelector('.submenu');
-        const submenuLink = document.querySelector('.submenu > a');
-        const dropdown = document.querySelector('.submenu .dropdown');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('show');
-        });
-        submenuLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdown.classList.toggle('show');
-        });
-        document.addEventListener('click', (e) => {
-            if (!submenu.contains(e.target)) {
-                dropdown.classList.remove('show');
+
+        // Add hover effect to table rows
+        document.querySelectorAll('.spreadsheet-table tr, .wallet-table tr').forEach(row => {
+            if (row.parentElement.tagName !== 'THEAD') {
+                row.addEventListener('mouseenter', function() {
+                    this.style.background = '#252526';
+                });
+                row.addEventListener('mouseleave', function() {
+                    this.style.background = '';
+                });
             }
         });
     </script>
