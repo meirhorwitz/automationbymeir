@@ -13,11 +13,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automation by Meir - הפכו את העסק שלכם לאוטומטי וחכם</title>
+    <link rel="icon" href="/profile.jpeg" type="image/jpeg">
     <meta name="description" content="פתרונות אוטומציה מותאמים אישית לעסק שלכם" />
     <link rel="canonical" href="https://automationbymeir.web.app/index-he.html" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
         :root {
             --primary: #00e676;
             --primary-dark: #00c853;
@@ -160,6 +162,10 @@
         .service-card:hover, .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(66, 133, 244, 0.3); }
         .service-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--secondary); }
         .service-description, .project-description, .about-text, .stat-label { color: #cbd5e1; }
+        .project-logo { height: 40px; width: auto; }
+        .project-logo-text { font-family: 'Orbitron', sans-serif; font-weight: 600; color: var(--primary); text-decoration: none; }
+        .read-more { color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 1rem; display: inline-block; }
+        .read-more:hover { text-decoration: underline; }
         .project-header { padding: 2rem; background: rgba(66, 133, 244, 0.1); }
         .project-title { font-size: 1.5rem; color: var(--light); margin-bottom: 0.5rem; }
         .project-tech { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-start; }
@@ -169,7 +175,7 @@
         .about-header { display: flex; align-items: center; gap: 3rem; margin-bottom: 3rem; flex-direction: row-reverse; }
         .profile-photo { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--primary); overflow: hidden; flex-shrink: 0; }
         .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
-        .about-text { font-size: 1.2rem; line-height: 2; }
+        .about-text { font-size: 1.2rem; line-height: 2; text-align: right; }
         .stats-grid { margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
         .stat-card { text-align: center; padding: 2rem; background: var(--dark-secondary); border: 1px solid var(--border-color); border-radius: 0; transition: transform 0.3s ease; }
         .stat-card:hover { transform: translateY(-5px); }
@@ -182,7 +188,7 @@
         .playground-section { position: relative; overflow: hidden; }
         .playground-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(66, 133, 244, 0.05) 0%, transparent 50%); animation: rotate 30s linear infinite; }
         .platform-logos { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 2rem; }
-        .platform-logos img { height: 40px; }
+        .platform-logos img { height: 40px; filter: none; }
         .linkedin-logo { width: 24px; margin-right: 0.5rem; vertical-align: middle; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
@@ -276,12 +282,12 @@
             <div class="platforms">
                 <h3 class="platforms-title">המערכות שאיתן אנחנו בונים אוטומציות</h3>
                 <div class="platform-logos">
-                    <img src="logos/googleappsscript.svg" alt="Google Apps Script">
-                    <img src="logos/firebase.svg" alt="Firebase">
-                    <img src="logos/openai.svg" alt="OpenAI">
-                    <img src="logos/claude.svg" alt="Claude">
-                    <img src="logos/googlegemini.svg" alt="Gemini">
-                    <img src="logos/grok.svg" alt="Grok">
+                    <img src="logos/googleappsscript.svg" alt="Google Apps Script" title="Extend Google Workspace with custom scripts">
+                    <img src="logos/firebase.svg" alt="Firebase" title="Backend services and hosting">
+                    <img src="logos/openai.svg" alt="OpenAI" title="Advanced language model APIs">
+                    <img src="logos/claude.svg" alt="Claude" title="Anthropic's powerful AI assistant">
+                    <img src="logos/googlegemini.svg" alt="Gemini" title="Google's multimodal AI platform">
+                    <img src="logos/grok.svg" alt="Grok" title="Real-time AI from xAI">
                 </div>
             </div>
             <div class="services-grid">
@@ -355,6 +361,18 @@
                         <p class="project-description">אוטומציה מלאה של תהליך בדיקת הממליצים, כולל רצפי דוא"ל חכמים ומעקב אחר תגובות.</p>
                     </div>
                 </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <a href="https://www.trendingtechdaily.com/" target="_blank" class="project-logo-text">
+                                TrendingTech Daily
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">אתר חדשות טכנולוגיה יומי המספק תובנות על טכנולוגיות מתפתחות.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -372,13 +390,14 @@
                     </div>
                     <div>
                         <p class="about-text">
-                            עם ניסיון של מעל 5 שנים באוטומציה ופיתוח, אני מתמחה ביצירת פתרונות מותאמים אישית שמשנים את אופן הפעולה של עסקים. הגישה שלי של "הכל אפשרי" והמומחיות העמוקה שלי ב-Google Apps Script, Firebase וטכנולוגיות ווב מודרניות מאפשרות לי להתמודד עם האתגרים המורכבים ביותר.
+                            עם ניסיון של מעל 8 שנים באוטומציה ופיתוח, אני בונה פתרונות מותאמים אישית שמשלבים בינה מלאכותית ומשנים את אופן הפעולה של עסקים. המומחיות שלי ב-Google Apps Script, Firebase, טכנולוגיות ווב מודרניות ותהליכי AI מאפשרת לי להתמודד עם האתגרים המורכבים ביותר.
                         </p>
+                        <a href="about-me-he.html" class="read-more">קראו עוד</a>
                     </div>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">5+</div>
+                        <div class="stat-number">8+</div>
                         <div class="stat-label">שנות ניסיון</div>
                     </div>
                     <div class="stat-card">
