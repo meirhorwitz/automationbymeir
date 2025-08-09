@@ -6,6 +6,7 @@
     <title>Why Your Business Needs Automation</title>
     <meta name="description" content="Learn how automation streamlines operations and boosts growth with real-world examples." />
     <link rel="canonical" href="https://automationbymeir.web.app/why-automation.html" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;400;600;700&display=swap');
         :root {
@@ -118,6 +119,8 @@
         article{max-width:800px; margin:6rem auto 2rem; padding:0 1rem; line-height:1.8;}
         article h1{font-size:2.5rem; margin-bottom:1rem;}
         article h2{margin-top:2rem; color:var(--secondary);}
+        .chart-container{max-width:600px; margin:2rem auto;}
+        .chart-container canvas{background:var(--light); border-radius:8px; padding:1rem;}
     </style>
 </head>
 <body>
@@ -155,6 +158,13 @@
         <h1>Why Your Business Needs Automation</h1>
         <p>In today’s fast-paced market, businesses run on countless repetitive tasks – from copying data between systems to sending routine emails – that quietly consume hours of employee time. Studies show the average knowledge worker spends nearly <strong>4 hours per day</strong> on tasks that could be automated:. That’s over <strong>100 hours every month</strong> lost to busywork. By embracing automation, companies can reclaim this time, allowing teams to focus on strategic, high-value activities that drive growth.</p>
         <p>Automation means using technology to handle repetitive processes automatically, with minimal human intervention. Modern tools can reliably perform tasks like data entry, file transfers, report generation, and email follow-ups much faster and more accurately than manual efforts. This isn’t about replacing people – it’s about empowering your employees to work smarter. When you automate tedious workflows, you <strong>save time, reduce errors, cut costs,</strong> and free your staff to concentrate on what really matters: serving customers and expanding the business.</p>
+        <h2>Automation Impact at a Glance</h2>
+        <div class="chart-container">
+            <canvas id="timeChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="benefitsChart"></canvas>
+        </div>
         <h2>Save Time and Boost Productivity</h2>
         <p><strong>Time is money</strong> in business, and automation gives you more of both. Every minute an employee spends on manual data processing or administrative chores is time taken away from strategic work. By automating these repetitive tasks, you instantly speed up your operations. In fact, research by McKinsey estimates that about <strong>60% of employees could save 30% of their time</strong> through workflow automation:. Imagine your team accomplishing the same work in significantly less time – or using those extra hours to plan, sell, create, and innovate.</p>
         <p>Even managers benefit: many report spending an entire workday each week on routine administration, and a quarter of managers say they waste 20+ hours weekly on such tasks:. Automation gives that time back. For example, instead of manually updating spreadsheets or scheduling dozens of emails, an automated system can handle it all overnight. Your team arrives each morning to find the grunt work done – ready to tackle the real challenges. The result is a major <strong>productivity boost</strong> across your organization. Employees can prioritize creative projects, problem-solving, and customer relationships over copying and pasting. Over weeks and months, those saved hours compound into higher output and faster growth.</p>
@@ -194,6 +204,42 @@
         document.addEventListener('click', (e) => {
             if (!submenu.contains(e.target)) {
                 dropdown.classList.remove('show');
+            }
+        });
+
+        const timeCtx = document.getElementById('timeChart').getContext('2d');
+        new Chart(timeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Manual', 'Automated'],
+                datasets: [{
+                    label: 'Hours per Day',
+                    data: [4, 1],
+                    backgroundColor: ['#EA4335', '#34A853']
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        const benefitCtx = document.getElementById('benefitsChart').getContext('2d');
+        new Chart(benefitCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Error Reduction', 'Lead Conversion', 'ROI in 6mo'],
+                datasets: [{
+                    label: 'Percent',
+                    data: [32, 58, 61],
+                    backgroundColor: ['#34A853', '#FBBC04', '#4285F4']
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
             }
         });
     </script>
