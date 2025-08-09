@@ -18,6 +18,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
         :root {
             --primary: #00e676;
             --primary-dark: #00c853;
@@ -160,6 +161,9 @@
         .service-card:hover, .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(66, 133, 244, 0.3); }
         .service-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--secondary); }
         .service-description, .project-description, .about-text, .stat-label { color: #cbd5e1; }
+        .project-logo { height: 40px; width: auto; }
+        .read-more { color: var(--primary); text-decoration: none; font-weight: 500; margin-top: 1rem; display: inline-block; }
+        .read-more:hover { text-decoration: underline; }
         .project-header { padding: 2rem; background: rgba(66, 133, 244, 0.1); }
         .project-title { font-size: 1.5rem; color: var(--light); margin-bottom: 0.5rem; }
         .project-tech { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-start; }
@@ -355,6 +359,19 @@
                         <p class="project-description">אוטומציה מלאה של תהליך בדיקת הממליצים, כולל רצפי דוא"ל חכמים ומעקב אחר תגובות.</p>
                     </div>
                 </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">TrendingTech Daily</h3>
+                        <div class="project-tech">
+                            <a href="https://www.trendingtechdaily.com/" target="_blank">
+                                <img src="logos/trendingtechdaily.svg" alt="TrendingTech Daily" class="project-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">אתר חדשות טכנולוגיה יומי המספק תובנות על טכנולוגיות מתפתחות.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -372,13 +389,14 @@
                     </div>
                     <div>
                         <p class="about-text">
-                            עם ניסיון של מעל 5 שנים באוטומציה ופיתוח, אני מתמחה ביצירת פתרונות מותאמים אישית שמשנים את אופן הפעולה של עסקים. הגישה שלי של "הכל אפשרי" והמומחיות העמוקה שלי ב-Google Apps Script, Firebase וטכנולוגיות ווב מודרניות מאפשרות לי להתמודד עם האתגרים המורכבים ביותר.
+                            עם ניסיון של מעל 8 שנים באוטומציה ופיתוח, אני בונה פתרונות מותאמים אישית שמשלבים בינה מלאכותית ומשנים את אופן הפעולה של עסקים. המומחיות שלי ב-Google Apps Script, Firebase, טכנולוגיות ווב מודרניות ותהליכי AI מאפשרת לי להתמודד עם האתגרים המורכבים ביותר.
                         </p>
+                        <a href="about-me-he.html" class="read-more">קראו עוד</a>
                     </div>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">5+</div>
+                        <div class="stat-number">8+</div>
                         <div class="stat-label">שנות ניסיון</div>
                     </div>
                     <div class="stat-card">
