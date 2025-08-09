@@ -11,11 +11,13 @@ import {
     OrdersController,
 } from "@paypal/paypal-server-sdk";
 import bodyParser from "body-parser";
+import OpenAI from "openai";
 
 const app = express();
 app.use(bodyParser.json());
 
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8080 } = process.env;
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Basic validation for environment variables
 if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
@@ -121,6 +123,30 @@ app.post("/api/orders/:orderID/capture", async(req, res) => {
     } catch (error) {
         console.error("Failed to capture order:", error);
         res.status(500).json({ error: "Failed to capture order." });
+    }
+});
+
+// Interpret layout instructions via OpenAI
+app.post("/api/layout", async (req, res) => {
+    try {
+        const { message } = req.body;
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+                {
+                    role: "system",
+                    content:
+                        "You are a layout assistant. Respond with a JSON array of objects, each with id, x, and y numbers. Example: [{\"id\":\"service-1\",\"x\":10,\"y\":20}]"
+                },
+                { role: "user", content: message }
+            ]
+        });
+
+        const reply = completion.choices[0].message.content;
+        res.json({ instructions: reply });
+    } catch (error) {
+        console.error("OpenAI request failed:", error);
+        res.status(500).json({ error: "Error contacting OpenAI" });
     }
 });
 
