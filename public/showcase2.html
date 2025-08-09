@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiverr Pro Analytics System - Enterprise Automation Showcase</title>
+    <title>Business Analytics System - Enterprise Automation Showcase</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Macan:wght@300;400;500;600;700;800;900&display=swap');
@@ -41,6 +41,157 @@
             color: var(--text-primary);
             min-height: 100vh;
             padding: 2rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--light);
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .logo .by-meir {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.8em;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            background: var(--dark-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0;
+            border-radius: 8px;
+            min-width: 200px;
+            z-index: 10;
+        }
+
+        .dropdown a {
+            padding: 0.5rem 1.5rem;
+            white-space: nowrap;
+        }
+
+        .dropdown a:hover {
+            background: var(--dark-tertiary);
+        }
+
+        .dropdown.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                border: 1px solid var(--border-color);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links .dropdown {
+                position: static;
+                background: transparent;
+                border: none;
+                padding: 0;
+            }
+
+            .dropdown a {
+                padding: 0.5rem 0;
+            }
+
+            .nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--light);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
         }
 
         .showcase-container {
@@ -588,9 +739,8 @@
 
         .chart-placeholder {
             height: 300px;
-            background: linear-gradient(135deg, #49A2A5 0%, #7283C8 100%);
+            background: linear-gradient(135deg, rgba(73,162,165,0.1) 0%, rgba(114,131,200,0.1) 100%);
             border-radius: 8px;
-            opacity: 0.1;
             position: relative;
             overflow: hidden;
         }
@@ -735,6 +885,36 @@
     </style>
 </head>
 <body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 3L5 7L9 11" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15 3L19 7L15 11" stroke="#448aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 14L8 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M16 14L14 20" stroke="#ffc107" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Automations <span class="by-meir">by Meir</span>
+            </a>
+            <button class="nav-toggle" id="navToggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
+                <li class="submenu"><a href="#">Showcases</a>
+                    <ul class="dropdown">
+                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+                        <li><a href="showcase2.html">Business Analytics System</a></li>
+                        <li><a href="showcase-job-post-pro.html">Job Post Pro System</a></li>
+                    </ul>
+                </li>
+                <li><a href="why-automation.html">Why Automate</a></li>
+                <li><a href="payment.html">Payments</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index-he.html">עברית</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="showcase-container">
         <!-- Header -->
         <div class="header">
@@ -1196,6 +1376,25 @@
             this.style.color = '#62646A';
             this.style.border = '1px solid #DADBDD';
             this.style.cursor = 'default';
+        });
+    </script>
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.querySelector('.nav-links');
+        const submenu = document.querySelector('.submenu');
+        const submenuLink = document.querySelector('.submenu > a');
+        const dropdown = document.querySelector('.submenu .dropdown');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+        submenuLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdown.classList.toggle('show');
+        });
+        document.addEventListener('click', (e) => {
+            if (!submenu.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
         });
     </script>
 </body>

@@ -358,6 +358,7 @@
         .platform-logos img {
             height: 40px;
             filter: none;
+            cursor: help;
         }
 
         .linkedin-logo {
@@ -513,6 +514,22 @@
         .stat-label {
             color: var(--text-secondary);
             font-size: 0.9rem;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 5rem 2rem;
+            background: var(--dark-secondary);
+        }
+
+        .review {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: center;
+            font-style: italic;
         }
         
         /* Contact Section */
@@ -795,7 +812,7 @@
                 <li class="submenu"><a href="#">Showcases</a>
                     <ul class="dropdown">
                         <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
-                        <li><a href="showcase2.html">Enterprise Analytics Dashboard</a></li>
+                        <li><a href="showcase2.html">Business Analytics System</a></li>
                         <li><a href="showcase-job-post-pro.html">Job Post Pro System</a></li>
                     </ul>
                 </li>
@@ -837,12 +854,12 @@
             <div class="platforms">
                 <h3 class="platforms-title">Automation Platforms We Use</h3>
                 <div class="platform-logos">
-                    <img src="logos/googleappsscript.svg" alt="Google Apps Script">
-                    <img src="logos/firebase.svg" alt="Firebase">
-                    <img src="logos/openai.svg" alt="OpenAI">
-                    <img src="logos/claude.svg" alt="Claude">
-                    <img src="logos/googlegemini.svg" alt="Gemini">
-                    <img src="logos/grok.svg" alt="Grok">
+                    <img src="logos/googleappsscript.svg" alt="Google Apps Script" title="Extend Google Workspace with custom scripts">
+                    <img src="logos/firebase.svg" alt="Firebase" title="Backend services and hosting">
+                    <img src="logos/openai.svg" alt="OpenAI" title="Advanced language model APIs">
+                    <img src="logos/claude.svg" alt="Claude" title="Anthropic's powerful AI assistant">
+                    <img src="logos/googlegemini.svg" alt="Gemini" title="Google's multimodal AI platform">
+                    <img src="logos/grok.svg" alt="Grok" title="Real-time AI from xAI">
                 </div>
             </div>
             <div class="services-grid">
@@ -899,7 +916,7 @@
                                 <path d="M11 4H4C2.89543 4 2 4.89543 2 6V20C2 21.1046 2.89543 22 4 22H18C19.1046 22 20 21.1046 20 20V13" stroke="#448aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M18.5 2.5C19.3284 1.67157 20.6716 1.67157 21.5 2.5C22.3284 3.32843 22.3284 4.67157 21.5 5.5L12 15L8 16L9 12L18.5 2.5Z" stroke="#448aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            Enterprise Analytics Dashboard
+                            Business Analytics System
                         </h3>
                         <p class="project-description">Comprehensive dashboard solution for enterprise-level analytics and reporting.</p>
                     </div>
@@ -982,7 +999,15 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+            <p class="review">"Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and professional demeanor made collaboration a breeze. If you're looking to automate your work environment, I'd recommend to reach out to him! 🙌"</p>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
