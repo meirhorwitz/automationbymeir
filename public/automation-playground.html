@@ -525,6 +525,49 @@
             margin-top: 0.25rem;
         }
 
+        /* Guide overlay */
+        #guide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffe0;
+            color: #000;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            z-index: 3000;
+        }
+        #guide button {
+            margin-top: 10px;
+        }
+
+        /* Chat controls */
+        #chat-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 1100;
+        }
+        #chatInput {
+            padding: 0.5rem;
+            width: 300px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #2d2d30;
+            color: #fff;
+        }
+        #chatSend {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #000;
+        }
+
         /* Action Buttons */
         .action-buttons {
             position: fixed;
@@ -630,6 +673,14 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ9XZMFL"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <div id="guide">
+        <h2>How to use this canvas</h2>
+        <p>
+            1. Drag service blocks onto the canvas.<br>
+            2. Type instructions in the chat below to arrange them automatically.
+        </p>
+        <button onclick="document.getElementById('guide').style.display='none'">Got it!</button>
+    </div>
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -766,6 +817,11 @@
         </div>
     </div>
 
+    <div id="chat-controls">
+        <input id="chatInput" type="text" placeholder="Describe block layout..." />
+        <button id="chatSend">Send</button>
+    </div>
+
     <script>
         // --- Global variables ---
         let droppedServices = [];
@@ -797,6 +853,42 @@
         const canvas = document.getElementById('canvas');
         canvas.addEventListener('dragover', handleDragOver);
         canvas.addEventListener('drop', handleDrop);
+
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        chatSend.addEventListener('click', sendLayoutRequest);
+        chatInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') sendLayoutRequest();
+        });
+
+        async function sendLayoutRequest() {
+            const message = chatInput.value;
+            if (!message) return;
+            try {
+                const res = await fetch('/api/layout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await res.json();
+                const moves = JSON.parse(data.instructions);
+                moves.forEach(m => {
+                    const el = document.getElementById(m.id);
+                    if (el) {
+                        el.style.left = m.x + 'px';
+                        el.style.top = m.y + 'px';
+                        const svc = droppedServices.find(s => s.id === m.id);
+                        if (svc) {
+                            svc.x = m.x;
+                            svc.y = m.y;
+                        }
+                    }
+                });
+                chatInput.value = '';
+            } catch (err) {
+                console.error('Layout request failed:', err);
+            }
+        }
 
         function handleDragStart(e) {
             e.target.classList.add('dragging');
