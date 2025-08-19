@@ -38,6 +38,7 @@
             --accent: #fbbc04;
             --danger: #ea4335;
             --gray: #5f6368;
+            --nav-height: 0px;
         }
         
         * {
@@ -537,7 +538,7 @@
         /* Action Buttons */
         .action-buttons {
             position: fixed;
-            top: 8rem;
+            top: calc(var(--nav-height) + 2rem);
             right: 2rem;
             display: flex;
             gap: 1rem;
@@ -1561,6 +1562,17 @@
             @keyframes scaleIn { from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
         `;
         document.head.appendChild(style);
+
+        function updateNavOffset() {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                const navHeight = nav.offsetHeight;
+                document.documentElement.style.setProperty('--nav-height', navHeight + 'px');
+            }
+        }
+
+        window.addEventListener('load', updateNavOffset);
+        window.addEventListener('resize', updateNavOffset);
 
         // Initialize on load
         createParticles();
