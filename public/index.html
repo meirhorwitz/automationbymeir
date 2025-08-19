@@ -337,7 +337,7 @@
       margin: 0;
     }
 
-    #About b{
+    #about b{
       float: left;
       font-weight: 400;
       font-size: 24px;
@@ -350,21 +350,21 @@
       background: radial-gradient(58.02% 57.86% at 100% 100%, #72FFA3 0%, rgba(7, 106, 167, 0.7) 33.85%, rgba(8, 25, 36, 0) 100%);
       border-radius: 16px;
     }
-    #About b i{
+    #about b i{
       display: block;
       font-size: 16px;
       font-style: normal;
       color: #C4C4C4;
     }
-    #Projects a{
+    #projects a{
       position: relative;
       overflow: hidden;
       border-radius: 12px;
     }
-    #Projects a p{
+    #projects a p{
       max-width: 600px;
     }
-    #Projects a:before{
+    #projects a:before{
       content: '';
       display: block;
       position: absolute;
@@ -379,12 +379,12 @@
       opacity: 0;
       transition: transform .3s , opacity .3s;
     }
-    #Projects a:hover:before{
+    #projects a:hover:before{
       transform: translate(0%, 0%);
       opacity: 1;
     }
 
-    #Contact{
+    #contact{
       border: 1px solid #333333;
       border-radius: 8px;
       padding-top: 40px;
@@ -495,20 +495,32 @@
     .form-step { display: none; }
     .form-step.active { display: block; }
     .time-slots-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
       margin-top: 1rem;
+      overflow-x: auto;
+    }
+    .time-slots-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .time-slots-table th {
+      text-align: left;
+      padding: 0.5rem;
+      color: var(--accent);
+    }
+    .time-slots-table td {
+      padding: 0.25rem 0.5rem;
     }
     .time-slot {
       background: #100F0F;
       color: var(--light);
-      padding: 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 8px;
       border: 1px solid var(--border-color);
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: center;
+      display: inline-block;
+      width: 100%;
     }
     .time-slot:hover {
       background: #161616;
@@ -557,15 +569,15 @@
 
   <nav>
     <ul>
-      <li><a href="#Services">Services</a></li>
-      <li><a href="#Projects">Projects</a></li>
-      <li><a href="#">Showcases</a></li>
-      <li><a href="#">Why Automate</a></li>
-      <li><a href="#Contact">Contact Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="showcase1.html">Showcases</a></li>
+      <li><a href="why-automation.html">Why Automate</a></li>
+      <li><a href="#contact">Contact Us</a></li>
     </ul>
     <ul>
-      <li><a href="#">Try live</a></li>
-      <li><a href="#">Payments</a></li>
+      <li><a href="automation-playground.html">Try live</a></li>
+      <li><a href="payment.html">Payments</a></li>
     </ul>
   </nav>
 </div>
@@ -579,11 +591,11 @@
   <h2>Experience Automation in Action</h2>
   <div class="horizontal">
     <p>Try our interactive automation playground and build your own workflow by connecting Google services and AI tools</p>
-    <a href="#Contact" class="button">Start your project <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.1667 17.5L18.6667 14M18.6667 14L15.1667 10.5M18.6667 14H9.33333M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="#contact" class="button">Start your project <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.1667 17.5L18.6667 14M18.6667 14L15.1667 10.5M18.6667 14H9.33333M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </div>
 
-<div class="dark horizontal" id="Services">
+<div class="dark horizontal" id="services">
   <h2>Services</h2>
   <div class="grid_medium">
     <div>
@@ -613,29 +625,29 @@
   </div>
 </div>
 
-<div class="horizontal" id="Projects">
+<div class="horizontal" id="projects">
   <h2>Featured Projects</h2>
   <div class="grid_big">
     <div>
-      <a href="#project">
+      <a href="showcase-job-post-pro.html">
         <h3>AI Brief Creation System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
         <p>Intelligent system that generates comprehensive sales briefs using AI, streamlining the sales process and improving conversion rates.</p>
       </a>
     </div>
     <div>
-      <a href="#project">
+      <a href="showcase1.html">
         <h3>Crypto Transaction Tracker <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
         <p>Advanced tracking system integrating multiple cryptocurrency APIs with Google Sheets for real-time portfolio management and analysis.</p>
       </a>
     </div>
     <div>
-      <a href="#project">
+      <a href="showcase2.html">
         <h3>Enterprise Analytics Dashboard <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
         <p>Comprehensive dashboard solution for enterprise-level analytics and reporting.</p>
       </a>
     </div>
     <div>
-      <a href="#project">
+      <a href="#contact">
         <h3>Automated Reference Check System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
         <p>Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
       </a>
@@ -643,7 +655,7 @@
   </div>
 </div>
 
-<div class="horizontal dark" id="About">
+<div class="horizontal dark" id="about">
   <h2>About Meir</h2>
   <p>With over 5 years of experience in automation and development, I specialize in creating custom solutions that transform how businesses operate. My "can-do" attitude and deep expertise in Google Apps Script, Firebase, and modern web technologies enable me to tackle even the most complex challenges.
     <img id="profile_image" src="https://media.licdn.com/dms/image/v2/D4D03AQGiPqbELG4MeQ/profile-displayphoto-shrink_800_800/B4DZYFxoWJH4Ak-/0/1743853619029?e=1757548800&amp;v=beta&amp;t=eHfhFiQk9_NxOUBFMGCR-twPEu4gfoOPn9ON_vNZe5E" alt="Meir">
@@ -663,7 +675,7 @@
     <p>Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and professional demeanor made collaboration a breeze. If you're looking to automate your work environment, I'd recommend to reach out to him! 🙌</p>
   </div>
 </div>
-<div class="horizontal " id="Contact">
+<div class="horizontal " id="contact">
   <h2>Contact</h2>
   <form id="projectForm">
     <div id="step1" class="form-step active">
@@ -899,14 +911,16 @@ document.addEventListener('DOMContentLoaded', function() {
       acc[day].push(slot);
       return acc;
     }, {});
-    let html = '';
+    let html = '<table class="time-slots-table"><tbody>';
     for (const day in groupedSlots) {
-      html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
+      html += `<tr><th>${day}</th>`;
       groupedSlots[day].forEach(slotISO => {
         const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-        html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
+        html += `<td><div class="time-slot" data-value="${slotISO}">${time}</div></td>`;
       });
+      html += '</tr>';
     }
+    html += '</tbody></table>';
     timeSlotsContainer.innerHTML = html;
   }
   timeSlotsContainer.addEventListener('click', (e) => {
