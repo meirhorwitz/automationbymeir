@@ -18,19 +18,28 @@ function initMobileNav() {
     background: #fff;
     border-radius: 2px;
   }
+  body {
+    overflow-x: hidden;
+  }
   @media (max-width: 768px) {
     nav {
       display: none;
       flex-direction: column;
       position: fixed;
-      top: 0;
-      right: 0;
-      width: 70%;
-      height: 100vh;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      width: auto;
+      height: calc(100vh - 32px);
       background: rgba(13,13,14,0.95);
       padding: 24px;
       box-sizing: border-box;
       gap: 16px;
+      overflow-y: auto;
+    }
+    nav ul {
+      width: 100%;
+      flex-grow: 0;
     }
     nav.open {
       display: flex;
@@ -58,6 +67,18 @@ function initMobileNav() {
 
   toggle.addEventListener('click', () => {
     nav.classList.toggle('open');
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== toggle) {
+      nav.classList.remove('open');
+    }
   });
 }
 
