@@ -533,7 +533,7 @@
                         <p style="color: var(--light); margin-bottom: 1rem;">כל הזמנים מוצגים באזור הזמן המקומי שלך.</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
                         <div id="timeSlots" class="time-slots-container"></div>
-                        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                        <div id="formButtons" style="margin-top: 2rem; display: none; gap: 1rem; justify-content: center;">
                             <button type="button" id="toStep1" class="cta-secondary">חזור</button>
                             <button type="submit" id="submitBtn" class="cta-button">שליחה וקביעת פגישה</button>
                         </div>
@@ -565,6 +565,7 @@
         const toStep1Btn = document.getElementById('toStep1');
         const form = document.getElementById('projectForm');
         const submitBtn = document.getElementById('submitBtn');
+        const formButtons = document.getElementById('formButtons');
         const slotsLoader = document.getElementById('slotsLoader');
         const timeSlotsContainer = document.getElementById('timeSlots');
         const formMessage = document.getElementById('form-message');
@@ -573,6 +574,8 @@
             if (form.checkValidity()) {
                 step1.classList.remove('active');
                 step2.classList.add('active');
+                formButtons.style.display = 'none';
+                submitBtn.style.display = '';
                 fetchAvailableSlots();
             } else {
                 form.reportValidity();
@@ -581,10 +584,12 @@
         toStep1Btn.addEventListener('click', () => {
             step2.classList.remove('active');
             step1.classList.add('active');
+            formButtons.style.display = 'none';
         });
         async function fetchAvailableSlots() {
             slotsLoader.style.display = 'block';
             timeSlotsContainer.innerHTML = '';
+            formButtons.style.display = 'none';
             try {
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
@@ -596,6 +601,8 @@
             } catch (error) {
                 console.error('Error fetching slots:', error);
                 timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
+                formButtons.style.display = 'flex';
+                submitBtn.style.display = 'none';
             } finally {
                 slotsLoader.style.display = 'none';
             }
@@ -603,6 +610,8 @@
         function displaySlots(slots) {
             if (slots.length === 0) {
                 timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
+                formButtons.style.display = 'flex';
+                submitBtn.style.display = 'none';
                 return;
             }
             const groupedSlots = slots.reduce((acc, slot) => {
@@ -623,6 +632,8 @@
                 });
             }
             timeSlotsContainer.innerHTML = html;
+            formButtons.style.display = 'flex';
+            submitBtn.style.display = 'inline-block';
         }
         timeSlotsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('time-slot')) {
