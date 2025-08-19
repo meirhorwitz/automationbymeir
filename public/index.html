@@ -121,6 +121,34 @@
       transform-origin: 0 0 ;
     }
 
+    nav ul li {
+      position: relative;
+    }
+    nav ul li .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13, 13, 14, 0.9);
+      border-radius: 8px;
+      padding: 8px 0;
+      list-style: none;
+      margin: 0;
+      min-width: 220px;
+    }
+    nav ul li:hover .dropdown-menu {
+      display: block;
+    }
+    nav ul li .dropdown-menu a {
+      padding: 8px 16px;
+      display: block;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    nav ul li .dropdown-menu a:hover {
+      background: #333333;
+    }
+
     #hero {
       box-sizing: border-box;
       height: 90vh;
@@ -571,7 +599,13 @@
     <ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="showcase1.html">Showcases</a></li>
+      <li class="dropdown"><a href="#">Showcases</a>
+        <ul class="dropdown-menu">
+          <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+          <li><a href="showcase2.html">Business Analytics System</a></li>
+          <li><a href="showcase-job-post-pro.html">Job Post Pro</a></li>
+        </ul>
+      </li>
       <li><a href="why-automation.html">Why Automate</a></li>
       <li><a href="#contact">Contact Us</a></li>
     </ul>

@@ -889,34 +889,127 @@
             background: #404145;
             transform: translateY(-2px);
         }
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 40px;
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            align-items: flex-start;
+            top: 0;
+            left: 0;
+            height: 0;
+        }
+        #header img{
+            height:40px; width:auto;
+            backdrop-filter: blur(20px);
+            padding: 8px 8px;
+            border-radius: 8px;
+        }
+        nav {
+            display:flex;
+            flex-direction:row;
+            align-items:flex-start;
+            padding:24px;
+            gap:40px;
+            right:32px;
+            top:32px;
+            background:rgba(13,13,14,0.6);
+            backdrop-filter:blur(16px);
+            border-radius:8px;
+            z-index:100;
+            width:25%;
+            min-width:min-content;
+            flex-wrap:wrap;
+            align-content:flex-start;
+            justify-content:flex-start;
+            box-sizing:border-box;
+        }
+        nav ul{
+            list-style:none;
+            padding:0;
+            margin:0;
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+            width:40%;
+            flex-grow:1;
+        }
+        a{
+            color:white;
+            text-decoration:none;
+        }
+        nav a{
+            font-size:20px;
+            position:relative;
+            display:inline-block;
+            font-weight:300;
+            white-space:nowrap;
+        }
+        nav a:after{
+            content:'';
+            display:block;
+            width:100%;
+            height:1px;
+            background:#fff;
+            transform:scaleX(0);
+            transition:transform 0.2s ease-in-out;
+            transform-origin:100% 0 ;
+        }
+        nav a:hover:after{
+            transform:scaleX(1);
+            transform-origin:0 0 ;
+        }
+        nav ul li { position: relative; }
+        nav ul li .dropdown-menu {
+            display:none;
+            position:absolute;
+            top:100%;
+            left:0;
+            background:rgba(13,13,14,0.9);
+            border-radius:8px;
+            padding:8px 0;
+            list-style:none;
+            margin:0;
+            min-width:220px;
+        }
+        nav ul li:hover .dropdown-menu { display:block; }
+        nav ul li .dropdown-menu a {
+            padding:8px 16px;
+            display:block;
+            font-size:16px;
+            white-space:nowrap;
+        }
+        nav ul li .dropdown-menu a:hover { background:#333333; }
     </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="ma_logo.svg" alt="Automations by Meir"/>
-                Automations <span class="by-meir">by Meir</span>
-            </a>
-            <button class="nav-toggle" id="navToggle">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li class="submenu"><a href="#">Showcases</a>
-                    <ul class="dropdown">
-                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
-                        <li><a href="showcase2.html">Business Analytics System</a></li>
-                        <li><a href="showcase-job-post-pro.html">Job Post Pro System</a></li>
-                    </ul>
-                </li>
-                <li><a href="why-automation.html">Why Automate</a></li>
-                <li><a href="payment.html">Payments</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-                <li><a href="index-he.html">עברית</a></li>
+    <div id="header">
+      <a href="index.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+      <nav>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li class="dropdown"><a href="#">Showcases</a>
+            <ul class="dropdown-menu">
+              <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+              <li><a href="showcase2.html">Business Analytics System</a></li>
+              <li><a href="showcase-job-post-pro.html">Job Post Pro</a></li>
             </ul>
-        </div>
-    </nav>
+          </li>
+          <li><a href="why-automation.html">Why Automate</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+        <ul>
+          <li><a href="automation-playground.html">Try live</a></li>
+          <li><a href="payment.html">Payments</a></li>
+          <li><a href="index-he.html">עברית</a></li>
+        </ul>
+      </nav>
+    </div>
     <div class="showcase-container">
         <!-- Header -->
         <div class="header">
@@ -1380,24 +1473,6 @@
             this.style.cursor = 'default';
         });
     </script>
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.querySelector('.nav-links');
-        const submenu = document.querySelector('.submenu');
-        const submenuLink = document.querySelector('.submenu > a');
-        const dropdown = document.querySelector('.submenu .dropdown');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('show');
-        });
-        submenuLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdown.classList.toggle('show');
-        });
-        document.addEventListener('click', (e) => {
-            if (!submenu.contains(e.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-    </script>
+    
 </body>
 </html>
