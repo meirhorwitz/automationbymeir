@@ -15,8 +15,12 @@ function initMobileNav() {
   .menu-toggle span {
     display: block;
     height: 3px;
-    background: #fff;
+    background: #fff !important;
     border-radius: 2px;
+  }
+  #header img {
+    height: 80px;
+    width: auto;
   }
   body {
     overflow-x: hidden;

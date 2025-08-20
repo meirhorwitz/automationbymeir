@@ -115,11 +115,11 @@
         .dropdown a { padding: 0.5rem 1.5rem; white-space: nowrap; }
         .dropdown a:hover { background: var(--dark-tertiary); }
         .dropdown.show { display: flex; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 8rem 2rem 4rem; position: relative; background: radial-gradient(circle at top right, rgba(0, 230, 118, 0.1) 0%, transparent 50%), radial-gradient(circle at bottom left, rgba(68, 138, 255, 0.1) 0%, transparent 50%); overflow: hidden; color: var(--light); }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 6rem 2rem 4rem; position: relative; background: radial-gradient(circle at top right, rgba(0, 230, 118, 0.1) 0%, transparent 50%), radial-gradient(circle at bottom left, rgba(68, 138, 255, 0.1) 0%, transparent 50%); overflow: hidden; color: var(--light); }
         .wave-net { position: absolute; top: -80px; left: 0; width: 100%; height: calc(100% + 80px); z-index: 0; opacity: 0.6; }
         .wave-net canvas { width: 100%; height: 100%; }
         .hero-content { text-align: center; max-width: 900px; z-index: 1; }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite; line-height: 1.2; }
+        .hero h1 { font-size: clamp(3rem, 8vw, 7rem); margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite; line-height: 1.2; }
         @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         .hero-subtitle { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
         .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
@@ -218,7 +218,7 @@
                 font-size: 1.5rem;
                 cursor: pointer;
             }
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { font-size: 4rem; }
             .services-grid, .projects-grid, .stats-grid { grid-template-columns: 1fr; }
         .about-header { flex-direction: column; text-align: center; }
         }
