@@ -503,32 +503,26 @@
         display: flex;
       }
 
-      .time-slots-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
+      .time-slots-table {
+        width: 100%;
+        border-collapse: collapse;
         margin-top: 1rem;
       }
 
-      .time-slot {
-        background: #100F0F;
-        color: var(--light);
+      .time-slots-table th,
+      .time-slots-table td {
         padding: 0.5rem 1rem;
-        border-radius: 8px;
         border: 1px solid var(--border-color);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: center;
+        text-align: left;
       }
 
-      .time-slot:hover {
+      .time-slots-table tr.time-slot:hover {
         background: #161616;
-        border-color: var(--primary);
+        cursor: pointer;
       }
 
-      .time-slot.selected {
+      .time-slots-table tr.time-slot.selected {
         background: var(--secondary);
-        border-color: var(--secondary);
         color: var(--light);
       }
 
@@ -780,7 +774,7 @@
               <h3>Select a Time for a 30-Minute Consultation</h3>
               <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
               <div id="slotsLoader" class="loader" style="display: none;"></div>
-              <div id="timeSlots" class="time-slots-container"></div>
+                <div id="timeSlots"></div>
               <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
                   <button type="button" id="toStep1" class="btn btn-secondary">Back</button>
                   <button type="submit" id="submitBtn" class="btn btn-primary">Submit &amp; Schedule</button>
@@ -1045,30 +1039,31 @@
       return;
     }
 
-    const groupedSlots = slots.reduce((acc, slot) => {
-      const date = new Date(slot);
-      const day = date.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
-      if (!acc[day]) acc[day] = [];
-      acc[day].push(slot);
-      return acc;
-    }, {});
+    let rows = "";
+    slots.forEach((slotISO) => {
+      const dateObj = new Date(slotISO);
+      const date = dateObj.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+      const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
+      rows += `<tr class=\"time-slot\" data-value=\"${slotISO}\"><td>${date}</td><td>${time}</td></tr>`;
+    });
 
-    let html = "";
-    for (const day in groupedSlots) {
-      html += `<div style="grid-column: 1 / -1;"><h4 style=\"color: var(--accent); margin-top: 1rem;\">${day}</h4></div>`;
-      groupedSlots[day].forEach((slotISO) => {
-        const time = new Date(slotISO).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
-        html += `<div class=\"time-slot\" data-value=\"${slotISO}\">${time}</div>`;
-      });
-    }
-    timeSlotsContainer.innerHTML = html;
+    timeSlotsContainer.innerHTML = `
+      <table class=\"time-slots-table\">
+        <thead>
+          <tr><th>Date</th><th>Time</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
   }
 
   timeSlotsContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("time-slot")) {
-      document.querySelectorAll(".time-slot").forEach((slot) => slot.classList.remove("selected"));
-      e.target.classList.add("selected");
-      selectedSlot = e.target.dataset.value;
+    const row = e.target.closest(".time-slot");
+    if (row) {
+      timeSlotsContainer
+        .querySelectorAll(".time-slot")
+        .forEach((slot) => slot.classList.remove("selected"));
+      row.classList.add("selected");
+      selectedSlot = row.dataset.value;
     }
   });
 
