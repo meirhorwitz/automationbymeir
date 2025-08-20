@@ -12,20 +12,16 @@
 <title>Web Development | Automations by Meir</title>
     <link rel="icon" href="/profile.jpeg" type="image/jpeg">
 <style>
- body { font-family: 'IBM Plex Sans', sans-serif; background:#0a0a0a; color:#e0e0e0; padding:2rem; }
+body { font-family: 'IBM Plex Sans', sans-serif; background:#0a0a0a; color:#e0e0e0; padding:2rem; }
  a { color:#00e676; }
  p { margin-bottom:1rem; }
-</style>
-<style>
-/* CRITICAL FIXES TO ADD TO ALL PAGES */
 
-/* 1. Fix H1 visibility and hero spacing */
 #hero {
-  margin-top: 40px !important; /* Ensure hero is below fixed header */
-  padding-top: 80px !important; /* Add padding for breathing room */
+  margin-top: 40px !important; 
+  padding-top: 80px !important; 
 }
 
-/* 2. Fix About section stats layout (for index.html) */
+
 #about .horizontal {
   display: flex;
   gap: 40px;
@@ -68,7 +64,7 @@
   color: #C4C4C4;
 }
 
-/* 3. Fix text overflow in cards */
+
 .service-card, .project-card, .stat-card, .service-item, .dropped-service {
   overflow: hidden;
   word-wrap: break-word;
@@ -80,7 +76,7 @@
   overflow-wrap: break-word;
 }
 
-/* 4. Consistent mobile menu toggle (remove any existing menu-toggle styles and use these) */
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -119,7 +115,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* 5. Mobile responsive adjustments */
+
 @media (max-width: 768px) {
   #header {
     padding: 16px !important;
@@ -188,7 +184,7 @@
   }
 }
 
-/* 6. Ensure proper z-index hierarchy */
+
 #header {
   z-index: 100;
 }
@@ -201,6 +197,7 @@ nav {
   z-index: 101;
 }
 </style>
+
 
 </head>
 <body>
