@@ -74,21 +74,17 @@ function initMobileNav() {
   .menu-toggle {
     display:none;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:space-around;
     width:30px;
-    height:21px;
+    height:22px;
     cursor:pointer;
-    background:rgba(13,13,14,0.6);
-    backdrop-filter:blur(16px);
-    padding:12px;
-    border-radius:8px;
-    gap:3px;
   }
   .menu-toggle span {
     display:block;
-    height:2px;
-    background:#fff !important;
-    border-radius:2px;
+    width:100%;
+    height:3px;
+    background:#fff;
+    border-radius:3px;
     transition:all 0.3s ease;
   }
   .menu-toggle.active span:nth-child(1) {
@@ -101,8 +97,8 @@ function initMobileNav() {
     transform:rotate(-45deg) translate(5px,-5px);
   }
   #header img {
-    height:40px;
-    width:auto;
+    width:196px;
+    height:64px;
   }
   body {
     overflow-x:hidden;
