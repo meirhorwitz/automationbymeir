@@ -1,166 +1,250 @@
 // Navigation toggle for mobile
 // Injects responsive styles and hamburger menu
-
 function initMobileNav() {
   const style = document.createElement('style');
   style.textContent = `
-  nav {
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;
-    padding:24px;
-    gap:40px;
-    background:rgba(13,13,14,0.6);
-    backdrop-filter:blur(16px);
-    border-radius:8px;
-    width:auto;
-    min-width:min-content;
-    flex-wrap:wrap;
-  }
-  nav ul {
-    list-style:none;
-    padding:0;
-    margin:0;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-  nav ul li { position:relative; }
-  nav ul li .dropdown-menu {
-    display:none;
-    position:static !important;
-    background:rgba(13,13,14,0.9);
-    border-radius:8px;
-    padding:8px 0;
-    list-style:none;
-    margin:0;
-    min-width:220px;
-  }
-  nav ul li:hover .dropdown-menu { display:block; }
-  nav ul li .dropdown-menu a {
-    padding:8px 16px;
-    display:block;
-    font-size:16px;
-    white-space:nowrap;
-  }
-  nav ul li .dropdown-menu a:hover { background:none !important; }
+    /* Mobile menu toggle button styling */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      background: rgba(13, 13, 14, 0.6);
+      backdrop-filter: blur(16px);
+      padding: 12px;
+      border-radius: 8px;
+      gap: 3px;
+      position: fixed;
+      top: 40px;
+      right: 40px;
+      z-index: 101;
+    }
 
-  a {
-    color:white;
-    text-decoration:none;
-  }
-  nav a {
-    font-size:20px;
-    position:relative;
-    display:inline-block;
-    font-weight:300;
-    white-space:nowrap;
-  }
-  nav a:after {
-    content:'';
-    display:block;
-    width:100%;
-    height:1px;
-    background:#fff;
-    transform:scaleX(0);
-    transition:transform 0.2s ease-in-out;
-    transform-origin:100% 0;
-  }
-  nav a:hover:after {
-    transform:scaleX(1);
-    transform-origin:0 0;
-  }
+    .menu-toggle span {
+      display: block;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
-  .menu-toggle {
-    display:none;
-    flex-direction:column;
-    justify-content:space-around;
-    width:30px;
-    height:22px;
-    cursor:pointer;
-  }
-  .menu-toggle span {
-    display:block;
-    width:100%;
-    height:3px;
-    background:#fff;
-    border-radius:3px;
-    transition:all 0.3s ease;
-  }
-  .menu-toggle.active span:nth-child(1) {
-    transform:rotate(45deg) translate(5px,5px);
-  }
-  .menu-toggle.active span:nth-child(2) {
-    opacity:0;
-  }
-  .menu-toggle.active span:nth-child(3) {
-    transform:rotate(-45deg) translate(5px,-5px);
-  }
-  #header img {
-    width:196px;
-    height:64px;
-  }
-  body {
-    overflow-x:hidden;
-  }
-  @media (max-width:768px) {
-    nav {
-      display:none;
-      flex-direction:column;
-      position:fixed;
-      top:16px;
-      left:16px;
-      right:16px;
-      width:auto;
-      height:calc(100vh - 32px);
-      background:rgba(13,13,14,0.95);
-      padding:24px;
-      box-sizing:border-box;
-      gap:16px;
-      overflow-y:auto;
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
     }
-    nav ul {
-      width:100%;
-      flex-grow:0;
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
     }
-    nav ul li .dropdown-menu {
-      width:100%;
-      margin-top:8px;
-      margin-left:16px;
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
     }
-    nav.open {
-      display:flex;
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      /* Adjust header for mobile */
+      #header {
+        padding: 16px !important;
+        background: rgba(30, 30, 33, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      #header img {
+        height: 32px !important;
+        padding: 6px !important;
+      }
+
+      /* Show menu toggle on mobile */
+      .menu-toggle {
+        display: flex !important;
+        top: 16px;
+        right: 16px;
+      }
+
+      /* Hide nav by default on mobile */
+      nav {
+        display: none !important;
+        position: fixed !important;
+        top: 70px !important;
+        left: 16px !important;
+        right: 16px !important;
+        width: auto !important;
+        max-height: calc(100vh - 100px) !important;
+        background: rgba(13, 13, 14, 0.95) !important;
+        padding: 24px !important;
+        flex-direction: column !important;
+        overflow-y: auto !important;
+        z-index: 99 !important;
+      }
+
+      /* Show nav when open */
+      nav.open {
+        display: flex !important;
+      }
+
+      nav ul {
+        width: 100% !important;
+        gap: 16px !important;
+      }
+
+      nav ul li .dropdown-menu {
+        position: static !important;
+        width: 100% !important;
+        margin-top: 8px !important;
+        margin-left: 16px !important;
+      }
+
+      nav ul li:hover .dropdown-menu,
+      nav ul li.active .dropdown-menu {
+        display: block !important;
+      }
+
+      nav a {
+        font-size: 18px !important;
+        padding: 8px 0 !important;
+      }
+
+      /* Ensure content doesn't hide under nav */
+      #hero, .hero {
+        margin-top: 60px !important;
+        padding-top: 40px !important;
+      }
+
+      /* Fix h1 visibility */
+      h1 {
+        margin-top: 20px !important;
+      }
+
+      /* Fix stats positioning in about section */
+      #about .horizontal {
+        flex-direction: column !important;
+      }
+
+      #about .stats {
+        width: 100% !important;
+        max-width: none !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        margin-top: 24px !important;
+      }
+
+      #about .stats div {
+        width: 100% !important;
+        min-width: auto !important;
+        padding: 10px 16px !important;
+        box-sizing: border-box !important;
+      }
+
+      #about .stats div p {
+        font-size: 0.875rem !important;
+      }
+
+      #profile_image {
+        width: 100% !important;
+        max-width: none !important;
+      }
+
+      /* Fix text within cards */
+      .service-item, .dropped-service, .service-card, .project-card, .stat-card {
+        padding: 1rem !important;
+        box-sizing: border-box !important;
+      }
+
+      .service-item *, .dropped-service *, .service-card *, .project-card *, .stat-card * {
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+      }
     }
-    #menu-toggle {
-      display:flex;
-      position:fixed;
-      top:20px;
-      right:20px;
-      z-index:101;
+
+    /* Desktop stats layout fix */
+    @media (min-width: 769px) {
+      #about .horizontal {
+        display: flex !important;
+        gap: 40px !important;
+        align-items: flex-start !important;
+      }
+
+      #about .horizontal > div:first-child {
+        flex: 1 !important;
+      }
+
+      #about .stats {
+        width: auto !important;
+        max-width: 300px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 20px !important;
+        margin-top: 8px !important;
+        flex-shrink: 0 !important;
+      }
+
+      #about .stats div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 12px 20px !important;
+        background: #333333 !important;
+        border-radius: 8px !important;
+        font-size: clamp(1.5rem, 4vw, 2rem) !important;
+        white-space: nowrap !important;
+        gap: 8px !important;
+        flex: 1 !important;
+        min-width: 120px !important;
+        margin-top: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      #about .stats div p {
+        margin: 0 !important;
+        font-size: clamp(0.875rem, 2vw, 1rem) !important;
+      }
+
+      /* Ensure h1 is not hidden */
+      #hero, .hero {
+        margin-top: 40px !important;
+        padding-top: 80px !important;
+      }
     }
-    nav a {
-      font-size:18px;
-      padding:8px 0;
+
+    /* Ensure text stays within all cards */
+    .service-card, .project-card, .stat-card, .service-item, .dropped-service {
+      overflow: hidden !important;
+      word-wrap: break-word !important;
+      box-sizing: border-box !important;
     }
-  }
+
+    .service-card *, .project-card *, .stat-card *, .service-item *, .dropped-service * {
+      max-width: 100% !important;
+      overflow-wrap: break-word !important;
+    }
   `;
   document.head.appendChild(style);
 
   const header = document.getElementById('header');
   const nav = header ? header.querySelector('nav') : null;
+  
   if (!header || !nav) return;
 
-  const toggle = document.createElement('div');
-  toggle.id = 'menu-toggle';
-  toggle.className = 'menu-toggle';
-  toggle.innerHTML = '<span></span><span></span><span></span>';
-  header.appendChild(toggle);
+  // Check if menu toggle already exists
+  let toggle = document.getElementById('menu-toggle');
+  if (!toggle) {
+    toggle = document.createElement('div');
+    toggle.id = 'menu-toggle';
+    toggle.className = 'menu-toggle';
+    toggle.innerHTML = '<span></span><span></span><span></span>';
+    header.appendChild(toggle);
+  }
 
+  // Toggle menu on click
   toggle.addEventListener('click', () => {
     nav.classList.toggle('open');
     toggle.classList.toggle('active');
   });
 
+  // Close menu when clicking on a link
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
@@ -168,12 +252,48 @@ function initMobileNav() {
     });
   });
 
+  // Close menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== toggle) {
+    if (nav.classList.contains('open') && 
+        !nav.contains(e.target) && 
+        !toggle.contains(e.target)) {
       nav.classList.remove('open');
       toggle.classList.remove('active');
     }
   });
+
+  // Handle dropdown menus on mobile
+  if (window.innerWidth <= 768) {
+    const dropdownParents = nav.querySelectorAll('li.dropdown');
+    dropdownParents.forEach(parent => {
+      const link = parent.querySelector('a');
+      if (link) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          parent.classList.toggle('active');
+        });
+      }
+    });
+  }
 }
 
-document.addEventListener('DOMContentLoaded', initMobileNav);
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileNav);
+} else {
+  initMobileNav();
+}
+
+// Reinitialize on window resize to handle orientation changes
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const nav = document.querySelector('nav');
+    const toggle = document.getElementById('menu-toggle');
+    if (window.innerWidth > 768) {
+      if (nav) nav.classList.remove('open');
+      if (toggle) toggle.classList.remove('active');
+    }
+  }, 250);
+});
