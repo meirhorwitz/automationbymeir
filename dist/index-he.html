@@ -68,13 +68,12 @@
             background-color: #2d2d30; color: var(--light); font-size: 1rem; text-align: right;
         }
         .form-group textarea { min-height: 150px; }
-        .time-slots-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .time-slot {
-            background: #2d2d30; color: var(--light); padding: 1rem; border-radius: 0;
-            border: 1px solid var(--gray); cursor: pointer; transition: all 0.2s ease; text-align: center;
+        .time-slots-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .time-slots-table th, .time-slots-table td {
+            padding: .75rem 1rem; border: 1px solid var(--gray); text-align: right;
         }
-        .time-slot:hover { background: #3c3c3f; border-color: var(--primary); }
-        .time-slot.selected { background: var(--secondary); color: white; border-color: var(--secondary); }
+        .time-slots-table tr.time-slot:hover { background: #3c3c3f; cursor: pointer; }
+        .time-slots-table tr.time-slot.selected { background: var(--secondary); color: white; }
         #form-message { margin-top: 1rem; padding: 1rem; border-radius: 0; text-align: center; display: none; }
         #form-message.success { background-color: rgba(52, 168, 83, 0.2); color: var(--secondary); }
         #form-message.error { background-color: rgba(234, 67, 53, 0.2); color: var(--danger); }
@@ -442,7 +441,7 @@
                         <h3>בחרו מועד לפגישת ייעוץ של 30 דקות</h3>
                         <p style="color: var(--light); margin-bottom: 1rem;">כל הזמנים מוצגים באזור הזמן המקומי שלך.</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
-                        <div id="timeSlots" class="time-slots-container"></div>
+                          <div id="timeSlots"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
                             <button type="button" id="toStep1" class="cta-secondary">חזור</button>
                             <button type="submit" id="submitBtn" class="cta-button">שליחה וקביעת פגישה</button>
@@ -515,30 +514,27 @@
                 timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
                 return;
             }
-            const groupedSlots = slots.reduce((acc, slot) => {
-                const date = new Date(slot);
-                const day = date.toLocaleDateString('he-IL', { weekday: 'long', month: 'long', day: 'numeric' });
-                if (!acc[day]) {
-                    acc[day] = [];
-                }
-                acc[day].push(slot);
-                return acc;
-            }, {});
-            let html = '';
-            for (const day in groupedSlots) {
-                html += `<div style="grid-column: 1 / -1;"><h4 style="color: var(--accent); margin-top: 1rem;">${day}</h4></div>`;
-                groupedSlots[day].forEach(slotISO => {
-                    const time = new Date(slotISO).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
-                    html += `<div class="time-slot" data-value="${slotISO}">${time}</div>`;
-                });
-            }
-            timeSlotsContainer.innerHTML = html;
+            let rows = '';
+            slots.forEach(slotISO => {
+                const dateObj = new Date(slotISO);
+                const day = dateObj.toLocaleDateString('he-IL', { weekday: 'long', month: 'long', day: 'numeric' });
+                const time = dateObj.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
+                rows += `<tr class="time-slot" data-value="${slotISO}"><td>${day}</td><td>${time}</td></tr>`;
+            });
+            timeSlotsContainer.innerHTML = `
+                <table class="time-slots-table">
+                    <thead>
+                        <tr><th>תאריך</th><th>שעה</th></tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>`;
         }
         timeSlotsContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('time-slot')) {
+            const row = e.target.closest('.time-slot');
+            if (row) {
                 document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
-                e.target.classList.add('selected');
-                selectedSlot = e.target.dataset.value;
+                row.classList.add('selected');
+                selectedSlot = row.dataset.value;
             }
         });
         form.addEventListener('submit', async (e) => {
