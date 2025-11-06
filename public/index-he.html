@@ -740,7 +740,7 @@ nav {
             measurementId: "G-D8GQDGVR08"
         };
         const app = initializeApp(firebaseConfig);
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYDJcrt8eT52qSQJf6sQ842LyUNjZQm-DGLaM_g757DDdC0viqZSgAyUilmOmxgJ_Cyw/exec";
+        const API_BASE_URL = "/api/schedule";
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const toStep2Btn = document.getElementById('toStep2');
@@ -773,12 +773,17 @@ nav {
             timeSlotsContainer.innerHTML = '';
             formButtons.style.display = 'none';
             try {
-                const response = await fetch(SCRIPT_URL);
+                const response = await fetch(`${API_BASE_URL}/slots`);
+
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
                 const data = await response.json();
                 if (data.success) {
                     displaySlots(data.slots);
                 } else {
-                    throw new Error(data.error || 'Failed to load slots.');
+                    throw new Error(data.error || 'שגיאה בטעינת הזמנים.');
                 }
             } catch (error) {
                 console.error('Error fetching slots:', error);
@@ -838,12 +843,22 @@ nav {
                 lang: 'he'
             };
             try {
-                await fetch(SCRIPT_URL, {
+                const response = await fetch(`${API_BASE_URL}/book`, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.error || 'שגיאה בקביעת הפגישה.');
+                }
+
                 form.style.display = 'none';
                 formMessage.style.display = 'block';
                 formMessage.className = 'success';
