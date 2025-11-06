@@ -837,7 +837,7 @@ document.addEventListener('DOMContentLoaded', function() {
     measurementId: "G-D8GQDGVR08"
   };
   const app = initializeApp(firebaseConfig);
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYDJcrt8eT52qSQJf6sQ842LyUNjZQm-DGLaM_g757DDdC0viqZSgAyUilmOmxgJ_Cyw/exec";
+  const API_BASE_URL = "/api/schedule";
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
   const toStep2Btn = document.getElementById('toStep2');
@@ -865,7 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slotsLoader.style.display = 'block';
     timeSlotsContainer.innerHTML = '';
     try {
-      const response = await fetch(SCRIPT_URL);
+      const response = await fetch(`${API_BASE_URL}/slots`);
       const data = await response.json();
       if (data.success) {
         displaySlots(data.slots);
@@ -924,12 +924,18 @@ document.addEventListener('DOMContentLoaded', function() {
       lang: 'en'
     };
     try {
-      await fetch(SCRIPT_URL, {
+      const response = await fetch(`${API_BASE_URL}/book`, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to schedule meeting.');
+      }
+
       form.style.display = 'none';
       formMessage.style.display = 'block';
       formMessage.className = 'success';
