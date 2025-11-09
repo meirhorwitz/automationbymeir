@@ -744,11 +744,11 @@ nav {
             .map((host) => host.toLowerCase())
             .includes(window.location.hostname.toLowerCase());
         const SCHEDULE_ENDPOINTS = isLocalhost
-            ? ["/api/schedule"]
-            : [
-                  "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
-                  "/api/schedule",
-              ];
+          ? ["/api/schedule"]
+          : [
+              "/api/schedule",
+              "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
+            ];
 
         function cloneRequestOptions(options = {}) {
             const cloned = { ...options };
