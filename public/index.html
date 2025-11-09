@@ -1,1118 +1,1129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "sxaf839npz");
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-D8GQDGVR08');
-  </script>
-  <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "sxaf839npz");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+        gtag('config', 'G-D8GQDGVR08');
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <style>
 
     .ibm-plex-sans-<uniquifier> {
-      font-family: "IBM Plex Sans", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: <weight>;
-      font-style: normal;
-      font-variation-settings:
-        "wdth" 100;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
     }
 
-      body {
-        font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
-        background: #1E1E21;
-        margin: 0;
-        padding: 16px;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      #header {
-         position: fixed;
-         width: 100%;
-         z-index: 100;
-         padding: 40px;
-         padding-top: 40px;
-         display: flex;
-         justify-content: space-between;
-         box-sizing: border-box;
-         align-items: flex-start;
-         top: 0;
-         left: 0;
-         height: 0;
-                   /* backdrop-filter: blur(20px); */
-          /* mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); */
-      }
-      #header img{
-        backdrop-filter: blur(20px);
-        padding: 8px 8px;
-        border-radius: 8px;
-      }
-      nav {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        padding: 24px;
-        gap: 40px;
-        right: 32px;
-        top: 32px;
-        background: rgba(13, 13, 14, 0.6);
-        backdrop-filter: blur(16px);
-        border-radius: 8px;
-        z-index: 100;
-        width: 25%;
-        min-width: min-content;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        justify-content: flex-start;
-        box-sizing: border-box;
-      }
-
-      nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        width: 40%;
-        flex-grow: 1;
-      }
-
-      a{
-        color: white;
-        text-decoration: none;
-      }
-      nav a {
- 
-        font-size: 20px;
-        position: relative;
-        display: inline-block;
-        font-weight: 300;
-        white-space: nowrap;
-      }
-      nav a:after {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 1px;
-        background: #fff;
-        transform: scaleX(0);
-        transition: transform 0.2s ease-in-out;
-        transform-origin: 100% 0 ;
-      }
-
-      nav a:hover:after {
-        transform: scaleX(1);
-        transform-origin: 0 0 ;
-      }
-
-      nav ul li {
-        position: relative;
-      }
-
-      nav ul li .dropdown-menu {
-        display: none;
-        background: rgba(13, 13, 14, 0.9);
-        border-radius: 8px;
-        padding: 8px 0;
-        list-style: none;
-        margin: 0;
-        min-width: 220px;
-      }
-
-      nav ul li:hover .dropdown-menu {
-        display: block;
-      }
-
-      nav ul li .dropdown-menu a {
-        padding: 8px 16px;
-        display: block;
-        font-size: 16px;
-        white-space: nowrap;
-      }
-      nav ul li .dropdown-menu a:hover {
-        background: none;
-      }
-
-      #hero {
-        box-sizing: border-box;
-        height: 90vh;
-        padding: 80px 36px;
-        border: 1px solid #333333;
-        border-radius: 8px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        gap: 40px;
-        background-color: #161616;
-      }
-
-      #hero h3 {
-        font-size: 1.8vw;
-        opacity: 0;
-      }
-      h1 {
-             font-family: 'IBM Plex Sans';
-             font-style: normal;
-             font-weight: 300;
-             font-size: 7.8vw;
-             line-height: 118%;
-             letter-spacing: -0.04em;
-             margin: 0;
-             color: #fff;
-             transform: translateY(80px);
-          }
-        
-        h1 .word {
-           display: inline-block;
-           white-space: nowrap;
+        body {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            background: #1E1E21;
+            margin: 0;
+            padding: 16px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        
-        h1 .letter {
-           display: inline-block;
-           opacity: 0;
-           transform: translateX(-12px) rotate(-5deg);
-           transform-origin: center;
-           margin: 0;
-           padding: 0;
-           vertical-align: baseline;
-           letter-spacing: -0.04em;
-           font-kerning: normal;
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 40px;
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            align-items: flex-start;
+            top: 0;
+            left: 0;
+            height: 0;
+            /* backdrop-filter: blur(20px); */
+            /* mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); */
         }
-        
-        h1 .word {
-           display: inline-block;
-           white-space: nowrap;
-           font-kerning: normal;
+        #header img{
+            backdrop-filter: blur(20px);
+            padding: 8px 8px;
+            border-radius: 8px;
+        }
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 24px;
+            gap: 40px;
+            right: 32px;
+            top: 32px;
+            background: rgba(13, 13, 14, 0.6);
+            backdrop-filter: blur(16px);
+            border-radius: 8px;
+            z-index: 100;
+            width: 25%;
+            min-width: min-content;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: flex-start;
+            box-sizing: border-box;
         }
 
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 40%;
+            flex-grow: 1;
+        }
 
-      h1 span:first-child span:nth-child(1){
-        margin-right: -.38vw;
-      }
-      #start_promo{
-        background: #333333;
-        border-radius: 8px;
-        padding: 80px 24px;
-      }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        nav a {
 
-      #start_promo .horizontal{
-        display: flex;
-        justify-content: space-between;
-        padding: 0px;
-        padding-left: calc(25% + 40px);
-        margin-top: 4%;
-        align-items: center;
-        flex-wrap: nowrap;
-        flex-direction: row;
+            font-size: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 300;
+            white-space: nowrap;
+        }
+        nav a:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: #fff;
+            transform: scaleX(0);
+            transition: transform 0.2s ease-in-out;
+            transform-origin: 100% 0 ;
+        }
+
+        nav a:hover:after {
+            transform: scaleX(1);
+            transform-origin: 0 0 ;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li .dropdown-menu {
+            display: none;
+            background: rgba(13, 13, 14, 0.9);
+            border-radius: 8px;
+            padding: 8px 0;
+            list-style: none;
+            margin: 0;
+            min-width: 220px;
+        }
+
+        nav ul li:hover .dropdown-menu {
+            display: block;
+        }
+
+        nav ul li .dropdown-menu a {
+            padding: 8px 16px;
+            display: block;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        nav ul li .dropdown-menu a:hover {
+            background: none;
+        }
+
+        #hero {
+            box-sizing: border-box;
+            height: 90vh;
+            padding: 80px 36px;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 40px;
+            background-color: #161616;
+        }
+
+        #hero h3 {
+            font-size: 1.8vw;
+            opacity: 0;
+        }
+        h1 {
+                font-family: 'IBM Plex Sans';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 7.8vw;
+                line-height: 118%;
+                letter-spacing: -0.04em;
+                margin: 0;
+                color: #fff;
+                transform: translateY(80px);
+            }
+            
+            h1 .word {
+                display: inline-block;
+                white-space: nowrap;
+            }
+            
+            h1 .letter {
+                display: inline-block;
+                opacity: 0;
+                transform: translateX(-12px) rotate(-5deg);
+                transform-origin: center;
+                margin: 0;
+                padding: 0;
+                vertical-align: baseline;
+                letter-spacing: -0.04em;
+                font-kerning: normal;
+            }
+            
+            h1 .word {
+                display: inline-block;
+                white-space: nowrap;
+                font-kerning: normal;
+            }
+
+
+        h1 span:first-child span:nth-child(1){
+            margin-right: -.38vw;
+        }
+        #start_promo{
+            background: #333333;
+            border-radius: 8px;
+            padding: 80px 24px;
+        }
+
+        #start_promo .horizontal{
+            display: flex;
+            justify-content: space-between;
+            padding: 0px;
+            padding-left: calc(25% + 40px);
+            margin-top: 4%;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            
+            
+        }
+        #start_promo .horizontal p{
+            width: 50%;
+        }
+        #start_promo .horizontal .button{
+            width: 28%;
+        }
+
+        h2{
+            font-weight: 300;
+            font-size: 48px;
+            line-height: 120%;
+            color: #FFFFFF;
+            margin: 0;
+            margin-bottom: 40px;
+        }
+        h3{
+            font-weight: 300;
+            font-size: 32px;
+            line-height: 120%;
+            color: #FFFFFF;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        a h3{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+        }
+
+        p{
+            font-style: normal;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 150%;
+            color: #C4C4C4;
+        }
+        .button, button{
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 27px;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #FFFFFF;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 300;
+            background-color: transparent;
+        }
+        .white_button{
         
+            font-style: normal;
+            font-weight:300;
+            font-size: 24px;
+            line-height: 120%;
+            /* or 29px */
+
+            color: #000000;
+
+            /* Auto layout */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 27px;
+            gap: 8px;
+
+            background: #FFFFFF;
+            border-radius: 12px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .dark{
+            background: #161616;
+            border-radius: 8px;
+            
+        }
+
+        .horizontal{
+            display: flex;
+            /* flex-wrap: wrap; */
+            flex-direction: row;
+            align-content: flex-start;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 100px 24px;
+        }
+
+        .horizontal h2{
+            width: 25%;
+            flex-shrink: 0;
+        }
+
+        .horizontal div{
+            margin-top: 8px;
+        }
+
+        .grid_medium{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px 80px;
+            flex-grow: 1;
+        }
+
+        .grid_big{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+            gap: 40px 80px;
+            flex-grow: 1;
+        }
         
-      }
-      #start_promo .horizontal p{
-        width: 50%;
-      }
-      #start_promo .horizontal .button{
-        width: 28%;
-      }
+        a svg{
+            transition: transform .3s;
+        }
+        a:hover svg{
+            transform: translateX(-8px);
+        }
 
-      h2{
-          font-weight: 300;
-          font-size: 48px;
-          line-height: 120%;
-          color: #FFFFFF;
-          margin: 0;
-          margin-bottom: 40px;
-      }
-      h3{
-          font-weight: 300;
-          font-size: 32px;
-          line-height: 120%;
-          color: #FFFFFF;
-          margin: 0;
-          margin-bottom: 20px;
-      }
+        #profile_image{
+            width: 50%;
+            border-radius: 20px;
+            display: block;
+            margin-top: 28px;
+            position: relative;
 
-      a h3{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: nowrap;
-        flex-direction: row;
-      }
+        }
 
-      p{
-        font-style: normal;
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 150%;
-        color: #C4C4C4;
-      }
-      .button, button{
-        font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 12px 27px;
-        gap: 8px;
-        color: #fff;
-        text-decoration: none;
-        border: 1px solid #FFFFFF;
-        border-radius: 12px;
-        font-size: 20px;
-        font-weight: 300;
-        background-color: transparent;
-      }
-      .white_button{
-      
-        font-style: normal;
-        font-weight:300;
-        font-size: 24px;
-        line-height: 120%;
-        /* or 29px */
-
-        color: #000000;
-
-        /* Auto layout */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 12px 27px;
-        gap: 8px;
-
-        background: #FFFFFF;
-        border-radius: 12px;
-        color: #000;
-        text-decoration: none;
-      }
-
-      .dark{
-        background: #161616;
-        border-radius: 8px;
-        
-      }
-
-      .horizontal{
-        display: flex;
-        /* flex-wrap: wrap; */
-        flex-direction: row;
-        align-content: flex-start;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 40px;
-        padding: 100px 24px;
-      }
-
-      .horizontal h2{
-        width: 25%;
-        flex-shrink: 0;
-      }
-
-      .horizontal div{
-        margin-top: 8px;
-      }
-
-      .grid_medium{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 40px 80px;
-        flex-grow: 1;
-      }
-
-      .grid_big{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-        gap: 40px 80px;
-        flex-grow: 1;
-      }
-      
-      a svg{
-        transition: transform .3s;
-      }
-      a:hover svg{
-          transform: translateX(-8px);
-      }
-
-      #profile_image{
-        width: 50%;
-        border-radius: 20px;
-        display: block;
-        margin-top: 28px;
-        position: relative;
-
-      }
-
-       .stats{
-          width: 25%;
-          flex-shrink: 0;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 20px;
-          margin-top: 24px !important;
-       }
-       .stats div{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 12px 20px;
-        width: min-content;
-        background: #333333;
-        border-radius: 8px;
-        font-size: 32px;
-        white-space: nowrap;
-        gap: 8px;
-        width: 100%;
-        margin-top: 0;
-       }
-       .stats div p{
-        margin: 0;
-       }
+        .stats{
+            width: 25%;
+            flex-shrink: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 24px !important;
+        }
+        .stats div{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 12px 20px;
+            width: min-content;
+            background: #333333;
+            border-radius: 8px;
+            font-size: 32px;
+            white-space: nowrap;
+            gap: 8px;
+            width: 100%;
+            margin-top: 0;
+        }
+        .stats div p{
+            margin: 0;
+        }
 
 
-       #about b{
-        float: left;
-        font-weight: 400;
-        font-size: 24px;
-        color: #fff;
-        position: relative;
-        margin-top: -214px;
-        width: 50%;
-        padding: 144px 20px 16px;
-        box-sizing: border-box;
-        background: radial-gradient(58.02% 57.86% at 100% 100%, #72FFA3 0%, rgba(7, 106, 167, 0.7) 33.85%, rgba(8, 25, 36, 0) 100%);
-        border-radius: 16px;
-       }
-       #about b i{
-        display: block;
-        font-size: 16px;
-        font-style: normal;
-        color: #C4C4C4;
-       }
-       #projects a{
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-       }
-       #projects a p{
-        max-width: 600px;
-       }
-       #projects a:before{
-          content: '';
-          display: block;
-          position: absolute;
-          /* background-color: #000; */
-          width: calc(100% + 0px);
-          height: calc(100% + 48px);
-          left: -24px;
-          top:-20px;
-          z-index: -1;
-          border-radius: 12px;
-          background: linear-gradient(83.43deg, #161616 -2.21%, rgba(22, 22, 22, 0) 100%);
-          transform: translate(-12px, 0px);
-          opacity: 0;
-          transition: transform .3s , opacity .3s;
-       }
-       #projects a:hover:before{
-        transform: translate(0%, 0%);
-        opacity: 1;
-       }
+        #about b{
+            float: left;
+            font-weight: 400;
+            font-size: 24px;
+            color: #fff;
+            position: relative;
+            margin-top: -214px;
+            width: 50%;
+            padding: 144px 20px 16px;
+            box-sizing: border-box;
+            background: radial-gradient(58.02% 57.86% at 100% 100%, #72FFA3 0%, rgba(7, 106, 167, 0.7) 33.85%, rgba(8, 25, 36, 0) 100%);
+            border-radius: 16px;
+        }
+        #about b i{
+            display: block;
+            font-size: 16px;
+            font-style: normal;
+            color: #C4C4C4;
+        }
+        #projects a{
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        #projects a p{
+            max-width: 600px;
+        }
+        #projects a:before{
+            content: '';
+            display: block;
+            position: absolute;
+            /* background-color: #000; */
+            width: calc(100% + 0px);
+            height: calc(100% + 48px);
+            left: -24px;
+            top:-20px;
+            z-index: -1;
+            border-radius: 12px;
+            background: linear-gradient(83.43deg, #161616 -2.21%, rgba(22, 22, 22, 0) 100%);
+            transform: translate(-12px, 0px);
+            opacity: 0;
+            transition: transform .3s , opacity .3s;
+        }
+        #projects a:hover:before{
+            transform: translate(0%, 0%);
+            opacity: 1;
+        }
 
 
-       #contact{
-        border: 1px solid #333333;
-        border-radius: 8px;
-        padding-top: 40px;
-       }
+        #contact{
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding-top: 40px;
+        }
 
-       #projectForm{
-        width: 100%;
-        width: auto;
-        margin-right: 12%;
-       }
-       #projectForm input , #projectForm textarea{
-        font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
-        font-weight: 300;
-        width: 100%;
-        background: #100F0F;
-        color: #fff;
-        border-radius: 8px;
-        border: 0 none;
-        font-size: 20px;
-        padding: 16px;
-        display: block;
-        box-sizing: border-box;
-       }
-       #projectForm input:hover , #projectForm textarea:hover{
-          /* outline: 1px solid #333333; */
-          background-color: #161616;
-       }
-       #projectForm textarea{
-        height: 200px;
-        resize: vertical;
-       }
-       #projectForm input:focus , #projectForm textarea:focus{
-          outline: 1px solid #fff;
-          background-color: #161616;
-       }
-       #projectForm > div{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        align-items: flex-start;
-        gap: 20px;
-       }
-       #projectForm .form-group{
-        width: auto;
-        flex-grow: 1;
-        display: flex;
-        gap: 16px;
-        flex-direction: column;
-        margin-top: 12px;
-       }
-       #projectForm .form-group:last-of-type{
-        width: 100%;
-       }
+        #projectForm{
+            width: 100%;
+            width: auto;
+            margin-right: 12%;
+        }
+        #projectForm input , #projectForm textarea{
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            width: 100%;
+            background: #100F0F;
+            color: #fff;
+            border-radius: 8px;
+            border: 0 none;
+            font-size: 20px;
+            padding: 16px;
+            display: block;
+            box-sizing: border-box;
+        }
+        #projectForm input:hover , #projectForm textarea:hover{
+            /* outline: 1px solid #333333; */
+            background-color: #161616;
+        }
+        #projectForm textarea{
+            height: 200px;
+            resize: vertical;
+        }
+        #projectForm input:focus , #projectForm textarea:focus{
+            outline: 1px solid #fff;
+            background-color: #161616;
+        }
+        #projectForm > div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            align-items: flex-start;
+            gap: 20px;
+            
+        }
+        #projectForm .form-group{
+            width: auto;
+            flex-grow: 1;
+            display: flex;
+            gap: 16px;
+            flex-direction: column;
+            margin-top: 12px;
+        }
+        #projectForm .form-group:last-of-type{
+            width: 100%;
+        }
 
-       #projectForm  button{
-       margin-top: 20px;
-       align-self: flex-end;
-      }
+        #projectForm button{
+            margin-top: 20px;
+            align-self: flex-end;
+        }
 
-      #projectForm .form-step {
-        display: none;
-      }
+        #projectForm .form-step {
+            display: none;
+        }
 
-      #projectForm .form-step.active {
-        display: flex;
-      }
+        #projectForm .form-step.active {
+            display: flex;
+        }
 
-      .time-slots-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-      }
+        .time-slots-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
 
-      .time-slots-table th,
-      .time-slots-table td {
-        padding: 0.5rem 1rem;
-        border: 1px solid var(--border-color);
-        text-align: left;
-      }
+        .time-slots-table th,
+        .time-slots-table td {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
 
-      .time-slots-table tr.time-slot:hover {
-        background: #161616;
-        cursor: pointer;
-      }
+        .time-slots-table tr.time-slot:hover {
+            background: #161616;
+            cursor: pointer;
+        }
 
-      .time-slots-table tr.time-slot.selected {
-        background: var(--secondary);
-        color: var(--light);
-      }
+        .time-slots-table tr.time-slot.selected {
+            background: var(--secondary);
+            color: var(--light);
+        }
 
-      #form-message {
-        margin-top: 1rem;
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: center;
-        display: none;
-      }
+        #form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
 
-      #form-message.success {
-        background-color: rgba(114, 255, 163, 0.2);
-        color: var(--primary);
-      }
+        #form-message.success {
+            background-color: rgba(114, 255, 163, 0.2);
+            color: var(--primary);
+        }
 
-      #form-message.error {
-        background-color: rgba(234, 67, 53, 0.2);
-        color: var(--danger);
-      }
+        #form-message.error {
+            background-color: rgba(234, 67, 53, 0.2);
+            color: var(--danger);
+        }
 
-      .loader {
-        width: 48px;
-        height: 48px;
-        border: 5px solid var(--light);
-        border-bottom-color: var(--primary);
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        margin: 2rem auto;
-      }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--light);
+            border-bottom-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin: 2rem auto;
+        }
 
-      @keyframes rotation {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-      #reviews_carousel p {padding: 40px;
+        #reviews_carousel p {padding: 40px;
             border-radius: 12px;
             background: linear-gradient(83.43deg, #161616 -2.21%, rgba(22, 22, 22, 0) 110%);
             max-width: 800px;
-      } 
+        } 
 
 
-       #footer{
-        text-align: center;
-        padding: 40px 24px;
-        font-size: 16px;
-        font-weight: 100;
-       }
+        #footer{
+            text-align: center;
+            padding: 40px 24px;
+            font-size: 16px;
+            font-weight: 100;
+        }
 
-       @media (max-width:1200px) {
+        @media (max-width:1200px) {
         .horizontal{
-          flex-wrap: wrap;
+            flex-wrap: wrap;
         }
         #projectForm{
-        width: 100%;
-        margin-right: 0%;
-       }
+            width: 100%;
+            margin-right: 0%;
+        }
 
         #hero h3{
-         font-size: 28px;
-         opacity: 0;
+            font-size: 28px;
+            opacity: 0;
         }
         
         #hero h3 .word {
-           display: inline-block;
-           white-space: nowrap;
-           font-kerning: normal;
-           opacity: 0;
-           transform: translateY(20px) skewY(-2deg);
-           transform-origin: center;
+            display: inline-block;
+            white-space: nowrap;
+            font-kerning: normal;
+            opacity: 0;
+            transform: translateY(20px) skewY(-2deg);
+            transform-origin: center;
         }
         
         #hero h3 .letter {
-           display: inline-block;
-           opacity: 0;
-           transform: translateY(20px) skewY(-2deg);
-           transform-origin: center;
-           margin: 0;
-           padding: 0;
-           vertical-align: baseline;
-           letter-spacing: -0.04em;
-           font-kerning: normal;
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px) skewY(-2deg);
+            transform-origin: center;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+            letter-spacing: -0.04em;
+            font-kerning: normal;
         }
 
-       }
+        }
 
-       
-      
+        
+        
     </style>
-  </head>
-  <body>
-  
-  <div id="header">
-    <a href="index.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
-  
-  <nav>
-    <ul>
-      <li><a href="index.html#services">Services</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
-      <li class="dropdown"><a href="#">Showcases</a>
-        <ul class="dropdown-menu">
-          <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
-          <li><a href="showcase2.html">Business Analytics System</a></li>
-          <li><a href="showcase-job-post-pro.html">Job Post Pro</a></li>
+    </head>
+    <body>
+    
+    <div id="header">
+        <a href="index.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li class="dropdown"><a href="#">Showcases</a>
+                <ul class="dropdown-menu">
+                    <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+                    <li><a href="showcase2.html">Business Analytics System</a></li>
+                    <li><a href="showcase-job-post-pro.html">Job Post Pro</a></li>
+                </ul>
+            </li>
+            <li><a href="why-automation.html">Why Automate</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
         </ul>
-      </li>
-      <li><a href="why-automation.html">Why Automate</a></li>
-      <li><a href="index.html#contact">Contact Us</a></li>
-    </ul>
-    <ul>
-      <li><a href="automation-playground.html">Try live</a></li>
-      <li><a href="payment.html">Payments</a></li>
-    </ul>
-  </nav>
+        <ul>
+            <li><a href="automation-playground.html">Try live</a></li>
+            <li><a href="payment.html">Payments</a></li>
+        </ul>
+    </nav>
 </div>
 
-  <div id="hero">
-    <h1 id="animated-title">Transform your business with intelligent automation</h1>
-    <h3 id="animated-subtitle">Custom Google Apps Script & Firebase Solutions That Scale</h3>
-  </div>
-
-  <div id="start_promo">
-    <h2>Experience Automation in Action</h2>
-    <div class="horizontal">
-    <p>Try our interactive automation playground and build your own workflow by connecting Google services and AI tools</p>
-    <a href="#contact" class="button">Start you project <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15.1667 17.5L18.6667 14M18.6667 14L15.1667 10.5M18.6667 14H9.33333M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
+    <div id="hero">
+        <h1 id="animated-title">Transform your business with intelligent automation</h1>
+        <h3 id="animated-subtitle">Custom Google Apps Script & Firebase Solutions That Scale</h3>
     </div>
-  </div>
 
-  <div class="dark horizontal" id="services">
-    <h2>Services</h2>
-    <div class="grid_medium">
-      <div>
-        <h3>AI-Powered Systems</h3>
-        <p>Custom AI agents, LLM integrations, and intelligent automation systems that understand and adapt to your business needs.</p>
-      </div>
-      <div>
-        <h3>Data Dashboards</h3>
-        <p>Beautiful, interactive dashboards that transform spreadsheet data into actionable insights with stunning visualizations.</p>
-      </div>
-      <div>
-        <h3>Process Automation</h3>
-        <p>Streamline workflows with custom automation for emails, reports, data processing, and complex business operations.s</p>
-      </div>
-      <div>
-        <h3>API Integration</h3>
-        <p>Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
-      </div>
-      <div>
-        <h3>Document Generation</h3>
-        <p>Dynamic PDF creation systems with custom parameters, graphics, and professional layouts.</p>
-      </div>
-      <div>
-        <h3>Web Development</h3>
-        <p>Full-stack web applications with modern interfaces and robust backend automation.</p>
-      </div>
-    </div>
-  </div>
-  <div class="horizontal" id="projects">
-    <h2>Featured Projects</h2>
-    <div class="grid_big">
-      <div>
-        <a href="showcase-job-post-pro.html">
-        <h3>AI Brief Creation System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          </h3>
-        <p>Intelligent system that generates comprehensive sales briefs using AI, streamlining the sales process and improving conversion rates.</p>
-      </a>
-      </div>
-      <div>
-        <a href="showcase1.html">
-        <h3>Crypto Transaction Tracker <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></h3>
-        <p>Advanced tracking system integrating multiple cryptocurrency APIs with Google Sheets for real-time portfolio management and analysis.</p>
-      </a>
-      </div>
-      <div>
-        <a href="showcase2.html">
-        <h3>Enterprise Analytics Dashboard <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></h3>
-        <p>Comprehensive dashboard solution for enterprise-level analytics and reporting.</p>
+    <div id="start_promo">
+        <h2>Experience Automation in Action</h2>
+        <div class="horizontal">
+        <p>Try our interactive automation playground and build your own workflow by connecting Google services and AI tools</p>
+        <a href="#contact" class="button">Start you project <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.1667 17.5L18.6667 14M18.6667 14L15.1667 10.5M18.6667 14H9.33333M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </a>
-      </div>
-      <div>
-        <a href="#contact">
-        <h3>Automated Reference Check System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></h3>
-        <p>Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="horizontal dark" id="about">
-    <h2>About Meir</h2>
-        
-        <p>With over 5 years of experience in automation and development, I specialize in creating custom solutions that transform how businesses operate. My "can-do" attitude and deep expertise in Google Apps Script, Firebase, and modern web technologies enable me to tackle even the most complex challenges.
-          <img id="profile_image" src="logos/profilepicture.svg" alt="Meir">
-          <b>Meir Horwitz <i>Automation expert at Fiverr</i></b>
-        </p>
-        <div class="stats">
-          <div>5<p>Years Experience</p></div>
-          <div>50+<p>Projects completed</p></div>
-          <div>100%<p>Client Satisfaction</p></div>
-          <div>24/7<p>System Reliability</p></div>
         </div>
     </div>
 
-    <div class="horizontal" id="reviews">
-      <h2>Customer Reviews</h2>
-
-      <div id="reviews_carousel">
-        <p>Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and professional demeanor made collaboration a breeze. If you're looking to automate your work environment, I'd recommend to reach out to him! 🙌</p>
-      </div>
+    <div class="dark horizontal" id="services">
+        <h2>Services</h2>
+        <div class="grid_medium">
+            <div>
+                <h3>AI-Powered Systems</h3>
+                <p>Custom **AI agents**, LLM integrations, and intelligent automation systems that understand and adapt to your business needs.</p>
+            </div>
+            <div>
+                <h3>Data Dashboards</h3>
+                <p>Beautiful, interactive dashboards that transform spreadsheet data into **actionable insights** with stunning visualizations.</p>
+            </div>
+            <div>
+                <h3>Process Automation</h3>
+                <p>Streamline workflows with custom automation for emails, reports, **data processing**, and complex business operations.s</p>
+            </div>
+            <div>
+                <h3>API Integration</h3>
+                <p>**Seamlessly connect** multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
+            </div>
+            <div>
+                <h3>Document Generation</h3>
+                <p>**Dynamic PDF creation** systems with custom parameters, graphics, and professional layouts.</p>
+            </div>
+            <div>
+                <h3>Web Development</h3>
+                <p>Full-stack web applications with modern interfaces and **robust backend automation**.</p>
+            </div>
+        </div>
     </div>
-   
-    <div class="horizontal " id="contact">
-      <h2>Contact</h2>
-      
+    <div class="horizontal" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="grid_big">
+            <div>
+                <a href="showcase-job-post-pro.html">
+                <h3>AI Brief Creation System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </h3>
+                <p>**Intelligent system** that generates comprehensive sales briefs using AI, streamlining the sales process and improving conversion rates.</p>
+            </a>
+            </div>
+            <div>
+                <a href="showcase1.html">
+                <h3>Crypto Transaction Tracker <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg></h3>
+                <p>**Advanced tracking system** integrating multiple cryptocurrency APIs with Google Sheets for real-time portfolio management and analysis.</p>
+            </a>
+            </div>
+            <div>
+                <a href="showcase2.html">
+                <h3>Enterprise Analytics Dashboard <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg></h3>
+                <p>**Comprehensive dashboard solution** for enterprise-level analytics and reporting.</p>
+                </a>
+            </div>
+            <div>
+                <a href="#contact">
+                <h3>Automated Reference Check System <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg></h3>
+                <p>**Automated HR workflow** that fully manages the candidate reference checking process, including smart email sequences and response tracking.</p>
+                </a>
+            </div>
 
-        <form id="projectForm">
-          <div id="step1" class="form-step active">
-              <div class="form-group">
-                  <label for="name">Full Name</label>
-                  <input type="text" id="name" name="name" required="">
-              <div data-lastpass-icon-root="" style="position: absolute !important; height: 0px !important; width: 0px !important; float: left !important;"></div></div>
-              <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" required="">
-              </div>
-              <div class="form-group">
-                  <label for="details">Tell me about your project</label>
-                  <textarea id="details" name="details" required=""></textarea>
-              </div>
-              <button type="button" id="toStep2" class="btn btn-primary">Next: Schedule a Meeting</button>
-          </div>
-          <div id="step2" class="form-step">
-              <h3>Select a Time for a 30-Minute Consultation</h3>
-              <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
-              <div id="slotsLoader" class="loader" style="display: none;"></div>
-                <div id="timeSlots"></div>
-              <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
-                  <button type="button" id="toStep1" class="btn btn-secondary">Back</button>
-                  <button type="submit" id="submitBtn" class="btn btn-primary">Submit &amp; Schedule</button>
-              </div>
-          </div>
-      </form>
-      <div id="form-message"></div>
+        </div>
+    </div>
+
+    <div class="horizontal dark" id="about">
+        <h2>About Meir</h2>
+        
+            
+            <p>With over **5 years of experience** in automation and development, I specialize in creating custom solutions that transform how businesses operate. My "can-do" attitude and deep expertise in **Google Apps Script**, **Firebase**, and modern web technologies enable me to tackle even the most complex challenges.
+                <img id="profile_image" src="logos/profilepicture.svg" alt="Meir">
+                <b>Meir Horwitz <i>Automation expert at Fiverr</i></b>
+            </p>
+            <div class="stats">
+                <div>5<p>Years Experience</p></div>
+                <div>50+<p>Projects completed</p></div>
+                <div>100%<p>Client Satisfaction</p></div>
+                <div>24/7<p>System Reliability</p></div>
+            </div>
+    </div>
+
+    <div class="horizontal" id="reviews">
+        <h2>Customer Reviews</h2>
+
+        <div id="reviews_carousel">
+            <p>Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and professional demeanor made collaboration a breeze. If you're looking to automate your work environment, I'd recommend to reach out to him! 🙌</p>
+        </div>
+    </div>
+    
+    <div class="horizontal " id="contact">
+        <h2>Contact</h2>
+        
+
+            <form id="projectForm">
+                <div id="step1" class="form-step active">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required="">
+                    <div data-lastpass-icon-root="" style="position: absolute !important; height: 0px !important; width: 0px !important; float: left !important;"></div></div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Tell me about your project</label>
+                        <textarea id="details" name="details" required=""></textarea>
+                    </div>
+                    <button type="button" id="toStep2" class="btn btn-primary button">Next: Schedule a Meeting</button>
+                </div>
+                <div id="step2" class="form-step">
+                    <h3>Select a Time for a 30-Minute Consultation</h3>
+                    <p style="color: var(--light); margin-bottom: 1rem;">All times are in your local timezone.</p>
+                    <div id="slotsLoader" class="loader" style="display: none;"></div>
+                        <div id="timeSlots"></div>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                        <button type="button" id="toStep1" class="btn btn-secondary button">Back</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary button">Submit &amp; Schedule</button>
+                    </div>
+                </div>
+            </form>
+            <div id="form-message"></div>
 
     </div>
 
     <div class="horizontal dark" id="footer">© 2025 Automations by Meir. All rights reserved.</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 <script>
-  // Header scroll animation with Anime.js
-  const header = document.getElementById('header');
-  const scrollThreshold = 50;
-  const backThreshold = 20; // Threshold for back animation
-  let isScrolled = false;
-  let animation = null;
+    // Header scroll animation with Anime.js
+    const header = document.getElementById('header');
+    const scrollThreshold = 50;
+    const backThreshold = 20; // Threshold for back animation
+    let isScrolled = false;
+    let animation = null;
 
-  // Throttle function to limit scroll events
-  function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-      const args = arguments;
-      const context = this;
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
-      }
+    // Throttle function to limit scroll events
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
     }
-  }
 
-  // Animate header padding
-  function animateHeader(scrollDown) {
-    if (animation) {
-      animation.pause();
+    // Animate header padding
+    function animateHeader(scrollDown) {
+        if (animation) {
+            animation.pause();
+        }
+        
+        const targetPadding = scrollDown ? 16 : 40;
+        
+        animation = anime({
+            targets: header,
+            paddingTop: targetPadding,
+            duration: 200,
+            easing: 'easeOutCubic',
+            autoplay: true
+        });
     }
-    
-    const targetPadding = scrollDown ? 16 : 40;
-    
-    animation = anime({
-      targets: header,
-      paddingTop: targetPadding,
-      duration: 200,
-      easing: 'easeOutCubic',
-      autoplay: true
-    });
-  }
 
-  // Scroll event handler
-  const handleScroll = throttle(function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const shouldBeScrolled = scrollTop > scrollThreshold;
-    const shouldGoBack = scrollTop <= backThreshold;
-    
-    if (shouldBeScrolled !== isScrolled) {
-      isScrolled = shouldBeScrolled;
-      animateHeader(shouldBeScrolled);
-    } else if (shouldGoBack && isScrolled) {
-      // Additional check for back animation with threshold
-      isScrolled = false;
-      animateHeader(false);
-    }
-  }, 16); // ~60fps
+    // Scroll event handler
+    const handleScroll = throttle(function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const shouldBeScrolled = scrollTop > scrollThreshold;
+        const shouldGoBack = scrollTop <= backThreshold;
+        
+        if (shouldBeScrolled !== isScrolled) {
+            isScrolled = shouldBeScrolled;
+            animateHeader(shouldBeScrolled);
+        } else if (shouldGoBack && isScrolled) {
+            // Additional check for back animation with threshold
+            isScrolled = false;
+            animateHeader(false);
+        }
+    }, 16); // ~60fps
 
     window.addEventListener('scroll', handleScroll);
 
-  // H3 word-by-word animation function
-  function animateH3() {
-    const subtitle = document.getElementById('animated-subtitle');
-    const originalText = subtitle.textContent;
-    
-    // Clear the text and wrap each word in a span
-    subtitle.innerHTML = '';
-    
-    // Split by words and preserve spaces
-    const words = originalText.split(' ');
-    
-    words.forEach((word, wordIndex) => {
-      // Create word span
-      const wordSpan = document.createElement('span');
-      wordSpan.className = 'word';
-      wordSpan.textContent = word;
-      
-      subtitle.appendChild(wordSpan);
-      
-      // Add space after each word except the last one
-      if (wordIndex < words.length - 1) {
-        subtitle.appendChild(document.createTextNode(' '));
-      }
-    });
-    
-    // Animate each word with opacity, bottom movement, and skew
-    const wordSpans = subtitle.querySelectorAll('.word');
-    
-    anime({
-      targets: wordSpans,
-      opacity: [0, 1],
-      translateY: ['30px', '0px'],
-      skewY: ['-12deg', '0deg'],
-      duration: 400,
-      delay: anime.stagger(20, {startDelay: 0}),
-      easing: 'easeOutCubic',
-      complete: function() {
-        // Remove all spans and restore original text
-        subtitle.innerHTML = originalText;
-      }
-    });
-    
-    // Also animate the h3 container opacity
-    anime({
-      targets: subtitle,
-      opacity: [0, 1],
-      duration: 10,
-      delay: 0,
-      easing: 'easeOutCubic'
-    });
-  }
-
-  // H1 letter-by-letter animation with preserved word wrapping
-  document.addEventListener('DOMContentLoaded', function() {
-    const title = document.getElementById('animated-title');
-    const originalText = title.textContent;
-    
-    // Clear the text and wrap words in spans, then letters within words
-    title.innerHTML = '';
-    
-    // Split by words and preserve spaces
-    const words = originalText.split(' ');
-    
-    words.forEach((word, wordIndex) => {
-      // Create word span
-      const wordSpan = document.createElement('span');
-      wordSpan.className = 'word';
-      
-      // Add each letter to the word span
-      for (let i = 0; i < word.length; i++) {
-        const letterSpan = document.createElement('span');
-        letterSpan.className = 'letter';
-        letterSpan.textContent = word[i];
-        wordSpan.appendChild(letterSpan);
-      }
-      
-      title.appendChild(wordSpan);
-      
-      // Add space after each word except the last one
-      if (wordIndex < words.length - 1) {
-        title.appendChild(document.createTextNode(' '));
-      }
-    });
-    
-    // Animate each letter
-    const letters = title.querySelectorAll('.letter');
-    
-    anime({
-      targets: letters,
-      opacity: [0, 1],
-      translateX: ['-12px', '0px'],
-      rotate: ['-12deg', '0deg'],
-      duration: 800,
-      delay: anime.stagger(40, {startDelay: 300}),
-      easing: 'easeOutCubic',
-      complete: function() {
-        // Remove all spans and restore original text
-        title.innerHTML = originalText;
+    // H3 word-by-word animation function
+    function animateH3() {
+        const subtitle = document.getElementById('animated-subtitle');
+        const originalText = subtitle.textContent;
         
-        // Apply gradient and masking after letter animation
-        title.style.background = 'linear-gradient(90deg, #72FFA3 0%, #34B1FF 20%, #FFFFFF 40%)';
-        title.style.backgroundSize = '400% 100%';
-        title.style.backgroundPosition = '-200vw 0px';
-        title.style.webkitBackgroundClip = 'text';
-        title.style.webkitTextFillColor = 'transparent';
-        title.style.backgroundClip = 'text';
-        title.style.textFillColor = 'transparent';
+        // Clear the text and wrap each word in a span
+        subtitle.innerHTML = '';
         
-        // Animate the gradient background and vertical position
-  anime({
-        targets: title,
-        backgroundPosition: ['-200vw 0px', '0vw 0px'],
-        translateY: ['80px', '0px'],
-        duration: 1200,
-        easing: 'easeInOutCubic',
-        delay: 500,
-        complete: function() {
-          // Start h3 animation after h1 gradient and movement completes
-          animateH3();
-        }
-      });
+        // Split by words and preserve spaces
+        const words = originalText.split(' ');
+        
+        words.forEach((word, wordIndex) => {
+            // Create word span
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'word';
+            wordSpan.textContent = word;
+            
+            subtitle.appendChild(wordSpan);
+            
+            // Add space after each word except the last one
+            if (wordIndex < words.length - 1) {
+                subtitle.appendChild(document.createTextNode(' '));
+            }
+        });
+        
+        // Animate each word with opacity, bottom movement, and skew
+        const wordSpans = subtitle.querySelectorAll('.word');
+        
+        anime({
+            targets: wordSpans,
+            opacity: [0, 1],
+            translateY: ['30px', '0px'],
+            skewY: ['-12deg', '0deg'],
+            duration: 400,
+            delay: anime.stagger(20, {startDelay: 0}),
+            easing: 'easeOutCubic',
+            complete: function() {
+                // Remove all spans and restore original text
+                subtitle.innerHTML = originalText;
+            }
+        });
+        
+        // Also animate the h3 container opacity
+        anime({
+            targets: subtitle,
+            opacity: [0, 1],
+            duration: 10,
+            delay: 0,
+            easing: 'easeOutCubic'
+        });
     }
-  });
-});
+
+    // H1 letter-by-letter animation with preserved word wrapping
+    document.addEventListener('DOMContentLoaded', function() {
+        const title = document.getElementById('animated-title');
+        const originalText = title.textContent;
+        
+        // Clear the text and wrap words in spans, then letters within words
+        title.innerHTML = '';
+        
+        // Split by words and preserve spaces
+        const words = originalText.split(' ');
+        
+        words.forEach((word, wordIndex) => {
+            // Create word span
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'word';
+            
+            // Add each letter to the word span
+            for (let i = 0; i < word.length; i++) {
+                const letterSpan = document.createElement('span');
+                letterSpan.className = 'letter';
+                letterSpan.textContent = word[i];
+                wordSpan.appendChild(letterSpan);
+            }
+            
+            title.appendChild(wordSpan);
+            
+            // Add space after each word except the last one
+            if (wordIndex < words.length - 1) {
+                title.appendChild(document.createTextNode(' '));
+            }
+        });
+        
+        // Animate each letter
+        const letters = title.querySelectorAll('.letter');
+        
+        anime({
+            targets: letters,
+            opacity: [0, 1],
+            translateX: ['-12px', '0px'],
+            rotate: ['-12deg', '0deg'],
+            duration: 800,
+            delay: anime.stagger(40, {startDelay: 300}),
+            easing: 'easeOutCubic',
+            complete: function() {
+                // Remove all spans and restore original text
+                title.innerHTML = originalText;
+                
+                // Apply gradient and masking after letter animation
+                title.style.background = 'linear-gradient(90deg, #72FFA3 0%, #34B1FF 20%, #FFFFFF 40%)';
+                title.style.backgroundSize = '400% 100%';
+                title.style.backgroundPosition = '-200vw 0px';
+                title.style.webkitBackgroundClip = 'text';
+                title.style.webkitTextFillColor = 'transparent';
+                title.style.backgroundClip = 'text';
+                title.style.textFillColor = 'transparent';
+                
+                // Animate the gradient background and vertical position
+        anime({
+                targets: title,
+                backgroundPosition: ['-200vw 0px', '0vw 0px'],
+                translateY: ['80px', '0px'],
+                duration: 1200,
+                easing: 'easeInOutCubic',
+                delay: 500,
+                complete: function() {
+                    // Start h3 animation after h1 gradient and movement completes
+                    animateH3();
+                }
+            });
+            }
+        });
+    });
 </script>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
-    authDomain: "automationbymeir.firebaseapp.com",
-    projectId: "automationbymeir",
-    storageBucket: "automationbymeir.firebasestorage.app",
-    messagingSenderId: "216703427811",
-    appId: "1:216703427811:web:a2c848833870a1415c91d6",
-    measurementId: "G-D8GQDGVR08",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const API_BASE_URL = "/api/schedule";
-
-  const step1 = document.getElementById("step1");
-  const step2 = document.getElementById("step2");
-  const toStep2Btn = document.getElementById("toStep2");
-  const toStep1Btn = document.getElementById("toStep1");
-  const form = document.getElementById("projectForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const slotsLoader = document.getElementById("slotsLoader");
-  const timeSlotsContainer = document.getElementById("timeSlots");
-  const formMessage = document.getElementById("form-message");
-  let selectedSlot = null;
-
-  toStep2Btn.addEventListener("click", () => {
-    if (form.checkValidity()) {
-      step1.classList.remove("active");
-      step2.classList.add("active");
-      fetchAvailableSlots();
-    } else {
-      form.reportValidity();
-    }
-  });
-
-  toStep1Btn.addEventListener("click", () => {
-    step2.classList.remove("active");
-    step1.classList.add("active");
-  });
-
-  async function fetchAvailableSlots() {
-    slotsLoader.style.display = "block";
-    timeSlotsContainer.innerHTML = "";
-    try {
-      const response = await fetch(`${API_BASE_URL}/slots`);
-      const data = await response.json();
-      if (data.success) {
-        displaySlots(data.slots);
-      } else {
-        throw new Error(data.error || "Failed to load slots.");
-      }
-    } catch (error) {
-      console.error("Error fetching slots:", error);
-      timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
-    } finally {
-      slotsLoader.style.display = "none";
-    }
-  }
-
-  function displaySlots(slots) {
-    if (slots.length === 0) {
-      timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
-      return;
-    }
-
-    let rows = "";
-    slots.forEach((slotISO) => {
-      const dateObj = new Date(slotISO);
-      const date = dateObj.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
-      const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
-      rows += `<tr class=\"time-slot\" data-value=\"${slotISO}\"><td>${date}</td><td>${time}</td></tr>`;
-    });
-
-    timeSlotsContainer.innerHTML = `
-      <table class=\"time-slots-table\">
-        <thead>
-          <tr><th>Date</th><th>Time</th></tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`;
-  }
-
-  timeSlotsContainer.addEventListener("click", (e) => {
-    const row = e.target.closest(".time-slot");
-    if (row) {
-      timeSlotsContainer
-        .querySelectorAll(".time-slot")
-        .forEach((slot) => slot.classList.remove("selected"));
-      row.classList.add("selected");
-      selectedSlot = row.dataset.value;
-    }
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!selectedSlot) {
-      alert("Please select a time slot.");
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Scheduling...";
-
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      details: formData.get("details"),
-      dateTime: selectedSlot,
-      lang: "en",
+    const firebaseConfig = {
+        apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
+        authDomain: "automationbymeir.firebaseapp.com",
+        projectId: "automationbymeir",
+        storageBucket: "automationbymeir.firebasestorage.app",
+        messagingSenderId: "216703427811",
+        appId: "1:216703427811:web:a2c848833870a1415c91d6",
+        measurementId: "G-D8GQDGVR08",
     };
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/book`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    const app = initializeApp(firebaseConfig);
+    const API_BASE_URL = "/api/schedule";
 
-      const result = await response.json();
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const toStep2Btn = document.getElementById("toStep2");
+    const toStep1Btn = document.getElementById("toStep1");
+    const form = document.getElementById("projectForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const slotsLoader = document.getElementById("slotsLoader");
+    const timeSlotsContainer = document.getElementById("timeSlots");
+    const formMessage = document.getElementById("form-message");
+    let selectedSlot = null;
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || "Failed to schedule meeting.");
-      }
+    toStep2Btn.addEventListener("click", () => {
+        if (form.checkValidity()) {
+            step1.classList.remove("active");
+            step2.classList.add("active");
+            fetchAvailableSlots();
+        } else {
+            form.reportValidity();
+        }
+    });
 
-      form.style.display = "none";
-      formMessage.style.display = "block";
-      formMessage.className = "success";
-      formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      formMessage.style.display = "block";
-      formMessage.className = "error";
-      formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit & Schedule";
+    toStep1Btn.addEventListener("click", () => {
+        step2.classList.remove("active");
+        step1.classList.add("active");
+    });
+
+    async function fetchAvailableSlots() {
+        slotsLoader.style.display = "block";
+        timeSlotsContainer.innerHTML = "";
+        try {
+            const response = await fetch(`${API_BASE_URL}/slots`);
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.success) {
+                displaySlots(data.slots);
+            } else {
+                throw new Error(data.error || "Failed to load slots.");
+            }
+        } catch (error) {
+            console.error("Error fetching slots:", error);
+            timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
+        } finally {
+            slotsLoader.style.display = "none";
+        }
     }
-  });
+
+    function displaySlots(slots) {
+        if (slots.length === 0) {
+            timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
+            return;
+        }
+
+        let rows = "";
+        slots.forEach((slotISO) => {
+            const dateObj = new Date(slotISO);
+            const date = dateObj.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+            const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
+            rows += `<tr class=\"time-slot\" data-value=\"${slotISO}\"><td>${date}</td><td>${time}</td></tr>`;
+        });
+
+        timeSlotsContainer.innerHTML = `
+            <table class=\"time-slots-table\">
+                <thead>
+                    <tr><th>Date</th><th>Time</th></tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>`;
+    }
+
+    timeSlotsContainer.addEventListener("click", (e) => {
+        const row = e.target.closest(".time-slot");
+        if (row) {
+            timeSlotsContainer
+                .querySelectorAll(".time-slot")
+                .forEach((slot) => slot.classList.remove("selected"));
+            row.classList.add("selected");
+            selectedSlot = row.dataset.value;
+        }
+    });
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!selectedSlot) {
+            alert("Please select a time slot.");
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Scheduling...";
+
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            details: formData.get("details"),
+            dateTime: selectedSlot,
+            lang: "en",
+        };
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/book`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.error || "Failed to schedule meeting.");
+            }
+
+            form.style.display = "none";
+            formMessage.style.display = "block";
+            formMessage.className = "success";
+            formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            formMessage.style.display = "block";
+            formMessage.className = "error";
+            formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit & Schedule";
+        }
+    });
 </script>
 
 </body>

@@ -10,11 +10,11 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-D8GQDGVR08');
+    gtag('config', 'G-D8GQDGVR08');
 </script>
 
     <meta charset="UTF-8">
@@ -224,10 +224,8 @@
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ9XZMFL"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div class="particles" id="particles"></div>
     <nav id="navbar">
         <div class="nav-container">
@@ -441,7 +439,7 @@
                         <h3>בחרו מועד לפגישת ייעוץ של 30 דקות</h3>
                         <p style="color: var(--light); margin-bottom: 1rem;">כל הזמנים מוצגים באזור הזמן המקומי שלך.</p>
                         <div id="slotsLoader" class="loader" style="display: none;"></div>
-                          <div id="timeSlots"></div>
+                            <div id="timeSlots"></div>
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
                             <button type="button" id="toStep1" class="cta-secondary">חזור</button>
                             <button type="submit" id="submitBtn" class="cta-button">שליחה וקביעת פגישה</button>
@@ -496,11 +494,16 @@
             timeSlotsContainer.innerHTML = '';
             try {
                 const response = await fetch(`${API_BASE_URL}/slots`);
+
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
                 const data = await response.json();
                 if (data.success) {
                     displaySlots(data.slots);
                 } else {
-                    throw new Error(data.error || 'Failed to load slots.');
+                    throw new Error(data.error || 'שגיאה בטעינת הזמנים.');
                 }
             } catch (error) {
                 console.error('Error fetching slots:', error);
@@ -560,10 +563,14 @@
                     body: JSON.stringify(data)
                 });
 
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
                 const result = await response.json();
 
-                if (!response.ok || !result.success) {
-                    throw new Error(result.error || 'Failed to schedule meeting.');
+                if (!result.success) {
+                    throw new Error(result.error || 'שגיאה בקביעת הפגישה.');
                 }
 
                 form.style.display = 'none';
