@@ -857,6 +857,10 @@ nav {
 
                 if (!result.success) {
                     throw new Error(result.error || 'שגיאה בקביעת הפגישה.');
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.error || 'Failed to schedule meeting.');
                 }
 
                 form.style.display = 'none';
