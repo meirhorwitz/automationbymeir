@@ -993,8 +993,8 @@
   const SCHEDULE_ENDPOINTS = isLocalhost
     ? ["/api/schedule"]
     : [
-        "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
         "/api/schedule",
+        "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
       ];
 
   function cloneRequestOptions(options = {}) {

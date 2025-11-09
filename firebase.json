@@ -8,7 +8,7 @@
     ],
     "rewrites": [
       {
-        "source": "/api/schedule/**",
+        "source": "/api/**",
         "function": "schedule"
       }
     ]

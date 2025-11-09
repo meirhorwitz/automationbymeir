@@ -171,9 +171,38 @@ async function sendEmail({ to, subject, htmlBody }) {
   });
 }
 
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://www.automationbymeir.com",
+  "https://automationbymeir.com",
+  "http://localhost:5000",
+  "http://localhost:5173",
+];
+
+const allowedOrigins = schedulingConfig.allowed_origins
+  ? schedulingConfig.allowed_origins.split(",").map((origin) => origin.trim()).filter(Boolean)
+  : DEFAULT_ALLOWED_ORIGINS;
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error(`Origin ${origin} is not allowed by CORS policy`));
+  },
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.get("/slots", async (req, res) => {
   try {
@@ -270,5 +299,6 @@ app.post("/book", async (req, res) => {
 });
 
 export const schedule = functions
+  .region("us-central1")
   .runWith({ secrets: ["GOOGLE_SERVICE_ACCOUNT"] })
   .https.onRequest(app);
