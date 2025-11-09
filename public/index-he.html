@@ -745,13 +745,14 @@ nav {
             .includes(window.location.hostname.toLowerCase());
         const SCHEDULE_ENDPOINTS = isLocalhost
             ? ["/api/schedule"]
-            : ["/api/schedule", "https://us-central1-automationbymeir.cloudfunctions.net/schedule"];
+            : [
+                  "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
+                  "/api/schedule",
+              ];
 
         function cloneRequestOptions(options = {}) {
             const cloned = { ...options };
-            if (options.headers) {
-                cloned.headers = { ...options.headers };
-            }
+            cloned.headers = { Accept: "application/json", ...(options.headers ?? {}) };
             return cloned;
         }
 
@@ -760,7 +761,30 @@ nav {
             for (const baseUrl of SCHEDULE_ENDPOINTS) {
                 try {
                     const response = await fetch(`${baseUrl}${path}`, cloneRequestOptions(options));
-                    const data = await response.json();
+                    const bodyText = await response.text();
+                    const contentType = response.headers.get("content-type") ?? "";
+
+                    if (!contentType.toLowerCase().includes("application/json")) {
+                        lastError = new Error(
+                            `Unexpected ${contentType || "unknown"} response from ${baseUrl}${path} (${response.status})`
+                        );
+                        console.warn(`Schedule request failed via ${baseUrl}`, {
+                            status: response.status,
+                            statusText: response.statusText,
+                            contentType,
+                            preview: bodyText.slice(0, 200),
+                        });
+                        continue;
+                    }
+
+                    let data;
+                    try {
+                        data = JSON.parse(bodyText);
+                    } catch (parseError) {
+                        lastError = parseError;
+                        console.warn(`Schedule request returned invalid JSON via ${baseUrl}`, parseError);
+                        continue;
+                    }
 
                     if (!response.ok || !data?.success) {
                         lastError = new Error(data?.error || `Request failed with status ${response.status}`);
