@@ -740,7 +740,43 @@ nav {
             measurementId: "G-D8GQDGVR08"
         };
         const app = initializeApp(firebaseConfig);
-        const API_BASE_URL = "/api/schedule";
+        const isLocalhost = ["localhost", "127.0.0.1", "[::1]"]
+            .map((host) => host.toLowerCase())
+            .includes(window.location.hostname.toLowerCase());
+        const SCHEDULE_ENDPOINTS = isLocalhost
+            ? ["/api/schedule"]
+            : ["/api/schedule", "https://us-central1-automationbymeir.cloudfunctions.net/schedule"];
+
+        function cloneRequestOptions(options = {}) {
+            const cloned = { ...options };
+            if (options.headers) {
+                cloned.headers = { ...options.headers };
+            }
+            return cloned;
+        }
+
+        async function requestSchedule(path, options = {}) {
+            let lastError;
+            for (const baseUrl of SCHEDULE_ENDPOINTS) {
+                try {
+                    const response = await fetch(`${baseUrl}${path}`, cloneRequestOptions(options));
+                    const data = await response.json();
+
+                    if (!response.ok || !data?.success) {
+                        lastError = new Error(data?.error || `Request failed with status ${response.status}`);
+                        console.warn(`Schedule request failed via ${baseUrl}`, lastError);
+                        continue;
+                    }
+
+                    return data;
+                } catch (error) {
+                    lastError = error;
+                    console.warn(`Schedule request error via ${baseUrl}`, error);
+                }
+            }
+
+            throw lastError ?? new Error('Unable to reach the scheduling service.');
+        }
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
         const toStep2Btn = document.getElementById('toStep2');
@@ -773,13 +809,8 @@ nav {
             timeSlotsContainer.innerHTML = '';
             formButtons.style.display = 'none';
             try {
-                const response = await fetch(`${API_BASE_URL}/slots`);
-                const data = await response.json();
-                if (data.success) {
-                    displaySlots(data.slots);
-                } else {
-                    throw new Error(data.error || 'Failed to load slots.');
-                }
+                const data = await requestSchedule('/slots');
+                displaySlots(data.slots ?? []);
             } catch (error) {
                 console.error('Error fetching slots:', error);
                 timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
@@ -838,17 +869,11 @@ nav {
                 lang: 'he'
             };
             try {
-                const response = await fetch(`${API_BASE_URL}/book`, {
+                const result = await requestSchedule('/book', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-
-                const result = await response.json();
-
-                if (!response.ok || !result.success) {
-                    throw new Error(result.error || 'Failed to schedule meeting.');
-                }
 
                 form.style.display = 'none';
                 formMessage.style.display = 'block';
