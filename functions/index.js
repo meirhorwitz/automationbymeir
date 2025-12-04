@@ -4,11 +4,17 @@ import { google } from "googleapis";
 import functions from "firebase-functions";
 import { DateTime } from "luxon";
 import { v4 as uuidv4 } from "uuid";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const busboy = require("busboy");
+const getRawBody = require("raw-body");
 import {
   getEmailTemplate,
   createNotificationEmailContent,
   createEnglishEmailContent,
   createHebrewEmailContent,
+  createBriefConfirmationEmailContent,
+  createBriefNotificationEmailContent,
 } from "./emailTemplates.js";
 
 const runtimeConfig = functions.config() ?? {};
@@ -146,18 +152,52 @@ function generateAvailableSlots(now, busySlots) {
   return slots;
 }
 
-async function sendEmail({ to, subject, htmlBody }) {
+async function sendEmail({ to, subject, htmlBody, attachments = [] }) {
   const gmail = await getGmailClient();
 
-  const messageParts = [
-    "Content-Type: text/html; charset=\"UTF-8\"",
-    "MIME-Version: 1.0",
-    `From: Automation by Meir <${NOTIFICATION_EMAIL}>`,
-    `To: ${to}`,
-    `Subject: ${subject}`,
-    "",
-    htmlBody,
-  ];
+  let messageParts;
+
+  // If no attachments, use simple HTML email
+  if (!attachments || attachments.length === 0) {
+    messageParts = [
+      "Content-Type: text/html; charset=\"UTF-8\"",
+      "MIME-Version: 1.0",
+      `From: Automation by Meir <${NOTIFICATION_EMAIL}>`,
+      `To: ${to}`,
+      `Subject: ${subject}`,
+      "",
+      htmlBody,
+    ];
+  } else {
+    // Use multipart/mixed for emails with attachments
+    const boundary = `----=_Part_${uuidv4().replace(/-/g, "")}`;
+    messageParts = [
+      `MIME-Version: 1.0`,
+      `From: Automation by Meir <${NOTIFICATION_EMAIL}>`,
+      `To: ${to}`,
+      `Subject: ${subject}`,
+      `Content-Type: multipart/mixed; boundary="${boundary}"`,
+      "",
+      `--${boundary}`,
+      `Content-Type: text/html; charset="UTF-8"`,
+      "",
+      htmlBody,
+    ];
+
+    // Add attachments
+    for (const attachment of attachments) {
+      messageParts.push(
+        `--${boundary}`,
+        `Content-Type: ${attachment.contentType}; name="${attachment.filename}"`,
+        `Content-Disposition: attachment; filename="${attachment.filename}"`,
+        `Content-Transfer-Encoding: base64`,
+        "",
+        attachment.content
+      );
+    }
+
+    messageParts.push(`--${boundary}--`);
+  }
 
   const encodedMessage = Buffer.from(messageParts.join("\n"))
     .toString("base64")
@@ -176,6 +216,8 @@ const DEFAULT_ALLOWED_ORIGINS = [
   "https://automationbymeir.com",
   "http://localhost:5000",
   "http://localhost:5173",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500",
 ];
 
 const allowedOrigins = schedulingConfig.allowed_origins
@@ -198,13 +240,253 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
+
+// Middleware to handle multipart parsing using busboy directly
+// MUST be defined before express.json() to avoid consuming the stream
+const handleMultipart = async (req, res, next) => {
+  // Log request info
+  functions.logger.info("Brief request received", {
+    method: req.method,
+    contentType: req.headers['content-type'],
+    contentLength: req.headers['content-length']
+  });
+
+  const contentType = req.headers['content-type'] || '';
+  if (!contentType.includes('multipart/form-data')) {
+    return res.status(400).json({ success: false, error: "Request must be multipart/form-data" });
+  }
+
+  // Initialize body and files
+  req.body = {};
+  req.files = [];
+
+  try {
+    // Get the raw body as a buffer first (avoids streaming issues with Firebase Functions)
+    const rawBody = await getRawBody(req, {
+      length: req.headers['content-length'],
+      limit: '50mb', // Total request size limit
+      encoding: false // Return as buffer
+    });
+
+    return new Promise((resolve, reject) => {
+      const busboyInstance = busboy({ headers: req.headers, limits: { fileSize: 10 * 1024 * 1024 } }); // 10MB limit
+      let fileCount = 0;
+      const maxFiles = 10;
+      let hasError = false;
+
+      busboyInstance.on('file', (name, file, info) => {
+        const { filename, encoding, mimeType } = info;
+        
+        if (fileCount >= maxFiles) {
+          file.resume(); // Drain the file stream
+          return;
+        }
+
+        fileCount++;
+        const chunks = [];
+        let totalSize = 0;
+
+        file.on('data', (chunk) => {
+          totalSize += chunk.length;
+          if (totalSize > 10 * 1024 * 1024) {
+            file.resume(); // Drain if too large
+            return;
+          }
+          chunks.push(chunk);
+        });
+
+        file.on('end', () => {
+          if (totalSize <= 10 * 1024 * 1024) {
+            req.files.push({
+              fieldname: name,
+              originalname: filename,
+              encoding: encoding,
+              mimetype: mimeType,
+              buffer: Buffer.concat(chunks),
+              size: totalSize
+            });
+          }
+        });
+
+        file.on('error', (err) => {
+          if (!hasError) {
+            hasError = true;
+            functions.logger.error("File stream error", { error: err.message });
+          }
+        });
+      });
+
+      busboyInstance.on('field', (name, value, info) => {
+        req.body[name] = value;
+      });
+
+      busboyInstance.on('finish', () => {
+        if (!hasError) {
+          functions.logger.info("Multipart parsing finished", {
+            bodyKeys: Object.keys(req.body),
+            filesCount: req.files.length
+          });
+          resolve();
+          next();
+        }
+      });
+
+      busboyInstance.on('error', (err) => {
+        if (!hasError) {
+          hasError = true;
+          functions.logger.error("Busboy error", { error: err.message, stack: err.stack });
+          reject(err);
+          res.status(400).json({ success: false, error: `File upload error: ${err.message}` });
+        }
+      });
+
+      // Create a readable stream from the buffer and pipe to busboy
+      const stream = require('stream');
+      const readable = new stream.Readable();
+      readable.push(rawBody);
+      readable.push(null);
+      readable.pipe(busboyInstance);
+    }).catch((err) => {
+      // Error already handled in busboy error handler
+    });
+  } catch (error) {
+    functions.logger.error("Failed to read request body", { error: error.message });
+    return res.status(400).json({ success: false, error: `Failed to read request: ${error.message}` });
+  }
+};
+
+// Brief submission endpoint (must be before express.json() to avoid stream consumption)
+app.options("/api/brief", cors(corsOptions), (req, res) => {
+  res.sendStatus(200);
+});
+
+app.post("/api/brief", cors(corsOptions), handleMultipart, async (req, res) => {
+  try {
+    functions.logger.info("Brief submission received", { 
+      body: req.body, 
+      files: req.files?.length || 0,
+      contentType: req.headers['content-type']
+    });
+    
+    const { name, email, brief } = req.body;
+
+    functions.logger.info("Parsed form data", { 
+      name: name ? `${name.substring(0, 20)}...` : 'missing',
+      email: email ? `${email.substring(0, 20)}...` : 'missing',
+      brief: brief ? `${brief.substring(0, 50)}...` : 'missing',
+      bodyKeys: Object.keys(req.body || {}),
+      filesCount: req.files?.length || 0
+    });
+
+    if (!name || !email || !brief) {
+      const missing = [];
+      if (!name) missing.push('name');
+      if (!email) missing.push('email');
+      if (!brief) missing.push('brief');
+      functions.logger.warn("Missing required fields", { missing, bodyKeys: Object.keys(req.body || {}) });
+      res.status(400).json({ 
+        success: false, 
+        error: `Missing required fields: ${missing.join(', ')}. Please make sure all fields are filled out.` 
+      });
+      return;
+    }
+
+    // Process attachments
+    const attachments = [];
+    if (req.files && req.files.length > 0) {
+      // Filter to only actual file uploads (fieldname === 'files')
+      const fileUploads = req.files.filter(file => file.fieldname === 'files');
+      for (const file of fileUploads) {
+        attachments.push({
+          filename: file.originalname,
+          contentType: file.mimetype,
+          content: file.buffer.toString("base64"),
+        });
+      }
+    }
+
+    // Escape HTML in brief content for safety, but preserve line breaks
+    const escapeHtml = (text) => {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
+
+    // Escape names and email (simple text)
+    const escapedName = escapeHtml(name);
+    const escapedEmail = escapeHtml(email);
+    // Brief content will be displayed with pre-wrap, so just escape HTML tags
+    const escapedBrief = escapeHtml(brief);
+
+    // Send confirmation email to user
+    try {
+      functions.logger.info("Sending confirmation email to user", { email });
+      const confirmationHtml = getEmailTemplate(
+        createBriefConfirmationEmailContent({ name: escapedName, brief: escapedBrief })
+      );
+      await sendEmail({
+        to: email,
+        subject: "We've Received Your Project Brief!",
+        htmlBody: confirmationHtml,
+      });
+      functions.logger.info("Confirmation email sent successfully");
+    } catch (emailError) {
+      functions.logger.error("Failed to send confirmation email", { error: emailError.message, stack: emailError.stack });
+      // Don't fail the request if confirmation email fails
+    }
+
+    // Send notification email to me with attachments
+    try {
+      functions.logger.info("Sending notification email", { to: NOTIFICATION_EMAIL, attachments: attachments.length });
+      const notificationHtml = getEmailTemplate(
+        createBriefNotificationEmailContent(
+          { name: escapedName, email: escapedEmail, brief: escapedBrief, attachmentCount: attachments.length },
+          attachments.length > 0
+        )
+      );
+      await sendEmail({
+        to: NOTIFICATION_EMAIL,
+        subject: `New Custom Project Brief from ${escapedName}`,
+        htmlBody: notificationHtml,
+        attachments: attachments,
+      });
+      functions.logger.info("Notification email sent successfully");
+    } catch (emailError) {
+      functions.logger.error("Failed to send notification email", { error: emailError.message, stack: emailError.stack });
+      // Still return success even if notification fails, but log it
+    }
+
+    res.json({
+      success: true,
+      message: "Brief submitted successfully. You will receive a confirmation email shortly.",
+    });
+  } catch (error) {
+    functions.logger.error("Failed to process brief submission", { 
+      error: error.message, 
+      stack: error.stack,
+      name: error.name 
+    });
+    res.status(500).json({ 
+      success: false, 
+      error: error.message || "Failed to submit brief.",
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+});
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.get("/slots", async (req, res) => {
+const scheduleRouter = express.Router();
+
+scheduleRouter.get("/slots", async (req, res) => {
   try {
     const calendar = await getCalendarClient();
     const now = DateTime.now().setZone(TIMEZONE);
@@ -217,7 +499,7 @@ app.get("/slots", async (req, res) => {
   }
 });
 
-app.post("/book", async (req, res) => {
+scheduleRouter.post("/book", async (req, res) => {
   const { name, email, details, dateTime, lang = "en" } = req.body ?? {};
 
   if (!name || !email || !details || !dateTime) {
@@ -297,6 +579,9 @@ app.post("/book", async (req, res) => {
     res.status(500).json({ success: false, error: "Failed to schedule meeting." });
   }
 });
+
+app.use(scheduleRouter);
+app.use("/api/schedule", scheduleRouter);
 
 export const schedule = functions
   .region("us-central1")

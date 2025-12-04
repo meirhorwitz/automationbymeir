@@ -333,4 +333,123 @@ const createHebrewEmailContent = (data, timezone, meetingDurationMinutes) => {
     </div>`;
 };
 
-export { getEmailTemplate, createNotificationEmailContent, createEnglishEmailContent, createHebrewEmailContent };
+const createBriefConfirmationEmailContent = (data) => {
+  return `
+    <h1 style="font-family: 'Inter', Arial, sans-serif; font-size: 24px; color: #f8f9fa; margin: 0 0 20px 0;">
+      Hi ${data.name},
+    </h1>
+    
+    <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #cbd5e1; line-height: 1.6; margin: 0 0 24px 0;">
+      Thank you for submitting your project brief! We've received your request and are excited to learn more about your automation needs.
+    </p>
+    
+    <div style="background-color: #2d2d30; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+      <h2 style="font-family: 'Inter', Arial, sans-serif; font-size: 18px; color: #4285F4; margin: 0 0 16px 0;">
+        What Happens Next?
+      </h2>
+      <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #cbd5e1; line-height: 1.6; margin: 0;">
+        Our team will carefully review your brief and get back to you with a customized offer within <strong style="color: #34A853;">1-3 business days</strong>. We'll provide you with:
+      </p>
+      <ul style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #cbd5e1; line-height: 1.8; margin: 16px 0 0 0; padding-left: 24px;">
+        <li>A detailed proposal tailored to your requirements</li>
+        <li>Timeline and delivery estimates</li>
+        <li>Pricing information</li>
+        <li>Next steps to get started</li>
+      </ul>
+    </div>
+    
+    <div style="background-color: #2d2d30; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+      <h3 style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #4285F4; margin: 0 0 12px 0;">
+        Your Project Brief:
+      </h3>
+      <p style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #cbd5e1; margin: 0; white-space: pre-wrap; line-height: 1.6;">
+        ${data.brief}
+      </p>
+    </div>
+    
+    <div style="text-align: center; padding-top: 20px; border-top: 1px solid #424242;">
+      <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #cbd5e1; margin: 0;">
+        We're looking forward to working with you!
+      </p>
+      <p style="font-family: 'Inter', Arial, sans-serif; font-size: 18px; color: #f8f9fa; margin: 10px 0 0 0; font-weight: 600;">
+        Meir Horwitz
+      </p>
+      <p style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #5f6368; margin: 10px 0 0 0;">
+        Automation by Meir
+      </p>
+    </div>`;
+};
+
+const createBriefNotificationEmailContent = (data, hasAttachments) => {
+  const attachmentsNote = hasAttachments 
+    ? `<tr>
+        <td style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #f8f9fa; padding-top: 12px;">
+          <strong style="color: #34A853;">📎 Attachments:</strong><br>
+          ${data.attachmentCount} file(s) attached to this email
+        </td>
+      </tr>`
+    : '';
+
+  return `
+    <h1 style="font-family: 'Inter', Arial, sans-serif; font-size: 24px; color: #f8f9fa; margin: 0 0 20px 0; text-align: center;">
+      New Custom Project Brief Received! 🎉
+    </h1>
+    
+    <div style="background-color: #2d2d30; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td style="padding-bottom: 12px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #5f6368; width: 80px;">Client:</td>
+                <td style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #4285F4; font-weight: 600;">${data.name}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 12px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #5f6368; width: 80px;">Email:</td>
+                <td style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; color: #34A853;">
+                  <a href="mailto:${data.email}" style="color: #34A853; text-decoration: none;">${data.email}</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        ${attachmentsNote}
+      </table>
+    </div>
+    
+    <div style="margin-bottom: 24px;">
+      <h2 style="font-family: 'Inter', Arial, sans-serif; font-size: 18px; color: #f8f9fa; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #4285F4;">
+        Project Brief
+      </h2>
+      <div style="background-color: #2d2d30; border-radius: 8px; padding: 20px;">
+        <p style="font-family: 'Inter', Arial, sans-serif; font-size: 15px; color: #cbd5e1; margin: 0; white-space: pre-wrap; line-height: 1.6;">
+          ${data.brief}
+        </p>
+      </div>
+    </div>
+    
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" style="padding-top: 20px;">
+          <p style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #5f6368; margin: 0;">
+            Please review the brief and respond with a customized offer within 1-3 business days.
+          </p>
+        </td>
+      </tr>
+    </table>`;
+};
+
+export { 
+  getEmailTemplate, 
+  createNotificationEmailContent, 
+  createEnglishEmailContent, 
+  createHebrewEmailContent,
+  createBriefConfirmationEmailContent,
+  createBriefNotificationEmailContent
+};

@@ -342,7 +342,7 @@
         gap: 40px 80px;
         flex-grow: 1;
       }
-      
+
       a svg{
         transition: transform .3s;
       }
@@ -504,27 +504,114 @@
         display: flex;
       }
 
-      .time-slots-table {
+      .weekly-calendar {
         width: 100%;
-        border-collapse: collapse;
         margin-top: 1rem;
-      }
-
-      .time-slots-table th,
-      .time-slots-table td {
-        padding: 0.5rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
         border: 1px solid var(--border-color);
-        text-align: left;
+        border-radius: 8px;
+        overflow: hidden;
       }
 
-      .time-slots-table tr.time-slot:hover {
-        background: #161616;
-        cursor: pointer;
+      .calendar-day {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--border-color);
+        background: rgba(22, 22, 22, 0.5);
       }
 
-      .time-slots-table tr.time-slot.selected {
-        background: var(--secondary);
+      .calendar-day:last-child {
+        border-right: none;
+      }
+
+      .calendar-day-header {
+        padding: 0.75rem 0.5rem;
+        background: rgba(22, 22, 22, 0.8);
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.9rem;
         color: var(--light);
+      }
+
+      .calendar-day-name {
+        display: block;
+        font-size: 0.85rem;
+        opacity: 0.8;
+        margin-bottom: 0.25rem;
+      }
+
+      .calendar-day-number {
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .calendar-time-slots {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 200px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .time-slot-btn {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        background: rgba(45, 45, 48, 0.6);
+        color: var(--light);
+        cursor: pointer;
+        text-align: center;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+      }
+
+      .time-slot-btn:hover {
+        background: #161616;
+        border-color: var(--primary);
+        transform: translateY(-1px);
+      }
+
+      .time-slot-btn.selected {
+        background: var(--secondary);
+        color: white;
+        border-color: var(--secondary);
+        font-weight: bold;
+      }
+
+      .calendar-empty-day {
+        padding: 0.5rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.85rem;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @media (max-width: 768px) {
+        .weekly-calendar {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .calendar-day {
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .calendar-day:last-child {
+          border-bottom: none;
+        }
+
+        .calendar-time-slots {
+          max-height: 150px;
+        }
       }
 
       #form-message {
@@ -638,7 +725,7 @@
     </ul>
     <ul>
       <li><a href="automation-playground.html">Try live</a></li>
-      <li><a href="payment.html">Payments</a></li>
+      <li><a href="payment.html">Packages</a></li>
     </ul>
   </nav>
 </div>
@@ -748,6 +835,7 @@
 
       <div id="reviews_carousel">
         <p>Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and professional demeanor made collaboration a breeze. If you're looking to automate your work environment, I'd recommend to reach out to him! 🙌</p>
+        <p>Meir was excellent in his understanding of my needs in a timely fashion. I absolutely enjoyed working with him and look forwards to working together in the future again.</p>
       </div>
     </div>
    
@@ -1095,31 +1183,70 @@
       return;
     }
 
-    let rows = "";
+    // Group slots by day
+    const slotsByDay = {};
     slots.forEach((slotISO) => {
       const dateObj = new Date(slotISO);
-      const date = dateObj.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
-      const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
-      rows += `<tr class=\"time-slot\" data-value=\"${slotISO}\"><td>${date}</td><td>${time}</td></tr>`;
+      const dayKey = dateObj.toDateString();
+      if (!slotsByDay[dayKey]) {
+        slotsByDay[dayKey] = [];
+      }
+      slotsByDay[dayKey].push(slotISO);
     });
 
-    timeSlotsContainer.innerHTML = `
-      <table class=\"time-slots-table\">
-        <thead>
-          <tr><th>Date</th><th>Time</th></tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`;
+    // Get the next 7 days starting from today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const weekDays = [];
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(today);
+      day.setDate(today.getDate() + i);
+      weekDays.push(day);
+    }
+
+    // Build calendar HTML
+    let calendarHTML = '<div class="weekly-calendar">';
+    
+    weekDays.forEach((day) => {
+      const dayKey = day.toDateString();
+      const daySlots = slotsByDay[dayKey] || [];
+      const dayName = day.toLocaleDateString(undefined, { weekday: "short" });
+      const dayNumber = day.getDate();
+      const monthName = day.toLocaleDateString(undefined, { month: "short" });
+
+      calendarHTML += `
+        <div class="calendar-day">
+          <div class="calendar-day-header">
+            <span class="calendar-day-name">${dayName}</span>
+            <span class="calendar-day-number">${dayNumber}</span>
+            <span class="calendar-day-name" style="font-size: 0.7rem; margin-top: 0.25rem;">${monthName}</span>
+          </div>
+          <div class="calendar-time-slots">
+            ${daySlots.length > 0 
+              ? daySlots.map(slotISO => {
+                  const dateObj = new Date(slotISO);
+                  const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
+                  return `<button type="button" class="time-slot-btn" data-value="${slotISO}">${time}</button>`;
+                }).join("")
+              : `<div class="calendar-empty-day">No slots</div>`
+            }
+          </div>
+        </div>
+      `;
+    });
+
+    calendarHTML += '</div>';
+    timeSlotsContainer.innerHTML = calendarHTML;
   }
 
   timeSlotsContainer.addEventListener("click", (e) => {
-    const row = e.target.closest(".time-slot");
-    if (row) {
+    const slotBtn = e.target.closest(".time-slot-btn");
+    if (slotBtn) {
       timeSlotsContainer
-        .querySelectorAll(".time-slot")
+        .querySelectorAll(".time-slot-btn")
         .forEach((slot) => slot.classList.remove("selected"));
-      row.classList.add("selected");
-      selectedSlot = row.dataset.value;
+      slotBtn.classList.add("selected");
+      selectedSlot = slotBtn.dataset.value;
     }
   });
 
