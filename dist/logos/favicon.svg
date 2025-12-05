@@ -1,0 +1,20 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left bracket -->
+  <path d="M14 24L22 19V17L14 12V10L24 16V18L14 24V24Z" fill="#34B1FF"/>
+  
+  <!-- Right bracket -->
+  <path d="M50 24V24L40 18V16L50 10V12L42 17V19L50 24Z" fill="#34B1FF"/>
+  
+  <!-- Center dash -->
+  <path d="M22 40H42V42H22V40Z" fill="#72FFA3"/>
+  
+  <!-- Background circle (optional - remove if you want transparent) -->
+  <circle cx="32" cy="32" r="30" fill="#1a1a1a" opacity="0.95" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Brackets on top of background -->
+  <path d="M20 26L28 21V20L20 15V13L30 19V21L20 27V26Z" fill="#34B1FF"/>
+  <path d="M44 26V27L34 21V19L44 13V15L36 20V21L44 26Z" fill="#34B1FF"/>
+  
+  <!-- Center dash on top -->
+  <path d="M26 43H38V45H26V43Z" fill="#72FFA3"/>
+</svg>

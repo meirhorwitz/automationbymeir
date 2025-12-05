@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "sxaf839npz");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8GQDGVR08');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <title>Business Analytics - Mobile Showcase</title>
+    <style>
+        /* Base Mobile Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            left: 0;
+            background: rgba(30, 30, 33, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #333;
+        }
+
+        #header img {
+            height: 32px;
+            width: auto;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(22, 22, 22, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 80px 24px 24px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        nav.active {
+            right: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 300;
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a:hover {
+            color: #72FFA3;
+        }
+
+        .dropdown-menu {
+            padding-left: 16px;
+            margin-top: 12px;
+        }
+
+        .dropdown-menu a {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 32px 20px;
+            font-size: 14px;
+            font-weight: 100;
+            border-top: 1px solid #333;
+        }
+
+        /* Showcase Specific Styles */
+        .showcase-container {
+            padding: 100px 20px 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(29, 191, 115, 0.1);
+            border: 1px solid #1DBF73;
+            border-radius: 50px;
+            color: #1DBF73;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, #1DBF73 0%, #00e676 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #9e9e9e;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .system-architecture {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-architecture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1DBF73 0%, #00e676 100%);
+        }
+
+        .architecture-title {
+            font-size: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .process-step {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            width: 24px;
+            height: 24px;
+            background: #1DBF73;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-top: 8px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #9e9e9e;
+            line-height: 1.5;
+        }
+
+        .central-processor {
+            background: #0a0a0a;
+            border: 2px solid #1DBF73;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .processor-title {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1DBF73;
+        }
+
+        .feature-chip {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin: 4px;
+            display: inline-block;
+        }
+
+        .workflow-step {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+
+        .workflow-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* Mock UI Styles */
+        .dashboard-mock {
+            background: #f7f7f7;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-content {
+            padding: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #222;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .features-showcase {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .feature-card {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .feature-detail {
+            font-size: 14px;
+            color: #9e9e9e;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <a href="index-mobile.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <ul>
+            <li><a href="index-mobile.html#services">Services</a></li>
+            <li><a href="index-mobile.html#projects">Projects</a></li>
+            <li>
+                <a href="#showcases">Showcases</a>
+                <ul class="dropdown-menu">
+                    <li><a href="showcase1-mobile.html">Crypto Wallet Tracker</a></li>
+                    <li><a href="showcase2-mobile.html">Business Analytics System</a></li>
+                    <li><a href="showcase-job-post-pro-mobile.html">Job Post Pro</a></li>
+                </ul>
+            </li>
+            <li><a href="why-automation-mobile.html">Why Automate</a></li>
+            <li><a href="automation-playground-mobile.html">Try Live</a></li>
+            <li><a href="payment-mobile.html">Packages</a></li>
+            <li><a href="index-mobile.html#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="showcase-container">
+        <div style="text-align: center;">
+            <span class="badge">Business Intelligence</span>
+            <h1>Analytics System</h1>
+            <p class="subtitle">Automated reporting and KPI tracking for digital agencies</p>
+        </div>
+
+        <div class="system-architecture">
+            <h2 class="architecture-title">System Architecture</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Data Ingestion</h3>
+                    <p class="step-description">Connects to CRM, Ad Platforms, and Payment Gateways via API.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Aggregation</h3>
+                    <p class="step-description">Consolidates data into a central data warehouse (BigQuery/Firebase).</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Reporting</h3>
+                    <p class="step-description">Generates daily reports and live dashboards for stakeholders.</p>
+                </div>
+            </div>
+
+            <div class="central-processor">
+                <h3 class="processor-title">Analytics Engine</h3>
+                <div>
+                    <span class="feature-chip">ETL Pipeline</span>
+                    <span class="feature-chip">Data Warehousing</span>
+                    <span class="feature-chip">Predictive Analytics</span>
+                    <span class="feature-chip">Automated Reporting</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <h2 class="workflow-title">1. Executive Dashboard</h2>
+            <p style="color: #9e9e9e; margin-bottom: 16px;">High-level overview of business performance.</p>
+            <div class="dashboard-mock">
+                <div class="dashboard-header">
+                    <span style="font-weight: bold;">Agency Overview</span>
+                    <span style="color: #666;">Last 30 Days</span>
+                </div>
+                <div class="dashboard-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">$45,200</div>
+                            <div class="stat-label">Revenue</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">128</div>
+                            <div class="stat-label">New Leads</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3.4%</div>
+                            <div class="stat-label">Conversion Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-showcase">
+            <div class="feature-card">
+                <div class="feature-name">Unified Data</div>
+                <div class="feature-detail">Single source of truth for all business metrics.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-name">Automated Alerts</div>
+                <div class="feature-detail">Get notified when KPIs drop below targets.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-name">Custom Reports</div>
+                <div class="feature-detail">Tailored PDF reports sent to clients automatically.</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="footer">© 2025 Automations by Meir. All rights reserved.</section>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

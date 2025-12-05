@@ -197,7 +197,6 @@
         .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 0; left: auto; width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease; }
         .nav-links a:hover { color: var(--light); }
         .nav-links a:hover::after { width: 100%; }
-
         .submenu { position: relative; }
         .dropdown { display: none; flex-direction: column; position: absolute; top: calc(100% + 0.5rem); left: 0; background: var(--dark-secondary); border: 1px solid var(--border-color); padding: 0.5rem 0; border-radius: 8px; min-width: 200px; z-index: 10; }
         .dropdown a { padding: 0.5rem 1.5rem; white-space: nowrap; }
@@ -223,13 +222,11 @@
             position: relative;
             overflow: hidden;
         }
-
         .cta-button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 230, 118, 0.3);
         }
-
         .cta-secondary {
             display: inline-block;
             padding: 0.75rem 1.5rem;
@@ -241,7 +238,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-
         .cta-secondary:hover {
             background: var(--primary);
             color: var(--dark);
@@ -402,24 +398,19 @@
             white-space:nowrap;
         }
         nav ul li .dropdown-menu a:hover { background:none; }
-
-#hero {
+        #hero {
   margin-top: 40px !important; 
   padding-top: 80px !important; 
 }
-
-
-#about .horizontal {
+        #about .horizontal {
   display: flex;
   gap: 40px;
   align-items: flex-start;
 }
-
-#about .horizontal > div:first-child {
+        #about .horizontal > div:first-child {
   flex: 1;
 }
-
-#about .stats {
+        #about .stats {
   width: auto;
   max-width: 300px;
   display: flex;
@@ -428,8 +419,7 @@
   margin-top: 8px !important;
   flex-shrink: 0;
 }
-
-#about .stats div {
+        #about .stats div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -444,27 +434,21 @@
   margin-top: 0;
   box-sizing: border-box;
 }
-
-#about .stats div p {
+        #about .stats div p {
   margin: 0;
   font-size: clamp(0.875rem, 2vw, 1rem);
   color: #C4C4C4;
 }
-
-
-.service-card, .project-card, .stat-card, .service-item, .dropped-service {
+        .service-card, .project-card, .stat-card, .service-item, .dropped-service {
   overflow: hidden;
   word-wrap: break-word;
   box-sizing: border-box;
 }
-
-.service-card *, .project-card *, .stat-card *, .service-item *, .dropped-service * {
+        .service-card *, .project-card *, .stat-card *, .service-item *, .dropped-service * {
   max-width: 100%;
   overflow-wrap: break-word;
 }
-
-
-.menu-toggle {
+        .menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -481,29 +465,23 @@
   right: 40px;
   z-index: 101;
 }
-
-.menu-toggle span {
+        .menu-toggle span {
   display: block;
   height: 2px;
   background: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
-
-.menu-toggle.active span:nth-child(1) {
+        .menu-toggle.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
-
-.menu-toggle.active span:nth-child(2) {
+        .menu-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
-.menu-toggle.active span:nth-child(3) {
+        .menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
-
-
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
   #header {
     padding: 16px !important;
     background: rgba(30, 30, 33, 0.95);
@@ -570,22 +548,21 @@
     max-width: none !important;
   }
 }
-
-
-#header {
+        #header {
   z-index: 100;
 }
-
-nav {
+        nav {
   z-index: 100;
 }
-
-.menu-toggle {
+        .menu-toggle {
   z-index: 101;
 }
 </style>
 
 
+  <script type="module" crossorigin src="/assets/hebrew-BKfE_pRe.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/nav-_Ed4WGFi.js">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -594,7 +571,7 @@ nav {
     <!-- End Google Tag Manager (noscript) -->
     <div class="particles" id="particles"></div>
     <div id="header">
-      <a href="index-he.html"><img src="ma_logo.svg" alt="Automations by Meir" width="196" height="64" /></a>
+      <a href="index-he.html"><img src="/assets/ma_logo-BWq00-lR.svg" alt="Automations by Meir" width="196" height="64" /></a>
       <nav>
         <ul>
           <li><a href="index-he.html#services">שירותים</a></li>
@@ -645,12 +622,12 @@ nav {
             <div class="platforms">
                 <h3 class="platforms-title">המערכות שאיתן אנחנו בונים אוטומציות</h3>
                 <div class="platform-logos">
-                    <img src="logos/googleappsscript.svg" alt="Google Apps Script" title="Extend Google Workspace with custom scripts">
-                    <img src="logos/firebase.svg" alt="Firebase" title="Backend services and hosting">
-                    <img src="logos/openai.svg" alt="OpenAI" title="Advanced language model APIs">
-                    <img src="logos/claude.svg" alt="Claude" title="Anthropic's powerful AI assistant">
-                    <img src="logos/googlegemini.svg" alt="Gemini" title="Google's multimodal AI platform">
-                    <img src="logos/grok.svg" alt="Grok" title="Real-time AI from xAI">
+                    <img src="data:image/svg+xml,%3csvg%20role='img'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogle%20Apps%20Script%3c/title%3e%3cpath%20fill='%234285F4'%20d='M12.363%202.54a3.136%203.136%200%200%200-.376.022%202.864%202.864%200%200%200-1.589.828c-.562.58-.82%201.115-.773%201.943-.01.264.193%201.023.272%201.274%201.115%203.546%202.09%206.75%203.26%2010.279.08.246.168.486.267.72.02.047.035.046.048-.004.077-.297.174-.612.29-.945.894-2.576%201.772-5.14%202.633-7.696a.345.345%200%200%200%20.004-.217%20163.054%20163.054%200%200%200-1.49-4.572%202.603%202.603%200%200%200-.704-.933c-.55-.46-1.166-.694-1.842-.7Zm9.078.117a2.734%202.734%200%200%200-2.878%201.828l-4.576%2013.289a2.734%202.734%200%200%200%201.695%203.475l.12.04a2.734%202.734%200%200%200%203.475-1.694L23.85%206.307a2.734%202.734%200%200%200-1.695-3.476c-.233-.1-.506-.124-.716-.174ZM12.375%203.96a1.396%201.396%200%201%201%200%202.791%201.395%201.395%200%200%201%200-2.79zm8.809.07a1.402%201.402%200%201%201%200%202.803%201.402%201.402%200%200%201%200-2.803zM5.419%207.605a2.853%202.853%200%200%200-.468.052%202.683%202.683%200%200%200-1.337.627%202.62%202.62%200%200%200-.924%201.833%203.808%203.808%200%200%200%200%20.648%202.52%202.52%200%200%200%20.673%201.52c.221.238.465.454.732.648%203.043%202.21%206.08%204.43%209.108%206.664a.78.78%200%200%200%20.158.089c.03-.043.032-.098.007-.167a17.409%2017.409%200%200%200-.317-1.066%20532.752%20532.752%200%200%201-2.02-6.251%2041.91%2041.91%200%200%200-.497-1.477c-.967-.849-2.078-1.6-3.023-2.302A3.848%203.848%200%200%200%206.153%207.7a2.388%202.388%200%200%200-.734-.094Zm.02%201.424a1.398%201.398%200%201%201%200%202.796%201.398%201.398%200%200%201%200-2.796zm-2.458%206.792c-.733-.006-1.375.202-1.927.622a2.72%202.72%200%200%200-.95%201.45%202.78%202.78%200%200%200-.09%201.04%202.74%202.74%200%200%200%20.695%201.583c.664.578%201.26.85%202%20.945%201.42-.005%202.84-.012%204.262-.02h.418c2.277-.003%204.513-.002%206.706.003.148.005.28.003.392-.01.06-.005.091-.031.092-.077a10.656%2010.656%200%200%200-.834-.653%20488.746%20488.746%200%200%201-6.57-4.815.236.236%200%200%200-.14-.047c-1.34-.003-2.691-.01-4.054-.02zm-.19%201.418a1.402%201.402%200%201%201%200%202.803%201.402%201.402%200%200%201%200-2.803zm13.874.002a1.4%201.4%200%201%201%200%202.8%201.4%201.4%200%200%201%200-2.8z'/%3e%3c/svg%3e" alt="Google Apps Script" title="Extend Google Workspace with custom scripts">
+                    <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='256px'%20height='322px'%20viewBox='0%200%20256%20322'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%3e%3ctitle%3eFirebase%3c/title%3e%3cg%3e%3cpath%20d='M80.1808323,312.295406%20C93.6347594,317.709494%20108.230746,320.923389%20123.556401,321.458215%20C144.297625,322.182288%20164.021033,317.893803%20181.653847,309.747987%20C160.509281,301.440899%20141.3597,289.292936%20125.016395,274.187794%20C114.42239,291.15084%2098.7532944,304.547829%2080.1808323,312.295406%20Z'%20fill='%23FF9100'%3e%3c/path%3e%3cpath%20d='M125.013433,274.192731%20C87.706415,239.689026%2065.0743742,189.749411%2066.9870778,134.974635%20C67.0492822,133.195885%2067.1430825,131.418287%2067.2528453,129.641182%20C60.5713009,127.913117%2053.5958488,126.858604%2046.4173273,126.607977%20C36.142079,126.249067%2026.1913468,127.523435%2016.7969986,130.168933%20C6.83803832,147.614145%200.828169967,167.630638%200.0794789059,189.06977%20C-1.85272527,244.402081%2031.6316004,292.748737%2080.1778702,312.300343%20C98.7503322,304.552766%20114.418934,291.170588%20125.013433,274.192731%20Z'%20fill='%23FFC400'%3e%3c/path%3e%3cpath%20d='M125.014914,274.191086%20C133.688645,260.310285%20138.947716,244.036753%20139.559886,226.504323%20C141.170454,180.38419%20110.16583,140.710278%2067.2544909,129.639372%20C67.1447281,131.416477%2067.0507632,133.194075%2066.9887234,134.972825%20C65.0758552,189.747765%2087.7078961,239.687381%20125.014914,274.191086%20Z'%20fill='%23FF9100'%3e%3c/path%3e%3cpath%20d='M134.761095,0%20C110.321506,19.5791862%2091.0226675,45.3959945%2079.3465032,75.1362889%20C72.6616676,92.1712486%2068.4608946,110.46955%2067.2344144,129.650727%20C110.145918,140.721632%20141.150542,180.395709%20139.539974,226.515842%20C138.927639,244.048273%20133.653264,260.305348%20124.995002,274.202605%20C141.337814,289.322557%20160.487888,301.45571%20181.632454,309.762797%20C224.072981,290.145367%20254.184527,247.930289%20255.928884,197.998901%20C257.057779,165.647667%20244.628415,136.815425%20227.064718,112.478029%20C208.51694,86.738894%20134.761095,0%20134.761095,0%20Z'%20fill='%23DD2C00'%3e%3c/path%3e%3c/g%3e%3c/svg%3e" alt="Firebase" title="Backend services and hosting">
+                    <img src="data:image/svg+xml,%3csvg%20role='img'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenAI%3c/title%3e%3cpath%20fill='%2310A37F'%20d='M22.2819%209.8211a5.9847%205.9847%200%200%200-.5157-4.9108%206.0462%206.0462%200%200%200-6.5098-2.9A6.0651%206.0651%200%200%200%204.9807%204.1818a5.9847%205.9847%200%200%200-3.9977%202.9%206.0462%206.0462%200%200%200%20.7427%207.0966%205.98%205.98%200%200%200%20.511%204.9107%206.051%206.051%200%200%200%206.5146%202.9001A5.9847%205.9847%200%200%200%2013.2599%2024a6.0557%206.0557%200%200%200%205.7718-4.2058%205.9894%205.9894%200%200%200%203.9977-2.9001%206.0557%206.0557%200%200%200-.7475-7.0729zm-9.022%2012.6081a4.4755%204.4755%200%200%201-2.8764-1.0408l.1419-.0804%204.7783-2.7582a.7948.7948%200%200%200%20.3927-.6813v-6.7369l2.02%201.1686a.071.071%200%200%201%20.038.052v5.5826a4.504%204.504%200%200%201-4.4945%204.4944zm-9.6607-4.1254a4.4708%204.4708%200%200%201-.5346-3.0137l.142.0852%204.783%202.7582a.7712.7712%200%200%200%20.7806%200l5.8428-3.3685v2.3324a.0804.0804%200%200%201-.0332.0615L9.74%2019.9502a4.4992%204.4992%200%200%201-6.1408-1.6464zM2.3408%207.8956a4.485%204.485%200%200%201%202.3655-1.9728V11.6a.7664.7664%200%200%200%20.3879.6765l5.8144%203.3543-2.0201%201.1685a.0757.0757%200%200%201-.071%200l-4.8303-2.7865A4.504%204.504%200%200%201%202.3408%207.872zm16.5963%203.8558L13.1038%208.364%2015.1192%207.2a.0757.0757%200%200%201%20.071%200l4.8303%202.7913a4.4944%204.4944%200%200%201-.6765%208.1042v-5.6772a.79.79%200%200%200-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759%200%200%200-.7854%200L9.409%209.2297V6.8974a.0662.0662%200%200%201%20.0284-.0615l4.8303-2.7866a4.4992%204.4992%200%200%201%206.6802%204.66zM8.3065%2012.863l-2.02-1.1638a.0804.0804%200%200%201-.038-.0567V6.0742a4.4992%204.4992%200%200%201%207.3757-3.4537l-.142.0805L8.704%205.459a.7948.7948%200%200%200-.3927.6813zm1.0976-2.3654l2.602-1.4998%202.6069%201.4998v2.9994l-2.5974%201.4997-2.6067-1.4997Z'/%3e%3c/svg%3e" alt="OpenAI" title="Advanced language model APIs">
+                    <img src="data:image/svg+xml,%3csvg%20role='img'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eClaude%3c/title%3e%3cpath%20fill='%23FF4F00'%20d='m4.7144%2015.9555%204.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608%201.5179.1032%202.2767.1578%201.6514.0972%202.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973%209.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686%201.9064%201.4754%202.4893%201.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335%206.6997%200l.9957.1336.419.3642.6192%201.4147%201.0018%202.2282%201.5543%203.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853%201.8517-.5586%202.9021-.3643%201.9429h.2125l.2429-.2429.9835-1.3053%201.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759%201.1293-.34%201.1657-1.0625%201.3478-.8804%201.1414-1.2628%201.7-.7893%201.36.0729.1093.1882-.0183%202.8535-.607%201.5421-.2794%201.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607%201.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929%201.0686%202.0035%201.8092%202.5075%202.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496%202.3436%203.5214.1214%201.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38%2017.959l-1.1414-1.9428-.1397.079-.674%207.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328%201.9672-2.1796%202.9446-1.7243%201.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889%202.386-3.0357%201.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385%204.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429%201.9064-1.3114Z'/%3e%3c/svg%3e" alt="Claude" title="Anthropic's powerful AI assistant">
+                    <img src="data:image/svg+xml,%3csvg%20role='img'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogle%20Gemini%3c/title%3e%3cpath%20fill='%234285F4'%20d='M11.04%2019.32Q12%2021.51%2012%2024q0-2.49.93-4.68.96-2.19%202.58-3.81t3.81-2.55Q21.51%2012%2024%2012q-2.49%200-4.68-.93a12.3%2012.3%200%200%201-3.81-2.58%2012.3%2012.3%200%200%201-2.58-3.81Q12%202.49%2012%200q0%202.49-.96%204.68-.93%202.19-2.55%203.81a12.3%2012.3%200%200%201-3.81%202.58Q2.49%2012%200%2012q2.49%200%204.68.96%202.19.93%203.81%202.55t2.55%203.81'/%3e%3c/svg%3e" alt="Gemini" title="Google's multimodal AI platform">
+                    <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='%23fff'%20fill-rule='evenodd'%3e%3ctitle%3eGrok%3c/title%3e%3cpath%20d='M9.27%2015.29l7.978-5.897c.391-.29.95-.177%201.137.272.98%202.369.542%205.215-1.41%207.169-1.951%201.954-4.667%202.382-7.149%201.406l-2.711%201.257c3.889%202.661%208.611%202.003%2011.562-.953%202.341-2.344%203.066-5.539%202.388-8.42l.006.007c-.983-4.232.242-5.924%202.75-9.383.06-.082.12-.164.179-.248l-3.301%203.305v-.01L9.267%2015.292M7.623%2016.723c-2.792-2.67-2.31-6.801.071-9.184%201.761-1.763%204.647-2.483%207.166-1.425l2.705-1.25a7.808%207.808%200%2000-1.829-1A8.975%208.975%200%20005.984%205.83c-2.533%202.536-3.33%206.436-1.962%209.764%201.022%202.487-.653%204.246-2.34%206.022-.599.63-1.199%201.259-1.682%201.925l7.62-6.815'/%3e%3c/svg%3e" alt="Grok" title="Real-time AI from xAI">
                 </div>
             </div>
             <div class="services-grid">
@@ -743,13 +720,13 @@ nav {
         <div class="container">
             <h2 class="section-title">אודות מאיר
                 <a href="https://www.linkedin.com/in/meir-horwitz-81972189/" target="_blank">
-                    <img src="logos/linkedin.svg" alt="LinkedIn" class="linkedin-logo">
+                    <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20width='256px'%20height='256px'%20viewBox='0%200%20256%20256'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%3e%3cg%3e%3cpath%20d='M218.123122,218.127392%20L180.191928,218.127392%20L180.191928,158.724263%20C180.191928,144.559023%20179.939053,126.323993%20160.463756,126.323993%20C140.707926,126.323993%20137.685284,141.757585%20137.685284,157.692986%20L137.685284,218.123441%20L99.7540894,218.123441%20L99.7540894,95.9665207%20L136.168036,95.9665207%20L136.168036,112.660562%20L136.677736,112.660562%20C144.102746,99.9650027%20157.908637,92.3824528%20172.605689,92.9280076%20C211.050535,92.9280076%20218.138927,118.216023%20218.138927,151.114151%20L218.123122,218.127392%20Z%20M56.9550587,79.2685282%20C44.7981969,79.2707099%2034.9413443,69.4171797%2034.9391618,57.260052%20C34.93698,45.1029244%2044.7902948,35.2458562%2056.9471566,35.2436736%20C69.1040185,35.2414916%2078.9608713,45.0950217%2078.963054,57.2521493%20C78.9641017,63.090208%2076.6459976,68.6895714%2072.5186979,72.8184433%20C68.3913982,76.9473153%2062.7929898,79.26748%2056.9550587,79.2685282%20M75.9206558,218.127392%20L37.94995,218.127392%20L37.94995,95.9665207%20L75.9206558,95.9665207%20L75.9206558,218.127392%20Z%20M237.033403,0.0182577091%20L18.8895249,0.0182577091%20C8.57959469,-0.0980923971%200.124827038,8.16056231%20-0.001,18.4706066%20L-0.001,237.524091%20C0.120519052,247.839103%208.57460631,256.105934%2018.8895249,255.9977%20L237.033403,255.9977%20C247.368728,256.125818%20255.855922,247.859464%20255.999,237.524091%20L255.999,18.4548016%20C255.851624,8.12438979%20247.363742,-0.133792868%20237.033403,0.000790807055'%20fill='%230A66C2'%3e%3c/path%3e%3c/g%3e%3c/svg%3e" alt="LinkedIn" class="linkedin-logo">
                 </a>
             </h2>
             <div class="about-content">
                 <div class="about-header">
                     <div class="profile-photo">
-                        <img src="logos/profilepicture.svg" alt="Meir" />
+                        <img src="/assets/profilepicture-BgzgXaBt.svg" alt="Meir" />
                     </div>
                     <div>
                         <p class="about-text">
@@ -817,232 +794,6 @@ nav {
     <footer>
         <p>&copy; 2025 Automation by Meir. כל הזכויות שמורות.</p>
     </footer>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        const firebaseConfig = {
-            apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
-            authDomain: "automationbymeir.firebaseapp.com",
-            projectId: "automationbymeir",
-            storageBucket: "automationbymeir.firebasestorage.app",
-            messagingSenderId: "216703427811",
-            appId: "1:216703427811:web:a2c848833870a1415c91d6",
-            measurementId: "G-D8GQDGVR08"
-        };
-        const app = initializeApp(firebaseConfig);
-        const isLocalhost = ["localhost", "127.0.0.1", "[::1]"]
-            .map((host) => host.toLowerCase())
-            .includes(window.location.hostname.toLowerCase());
-        const SCHEDULE_ENDPOINTS = isLocalhost
-          ? ["/api/schedule"]
-          : [
-              "/api/schedule",
-              "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
-            ];
-
-        function cloneRequestOptions(options = {}) {
-            const cloned = { ...options };
-            cloned.headers = { Accept: "application/json", ...(options.headers ?? {}) };
-            return cloned;
-        }
-
-        async function requestSchedule(path, options = {}) {
-            let lastError;
-            for (const baseUrl of SCHEDULE_ENDPOINTS) {
-                try {
-                    const response = await fetch(`${baseUrl}${path}`, cloneRequestOptions(options));
-                    const bodyText = await response.text();
-                    const contentType = response.headers.get("content-type") ?? "";
-
-                    if (!contentType.toLowerCase().includes("application/json")) {
-                        lastError = new Error(
-                            `Unexpected ${contentType || "unknown"} response from ${baseUrl}${path} (${response.status})`
-                        );
-                        console.warn(`Schedule request failed via ${baseUrl}`, {
-                            status: response.status,
-                            statusText: response.statusText,
-                            contentType,
-                            preview: bodyText.slice(0, 200),
-                        });
-                        continue;
-                    }
-
-                    let data;
-                    try {
-                        data = JSON.parse(bodyText);
-                    } catch (parseError) {
-                        lastError = parseError;
-                        console.warn(`Schedule request returned invalid JSON via ${baseUrl}`, parseError);
-                        continue;
-                    }
-
-                    if (!response.ok || !data?.success) {
-                        lastError = new Error(data?.error || `Request failed with status ${response.status}`);
-                        console.warn(`Schedule request failed via ${baseUrl}`, lastError);
-                        continue;
-                    }
-
-                    return data;
-                } catch (error) {
-                    lastError = error;
-                    console.warn(`Schedule request error via ${baseUrl}`, error);
-                }
-            }
-
-            throw lastError ?? new Error('Unable to reach the scheduling service.');
-        }
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
-        const toStep2Btn = document.getElementById('toStep2');
-        const toStep1Btn = document.getElementById('toStep1');
-        const form = document.getElementById('projectForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formButtons = document.getElementById('formButtons');
-        const slotsLoader = document.getElementById('slotsLoader');
-        const timeSlotsContainer = document.getElementById('timeSlots');
-        const formMessage = document.getElementById('form-message');
-        let selectedSlot = null;
-        toStep2Btn.addEventListener('click', () => {
-            if (form.checkValidity()) {
-                step1.classList.remove('active');
-                step2.classList.add('active');
-                formButtons.style.display = 'none';
-                submitBtn.style.display = '';
-                fetchAvailableSlots();
-            } else {
-                form.reportValidity();
-            }
-        });
-        toStep1Btn.addEventListener('click', () => {
-            step2.classList.remove('active');
-            step1.classList.add('active');
-            formButtons.style.display = 'none';
-        });
-        async function fetchAvailableSlots() {
-            slotsLoader.style.display = 'block';
-            timeSlotsContainer.innerHTML = '';
-            formButtons.style.display = 'none';
-            try {
-                const data = await requestSchedule('/slots');
-                displaySlots(data.slots ?? []);
-            } catch (error) {
-                console.error('Error fetching slots:', error);
-                timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
-                formButtons.style.display = 'flex';
-                submitBtn.style.display = 'none';
-            } finally {
-                slotsLoader.style.display = 'none';
-            }
-        }
-        function displaySlots(slots) {
-            if (slots.length === 0) {
-                timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
-                formButtons.style.display = 'flex';
-                submitBtn.style.display = 'none';
-                return;
-            }
-
-            // Group slots by day
-            const slotsByDay = {};
-            slots.forEach(slotISO => {
-                const dateObj = new Date(slotISO);
-                const dayKey = dateObj.toDateString();
-                if (!slotsByDay[dayKey]) {
-                    slotsByDay[dayKey] = [];
-                }
-                slotsByDay[dayKey].push(slotISO);
-            });
-
-            // Get the next 7 days starting from today
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const weekDays = [];
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(today);
-                day.setDate(today.getDate() + i);
-                weekDays.push(day);
-            }
-
-            // Build calendar HTML
-            let calendarHTML = '<div class="weekly-calendar">';
-            
-            weekDays.forEach(day => {
-                const dayKey = day.toDateString();
-                const daySlots = slotsByDay[dayKey] || [];
-                const dayName = day.toLocaleDateString('he-IL', { weekday: 'short' });
-                const dayNumber = day.getDate();
-                const monthName = day.toLocaleDateString('he-IL', { month: 'short' });
-
-                calendarHTML += `
-                    <div class="calendar-day">
-                        <div class="calendar-day-header">
-                            <span class="calendar-day-name">${dayName}</span>
-                            <span class="calendar-day-number">${dayNumber}</span>
-                            <span class="calendar-day-name" style="font-size: 0.7rem; margin-top: 0.25rem;">${monthName}</span>
-                        </div>
-                        <div class="calendar-time-slots">
-                            ${daySlots.length > 0 
-                                ? daySlots.map(slotISO => {
-                                    const dateObj = new Date(slotISO);
-                                    const time = dateObj.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', hour12: false });
-                                    return `<button type="button" class="time-slot-btn" data-value="${slotISO}">${time}</button>`;
-                                }).join('')
-                                : `<div class="calendar-empty-day">אין זמנים</div>`
-                            }
-                        </div>
-                    </div>
-                `;
-            });
-
-            calendarHTML += '</div>';
-            timeSlotsContainer.innerHTML = calendarHTML;
-            formButtons.style.display = 'flex';
-            submitBtn.style.display = 'inline-block';
-        }
-        timeSlotsContainer.addEventListener('click', (e) => {
-            const slotBtn = e.target.closest('.time-slot-btn');
-            if (slotBtn) {
-                document.querySelectorAll('.time-slot-btn').forEach(slot => slot.classList.remove('selected'));
-                slotBtn.classList.add('selected');
-                selectedSlot = slotBtn.dataset.value;
-            }
-        });
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!selectedSlot) {
-                alert('נא לבחור שעה.');
-                return;
-            }
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'קובע פגישה...';
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                details: formData.get('details'),
-                dateTime: selectedSlot,
-                lang: 'he'
-            };
-            try {
-                const result = await requestSchedule('/book', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                form.style.display = 'none';
-                formMessage.style.display = 'block';
-                formMessage.className = 'success';
-                formMessage.innerHTML = "<h3>תודה!</h3><p>פגישתך נקבעה. אימייל אישור נשלח אליך.</p>";
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                formMessage.style.display = 'block';
-                formMessage.className = 'error';
-                formMessage.innerHTML = "<h3>שגיאה</h3><p>משהו השתבש. אנא נסה שוב או צור איתי קשר ישירות.</p>";
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'שליחה וקביעת פגישה';
-            }
-        });
-    </script>
     <script>
         // Wave Net Animation
         const canvas = document.getElementById('waveCanvas');
@@ -1165,6 +916,5 @@ nav {
         }
 
     </script>
-<script src="nav.js" type="module"></script>
 </body>
 </html>

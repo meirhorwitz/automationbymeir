@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "sxaf839npz");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8GQDGVR08');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <title>Automations by Meir - Mobile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            background: #1E1E21;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Mobile Header */
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            left: 0;
+            background: rgba(30, 30, 33, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #333;
+        }
+
+        #header img {
+            height: 32px;
+            width: auto;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(22, 22, 22, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 80px 24px 24px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        nav.active {
+            right: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 300;
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a:hover {
+            color: #72FFA3;
+        }
+
+        .dropdown-menu {
+            padding-left: 16px;
+            margin-top: 12px;
+        }
+
+        .dropdown-menu a {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 60vh;
+            padding: 100px 20px 60px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+            background: linear-gradient(135deg, #161616 0%, #1E1E21 100%);
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Sans';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 36px;
+            line-height: 118%;
+            letter-spacing: -0.02em;
+            margin: 0;
+            color: #fff;
+            background: linear-gradient(90deg, #72FFA3 0%, #34B1FF 40%, #FFFFFF 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: 28px;
+            line-height: 120%;
+            color: #FFFFFF;
+            margin: 0 0 24px 0;
+        }
+
+        h3 {
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 120%;
+            color: #FFFFFF;
+            margin: 0 0 12px 0;
+        }
+
+        p {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 150%;
+            color: #C4C4C4;
+            margin: 0 0 16px 0;
+        }
+
+        /* Sections */
+        section {
+            padding: 40px 20px;
+        }
+
+        .dark {
+            background: #161616;
+        }
+
+        .section-border {
+            border-bottom: 1px solid #333;
+        }
+
+        /* Buttons */
+        .button,
+        button {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #FFFFFF;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 300;
+            background-color: transparent;
+            min-height: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:active,
+        button:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .white_button {
+            background: #FFFFFF;
+            color: #000;
+            border: none;
+        }
+
+        /* Service Logos */
+        .service-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .service-logos img {
+            height: 30px;
+            width: auto;
+            opacity: 0.7;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .grid-item {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(22, 22, 22, 0.5) 0%, rgba(22, 22, 22, 0) 100%);
+            border-radius: 12px;
+        }
+
+        /* Profile Section */
+        #about {
+            position: relative;
+        }
+
+        #profile_image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 16px;
+            display: block;
+            margin: 24px auto;
+        }
+
+        #about .profile-info {
+            background: radial-gradient(circle at top right, rgba(114, 255, 163, 0.2) 0%, rgba(7, 106, 167, 0.1) 50%, transparent 100%);
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+
+        #about .profile-info b {
+            font-weight: 400;
+            font-size: 20px;
+            color: #fff;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        #about .profile-info i {
+            display: block;
+            font-size: 14px;
+            font-style: normal;
+            color: #C4C4C4;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stats div {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            background: #333333;
+            border-radius: 8px;
+            font-size: 24px;
+            gap: 8px;
+        }
+
+        .stats div p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Form */
+        #projectForm {
+            width: 100%;
+        }
+
+        #projectForm input,
+        #projectForm textarea {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            width: 100%;
+            background: #100F0F;
+            color: #fff;
+            border-radius: 8px;
+            border: 0 none;
+            font-size: 16px;
+            padding: 16px;
+            display: block;
+            margin-bottom: 16px;
+            min-height: 48px;
+        }
+
+        #projectForm input:focus,
+        #projectForm textarea:focus {
+            outline: 1px solid #fff;
+            background-color: #161616;
+        }
+
+        #projectForm textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        #projectForm label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #C4C4C4;
+        }
+
+        #projectForm .form-group {
+            margin-bottom: 20px;
+        }
+
+        #projectForm .form-step {
+            display: none;
+        }
+
+        #projectForm .form-step.active {
+            display: block;
+        }
+
+        #projectForm button {
+            width: 100%;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        /* Calendar */
+        .weekly-calendar {
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .calendar-day {
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(22, 22, 22, 0.5);
+        }
+
+        .calendar-day-header {
+            padding: 12px;
+            background: rgba(22, 22, 22, 0.8);
+            border-bottom: 1px solid #333;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .calendar-day-name {
+            display: block;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .calendar-day-number {
+            display: block;
+            font-size: 20px;
+        }
+
+        .calendar-time-slots {
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .time-slot-btn {
+            padding: 12px 16px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: rgba(45, 45, 48, 0.6);
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            flex: 1 1 calc(50% - 4px);
+            min-width: 100px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-slot-btn:active {
+            transform: scale(0.98);
+        }
+
+        .time-slot-btn.selected {
+            background: #72FFA3;
+            color: #000;
+            border-color: #72FFA3;
+            font-weight: bold;
+        }
+
+        .calendar-empty-day {
+            padding: 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        /* Loader */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #fff;
+            border-bottom-color: #72FFA3;
+            border-radius: 50%;
+            display: inline-block;
+            animation: rotation 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Form Message */
+        #form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        #form-message.success {
+            background-color: rgba(114, 255, 163, 0.2);
+            color: #72FFA3;
+        }
+
+        #form-message.error {
+            background-color: rgba(234, 67, 53, 0.2);
+            color: #EA4335;
+        }
+
+        /* Reviews */
+        #reviews_carousel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #reviews_carousel p {
+            padding: 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #161616 0%, rgba(22, 22, 22, 0) 100%);
+            border: 1px solid #333;
+        }
+
+        /* Footer */
+        #footer {
+            text-align: center;
+            padding: 32px 20px;
+            font-size: 14px;
+            font-weight: 100;
+            border-top: 1px solid #333;
+        }
+
+        /* Promo Section */
+        #start_promo {
+            background: #333333;
+            border-radius: 8px;
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        #start_promo p {
+            margin-bottom: 24px;
+        }
+
+        /* Projects */
+        .project-link {
+            display: block;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(22, 22, 22, 0.8) 0%, rgba(22, 22, 22, 0) 100%);
+            border-radius: 12px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, rgba(22, 22, 22, 1) 0%, rgba(22, 22, 22, 0.3) 100%);
+        }
+
+        .project-link h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .project-link svg {
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <a href="index-mobile.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li>
+                <a href="#showcases">Showcases</a>
+                <ul class="dropdown-menu">
+                    <li><a href="showcase1-mobile.html">Crypto Wallet Tracker</a></li>
+                    <li><a href="showcase2-mobile.html">Business Analytics System</a></li>
+                    <li><a href="showcase-job-post-pro-mobile.html">Job Post Pro</a></li>
+                </ul>
+            </li>
+            <li><a href="why-automation-mobile.html">Why Automate</a></li>
+            <li><a href="automation-playground-mobile.html">Try Live</a></li>
+            <li><a href="payment-mobile.html">Packages</a></li>
+            <li><a href="index-mobile.html#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Transform your business with intelligent automation</h1>
+        <p style="color: #fff; font-size: 18px; margin: 0;">Custom Google Apps Script & Firebase Solutions That Scale
+        </p>
+    </section>
+
+    <!-- Start Promo -->
+    <section id="start_promo">
+        <h2>Experience Automation in Action</h2>
+        <p>Try our interactive automation playground and build your own workflow by connecting Google services and AI
+            tools</p>
+        <a href="#contact" class="button">Start your project
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M15.1667 17.5L18.6667 14M18.6667 14L15.1667 10.5M18.6667 14H9.33333M24.5 14C24.5 19.799 19.799 24.5 14 24.5C8.20101 24.5 3.5 19.799 3.5 14C3.5 8.20101 8.20101 3.5 14 3.5C19.799 3.5 24.5 8.20101 24.5 14Z"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
+    </section>
+
+    <!-- Services Section -->
+    <section class="dark section-border" id="services">
+        <h2>Services</h2>
+
+        <div class="service-logos">
+            <img src="/logos/googleappsscript.svg" alt="Google Apps Script" title="Google Apps Script">
+            <img src="/logos/firebase.svg" alt="Firebase" title="Firebase">
+            <img src="/logos/googlesheets.svg" alt="Google Sheets" title="Google Sheets">
+            <img src="/logos/googledrive.svg" alt="Google Drive" title="Google Drive">
+            <img src="/logos/gmail.svg" alt="Gmail" title="Gmail">
+            <img src="/logos/googlecalendar.svg" alt="Google Calendar" title="Google Calendar">
+            <img src="/logos/openai.svg" alt="OpenAI" title="OpenAI">
+            <img src="/logos/claude.svg" alt="Claude" title="Claude">
+            <img src="/logos/googlegemini.svg" alt="Google Gemini" title="Google Gemini">
+            <img src="/logos/grok.svg" alt="Grok" title="Grok">
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>AI-Powered Systems</h3>
+                <p>Custom AI agents, LLM integrations, and intelligent automation systems that understand and adapt to
+                    your business needs.</p>
+            </div>
+            <div class="grid-item">
+                <h3>Data Dashboards</h3>
+                <p>Beautiful, interactive dashboards that transform spreadsheet data into actionable insights with
+                    stunning visualizations.</p>
+            </div>
+            <div class="grid-item">
+                <h3>Process Automation</h3>
+                <p>Streamline workflows with custom automation for emails, reports, data processing, and complex
+                    business operations.</p>
+            </div>
+            <div class="grid-item">
+                <h3>API Integration</h3>
+                <p>Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.
+                </p>
+            </div>
+            <div class="grid-item">
+                <h3>Document Generation</h3>
+                <p>Dynamic PDF creation systems with custom parameters, graphics, and professional layouts.</p>
+            </div>
+            <div class="grid-item">
+                <h3>Web Development</h3>
+                <p>Full-stack web applications with modern interfaces and robust backend automation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section-border" id="projects">
+        <h2>Featured Projects</h2>
+
+        <a href="showcase-job-post-pro.html" class="project-link">
+            <h3>
+                AI Brief Creation System
+                <svg width="28" height="28" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </h3>
+            <p>Intelligent system that generates comprehensive sales briefs using AI, streamlining the sales process and
+                improving conversion rates.</p>
+        </a>
+
+        <a href="showcase1.html" class="project-link">
+            <h3>
+                Crypto Transaction Tracker
+                <svg width="28" height="28" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </h3>
+            <p>Advanced tracking system integrating multiple cryptocurrency APIs with Google Sheets for real-time
+                portfolio management and analysis.</p>
+        </a>
+
+        <a href="showcase2.html" class="project-link">
+            <h3>
+                Enterprise Analytics Dashboard
+                <svg width="28" height="28" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </h3>
+            <p>Comprehensive dashboard solution for enterprise-level analytics and reporting.</p>
+        </a>
+
+        <a href="#contact" class="project-link">
+            <h3>
+                Automated Reference Check System
+                <svg width="28" height="28" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.8333 20.5L21.8333 16.5M21.8333 16.5L17.8333 12.5M21.8333 16.5H11.1667M28.5 16.5C28.5 23.1274 23.1274 28.5 16.5 28.5C9.87258 28.5 4.5 23.1274 4.5 16.5C4.5 9.87258 9.87258 4.5 16.5 4.5C23.1274 4.5 28.5 9.87258 28.5 16.5Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </h3>
+            <p>Seamlessly connect multiple platforms, LLMs, and services to create powerful integrated solutions.</p>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section class="dark section-border" id="about">
+        <h2>About Meir</h2>
+        <p>With over 5 years of experience in automation and development, I specialize in creating custom solutions that
+            transform how businesses operate. My "can-do" attitude and deep expertise in Google Apps Script, Firebase,
+            and modern web technologies enable me to tackle even the most complex challenges.</p>
+
+        <img id="profile_image" src="logos/profilepicture.svg" alt="Meir">
+
+        <div class="profile-info">
+            <b>Meir Horwitz</b>
+            <i>Automation expert at Fiverr</i>
+        </div>
+
+        <div class="stats">
+            <div>5<p>Years Experience</p>
+            </div>
+            <div>50+<p>Projects completed</p>
+            </div>
+            <div>100%<p>Client Satisfaction</p>
+            </div>
+            <div>24/7<p>System Reliability</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section-border" id="reviews">
+        <h2>Customer Reviews</h2>
+        <div id="reviews_carousel">
+            <p>Meir exceeded expectations with his AI development skills, showcasing deep understanding. His polite and
+                professional demeanor made collaboration a breeze. If you're looking to automate your work environment,
+                I'd recommend to reach out to him! 🙌</p>
+            <p>Meir was excellent in his understanding of my needs in a timely fashion. I absolutely enjoyed working
+                with him and look forwards to working together in the future again.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="dark" id="contact">
+        <h2>Contact</h2>
+
+        <form id="projectForm">
+            <div id="step1" class="form-step active">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="details">Tell me about your project</label>
+                    <textarea id="details" name="details" required></textarea>
+                </div>
+                <button type="button" id="toStep2" class="btn btn-primary">Next: Schedule a Meeting</button>
+            </div>
+
+            <div id="step2" class="form-step">
+                <h3>Select a Time for a 30-Minute Consultation</h3>
+                <p style="color: #C4C4C4; margin-bottom: 1rem;">All times are in your local timezone.</p>
+                <div id="slotsLoader" class="loader" style="display: none;"></div>
+                <div id="timeSlots"></div>
+                <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 12px;">
+                    <button type="button" id="toStep1" class="btn btn-secondary">Back</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Submit & Schedule</button>
+                </div>
+            </div>
+        </form>
+        <div id="form-message"></div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">© 2025 Automations by Meir. All rights reserved.</section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
+
+    <script type="module">
+        const isLocalhost = ["localhost", "127.0.0.1", "[::1]"]
+            .map((host) => host.toLowerCase())
+            .includes(window.location.hostname.toLowerCase());
+        const SCHEDULE_ENDPOINTS = isLocalhost
+            ? ["/api/schedule"]
+            : [
+                "/api/schedule",
+                "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
+            ];
+
+        function cloneRequestOptions(options = {}) {
+            const cloned = { ...options };
+            cloned.headers = { Accept: "application/json", ...(options.headers ?? {}) };
+            return cloned;
+        }
+
+        async function requestSchedule(path, options = {}) {
+            let lastError;
+            for (const baseUrl of SCHEDULE_ENDPOINTS) {
+                try {
+                    const response = await fetch(`${baseUrl}${path}`, cloneRequestOptions(options));
+                    const bodyText = await response.text();
+                    const contentType = response.headers.get("content-type") ?? "";
+
+                    if (!contentType.toLowerCase().includes("application/json")) {
+                        lastError = new Error(
+                            `Unexpected ${contentType || "unknown"} response from ${baseUrl}${path} (${response.status})`
+                        );
+                        console.warn(`Schedule request failed via ${baseUrl}`, {
+                            status: response.status,
+                            statusText: response.statusText,
+                            contentType,
+                            preview: bodyText.slice(0, 200),
+                        });
+                        continue;
+                    }
+
+                    let data;
+                    try {
+                        data = JSON.parse(bodyText);
+                    } catch (parseError) {
+                        lastError = parseError;
+                        console.warn(`Schedule request returned invalid JSON via ${baseUrl}`, parseError);
+                        continue;
+                    }
+
+                    if (!response.ok || !data?.success) {
+                        lastError = new Error(data?.error || `Request failed with status ${response.status}`);
+                        console.warn(`Schedule request failed via ${baseUrl}`, lastError);
+                        continue;
+                    }
+
+                    return data;
+                } catch (error) {
+                    lastError = error;
+                    console.warn(`Schedule request error via ${baseUrl}`, error);
+                }
+            }
+
+            throw lastError ?? new Error("Unable to reach the scheduling service.");
+        }
+
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const toStep2Btn = document.getElementById("toStep2");
+        const toStep1Btn = document.getElementById("toStep1");
+        const form = document.getElementById("projectForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const slotsLoader = document.getElementById("slotsLoader");
+        const timeSlotsContainer = document.getElementById("timeSlots");
+        const formMessage = document.getElementById("form-message");
+        let selectedSlot = null;
+
+        toStep2Btn.addEventListener("click", () => {
+            if (form.checkValidity()) {
+                step1.classList.remove("active");
+                step2.classList.add("active");
+                fetchAvailableSlots();
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        toStep1Btn.addEventListener("click", () => {
+            step2.classList.remove("active");
+            step1.classList.add("active");
+        });
+
+        async function fetchAvailableSlots() {
+            slotsLoader.style.display = "block";
+            timeSlotsContainer.innerHTML = "";
+            try {
+                const data = await requestSchedule("/slots");
+                displaySlots(data.slots ?? []);
+            } catch (error) {
+                console.error("Error fetching slots:", error);
+                timeSlotsContainer.innerHTML = `<p style="color: #EA4335;">Could not load available times. Please try again later.</p>`;
+            } finally {
+                slotsLoader.style.display = "none";
+            }
+        }
+
+        function displaySlots(slots) {
+            if (slots.length === 0) {
+                timeSlotsContainer.innerHTML = `<p style="color: #C4C4C4;">No available slots in the next 7 days. Please check back later.</p>`;
+                return;
+            }
+
+            // Group slots by day
+            const slotsByDay = {};
+            slots.forEach((slotISO) => {
+                const dateObj = new Date(slotISO);
+                const dayKey = dateObj.toDateString();
+                if (!slotsByDay[dayKey]) {
+                    slotsByDay[dayKey] = [];
+                }
+                slotsByDay[dayKey].push(slotISO);
+            });
+
+            // Get the next 7 days starting from today
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const weekDays = [];
+            for (let i = 0; i < 7; i++) {
+                const day = new Date(today);
+                day.setDate(today.getDate() + i);
+                weekDays.push(day);
+            }
+
+            // Build calendar HTML
+            let calendarHTML = '<div class="weekly-calendar">';
+
+            weekDays.forEach((day) => {
+                const dayKey = day.toDateString();
+                const daySlots = slotsByDay[dayKey] || [];
+                const dayName = day.toLocaleDateString(undefined, { weekday: "short" });
+                const dayNumber = day.getDate();
+                const monthName = day.toLocaleDateString(undefined, { month: "short" });
+
+                calendarHTML += `
+        <div class="calendar-day">
+          <div class="calendar-day-header">
+            <span class="calendar-day-name">${dayName}</span>
+            <span class="calendar-day-number">${dayNumber}</span>
+            <span class="calendar-day-name" style="font-size: 0.7rem; margin-top: 0.25rem;">${monthName}</span>
+          </div>
+          <div class="calendar-time-slots">
+            ${daySlots.length > 0
+                        ? daySlots.map(slotISO => {
+                            const dateObj = new Date(slotISO);
+                            const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
+                            return `<button type="button" class="time-slot-btn" data-value="${slotISO}">${time}</button>`;
+                        }).join("")
+                        : `<div class="calendar-empty-day">No slots</div>`
+                    }
+          </div>
+        </div>
+      `;
+            });
+
+            calendarHTML += '</div>';
+            timeSlotsContainer.innerHTML = calendarHTML;
+        }
+
+        timeSlotsContainer.addEventListener("click", (e) => {
+            const slotBtn = e.target.closest(".time-slot-btn");
+            if (slotBtn) {
+                timeSlotsContainer
+                    .querySelectorAll(".time-slot-btn")
+                    .forEach((slot) => slot.classList.remove("selected"));
+                slotBtn.classList.add("selected");
+                selectedSlot = slotBtn.dataset.value;
+            }
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!selectedSlot) {
+                alert("Please select a time slot.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Scheduling...";
+
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                details: formData.get("details"),
+                dateTime: selectedSlot,
+                lang: "en",
+            };
+
+            try {
+                const result = await requestSchedule("/book", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                form.style.display = "none";
+                formMessage.style.display = "block";
+                formMessage.className = "success";
+                formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                formMessage.style.display = "block";
+                formMessage.className = "error";
+                formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit & Schedule";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

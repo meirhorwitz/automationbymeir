@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -19,9 +20,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Post Pro - Complete System Showcase</title>
-    <link rel="icon" href="/profile.jpeg" type="image/jpeg">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
         :root {
             --primary: #00e676;
             --primary-dark: #00c853;
@@ -318,7 +318,8 @@
         .workflow-number {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: var(--dark);
-            height:40px; width:auto;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -559,7 +560,8 @@
             gap: 1rem;
         }
         .docs-logo {
-            height:40px; width:auto;
+            width: 40px;
+            height: 40px;
             background: var(--google-blue);
             border-radius: 4px;
             display: flex;
@@ -738,34 +740,306 @@
             from { box-shadow: 0 0 20px rgba(0, 230, 118, 0.5); }
             to { box-shadow: 0 0 30px rgba(0, 230, 118, 0.8), 0 0 40px rgba(0, 230, 118, 0.4); }
         }
-    </style>
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 40px;
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            align-items: flex-start;
+            top: 0;
+            left: 0;
+            height: 0;
+        }
+        #header img{
+            height:40px; width:auto;
+            backdrop-filter: blur(20px);
+            padding: 8px 8px;
+            border-radius: 8px;
+        }
+        nav {
+            display:flex;
+            flex-direction:row;
+            align-items:flex-start;
+            padding:24px;
+            gap:40px;
+            right:32px;
+            top:32px;
+            background:rgba(13,13,14,0.6);
+            backdrop-filter:blur(16px);
+            border-radius:8px;
+            z-index:100;
+            width:25%;
+            min-width:min-content;
+            flex-wrap:wrap;
+            align-content:flex-start;
+            justify-content:flex-start;
+            box-sizing:border-box;
+        }
+        nav ul{
+            list-style:none;
+            padding:0;
+            margin:0;
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+            width:40%;
+            flex-grow:1;
+        }
+        a{
+            color:white;
+            text-decoration:none;
+        }
+        nav a{
+            font-size:20px;
+            position:relative;
+            display:inline-block;
+            font-weight:300;
+            white-space:nowrap;
+        }
+        nav a:after{
+            content:'';
+            display:block;
+            width:100%;
+            height:1px;
+            background:#fff;
+            transform:scaleX(0);
+            transition:transform 0.2s ease-in-out;
+            transform-origin:100% 0 ;
+        }
+        nav a:hover:after{
+            transform:scaleX(1);
+            transform-origin:0 0 ;
+        }
+        nav ul li { position: relative; }
+        nav ul li .dropdown-menu {
+            display:none;
+            background:rgba(13,13,14,0.9);
+            border-radius:8px;
+            padding:8px 0;
+            list-style:none;
+            margin:0;
+            min-width:220px;
+        }
+        nav ul li:hover .dropdown-menu { display:block; }
+        nav ul li .dropdown-menu a {
+            padding:8px 16px;
+            display:block;
+            font-size:16px;
+            white-space:nowrap;
+        }
+        nav ul li .dropdown-menu a:hover { background:none; }
+
+#hero {
+  margin-top: 40px !important; 
+  padding-top: 80px !important; 
+}
+
+
+#about .horizontal {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+#about .horizontal > div:first-child {
+  flex: 1;
+}
+
+#about .stats {
+  width: auto;
+  max-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 8px !important;
+  flex-shrink: 0;
+}
+
+#about .stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 20px;
+  background: #333333;
+  border-radius: 8px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  white-space: nowrap;
+  gap: 8px;
+  flex: 1;
+  min-width: 120px;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+#about .stats div p {
+  margin: 0;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  color: #C4C4C4;
+}
+
+
+.service-card, .project-card, .stat-card, .service-item, .dropped-service {
+  overflow: hidden;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.service-card *, .project-card *, .stat-card *, .service-item *, .dropped-service * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  background: rgba(13, 13, 14, 0.6);
+  backdrop-filter: blur(16px);
+  padding: 12px;
+  border-radius: 8px;
+  gap: 3px;
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  z-index: 101;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+
+@media (max-width: 768px) {
+  #header {
+    padding: 16px !important;
+    background: rgba(30, 30, 33, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  #header img {
+    height: 32px !important;
+    padding: 6px !important;
+  }
+
+  .menu-toggle {
+    display: flex !important;
+    top: 16px;
+    right: 16px;
+  }
+
+  nav {
+    display: none !important;
+    position: fixed !important;
+    top: 70px !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    max-height: calc(100vh - 100px) !important;
+    background: rgba(13, 13, 14, 0.95) !important;
+    padding: 24px !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    z-index: 99 !important;
+  }
+
+  nav.open {
+    display: flex !important;
+  }
+
+  #hero {
+    min-height: 80vh;
+    padding: 40px 20px 40px;
+    margin-top: 60px !important;
+  }
+
+  #about .horizontal {
+    flex-direction: column !important;
+  }
+
+  #about .stats {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 24px !important;
+  }
+
+  #about .stats div {
+    width: 100% !important;
+    min-width: auto !important;
+    padding: 10px 16px !important;
+  }
+
+  #profile_image {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+
+#header {
+  z-index: 100;
+}
+
+nav {
+  z-index: 100;
+}
+
+.menu-toggle {
+  z-index: 101;
+}
+</style>
+
+
 </head>
 <body>
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="ma_logo.svg" alt="Automations by Meir"/>
-                Automations <span class="by-meir">by Meir</span>
-            </a>
-            <button class="nav-toggle" id="navToggle">☰</button>
-            <ul class="nav-links">
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="automation-playground.html" class="playground-link">Try It Live</a></li>
-                <li class="submenu"><a href="#">Showcases</a>
-                    <ul class="dropdown">
-                        <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
-                        <li><a href="showcase2.html">Business Analytics System</a></li>
-                        <li><a href="showcase-job-post-pro.html">Job Post Pro System</a></li>
-                    </ul>
-                </li>
-                <li><a href="why-automation.html">Why Automate</a></li>
-                <li><a href="payment.html">Payments</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-                <li><a href="index-he.html">עברית</a></li>
+    <div id="header">
+      <a href="index.html"><img src="ma_logo.svg" alt="Automations by Meir" width="196" height="64" /></a>
+      <nav>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li class="dropdown"><a href="#">Showcases</a>
+            <ul class="dropdown-menu">
+              <li><a href="showcase1.html">Crypto Wallet Tracker</a></li>
+              <li><a href="showcase2.html">Business Analytics System</a></li>
+              <li><a href="showcase-job-post-pro.html">Job Post Pro</a></li>
             </ul>
-        </div>
-    </nav>
+          </li>
+          <li><a href="why-automation.html">Why Automate</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+        </ul>
+        <ul>
+          <li><a href="automation-playground.html">Try live</a></li>
+          <li><a href="payment.html">Payments</a></li>
+        </ul>
+      </nav>
+    </div>
     <div class="showcase-container">
         <!-- Header -->
         <div class="header">
@@ -1112,25 +1386,7 @@
             observer.observe(el);
         });
     </script>
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.querySelector('.nav-links');
-        const submenu = document.querySelector('.submenu');
-        const submenuLink = document.querySelector('.submenu > a');
-        const dropdown = document.querySelector('.submenu .dropdown');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('show');
-        });
-        submenuLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdown.classList.toggle('show');
-        });
-        document.addEventListener('click', (e) => {
-            if (!submenu.contains(e.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-    </script>
+    
 <script src="nav.js" defer></script>
 </body>
 </html>

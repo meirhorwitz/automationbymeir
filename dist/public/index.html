@@ -703,11 +703,13 @@
        
       
     </style>
+    <script type="module" crossorigin src="/assets/main-DS7QfCRU.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
   </head>
   <body>
   
   <div id="header">
-    <a href="index.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+    <a href="index.html"><img src="/assets/ma_logo-BWq00-lR.svg" alt="Automations by Meir" /></a>
   
   <nav>
     <ul>
@@ -819,7 +821,7 @@
     <h2>About Meir</h2>
         
         <p>With over 5 years of experience in automation and development, I specialize in creating custom solutions that transform how businesses operate. My "can-do" attitude and deep expertise in Google Apps Script, Firebase, and modern web technologies enable me to tackle even the most complex challenges.
-          <img id="profile_image" src="logos/profilepicture.svg" alt="Meir">
+          <img id="profile_image" src="/assets/profilepicture-BgzgXaBt.svg" alt="Meir">
           <b>Meir Horwitz <i>Automation expert at Fiverr</i></b>
         </p>
         <div class="stats">
@@ -1060,235 +1062,6 @@
 });
 </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDv0d_OVQsHzD_biFpkMvFrXaZguCYG58",
-    authDomain: "automationbymeir.firebaseapp.com",
-    projectId: "automationbymeir",
-    storageBucket: "automationbymeir.firebasestorage.app",
-    messagingSenderId: "216703427811",
-    appId: "1:216703427811:web:a2c848833870a1415c91d6",
-    measurementId: "G-D8GQDGVR08",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const isLocalhost = ["localhost", "127.0.0.1", "[::1]"]
-    .map((host) => host.toLowerCase())
-    .includes(window.location.hostname.toLowerCase());
-  const SCHEDULE_ENDPOINTS = isLocalhost
-    ? ["/api/schedule"]
-    : [
-        "/api/schedule",
-        "https://us-central1-automationbymeir.cloudfunctions.net/schedule",
-      ];
-
-  function cloneRequestOptions(options = {}) {
-    const cloned = { ...options };
-    cloned.headers = { Accept: "application/json", ...(options.headers ?? {}) };
-    return cloned;
-  }
-
-  async function requestSchedule(path, options = {}) {
-    let lastError;
-    for (const baseUrl of SCHEDULE_ENDPOINTS) {
-      try {
-        const response = await fetch(`${baseUrl}${path}`, cloneRequestOptions(options));
-        const bodyText = await response.text();
-        const contentType = response.headers.get("content-type") ?? "";
-
-        if (!contentType.toLowerCase().includes("application/json")) {
-          lastError = new Error(
-            `Unexpected ${contentType || "unknown"} response from ${baseUrl}${path} (${response.status})`
-          );
-          console.warn(`Schedule request failed via ${baseUrl}`, {
-            status: response.status,
-            statusText: response.statusText,
-            contentType,
-            preview: bodyText.slice(0, 200),
-          });
-          continue;
-        }
-
-        let data;
-        try {
-          data = JSON.parse(bodyText);
-        } catch (parseError) {
-          lastError = parseError;
-          console.warn(`Schedule request returned invalid JSON via ${baseUrl}`, parseError);
-          continue;
-        }
-
-        if (!response.ok || !data?.success) {
-          lastError = new Error(data?.error || `Request failed with status ${response.status}`);
-          console.warn(`Schedule request failed via ${baseUrl}`, lastError);
-          continue;
-        }
-
-        return data;
-      } catch (error) {
-        lastError = error;
-        console.warn(`Schedule request error via ${baseUrl}`, error);
-      }
-    }
-
-    throw lastError ?? new Error("Unable to reach the scheduling service.");
-  }
-
-  const step1 = document.getElementById("step1");
-  const step2 = document.getElementById("step2");
-  const toStep2Btn = document.getElementById("toStep2");
-  const toStep1Btn = document.getElementById("toStep1");
-  const form = document.getElementById("projectForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const slotsLoader = document.getElementById("slotsLoader");
-  const timeSlotsContainer = document.getElementById("timeSlots");
-  const formMessage = document.getElementById("form-message");
-  let selectedSlot = null;
-
-  toStep2Btn.addEventListener("click", () => {
-    if (form.checkValidity()) {
-      step1.classList.remove("active");
-      step2.classList.add("active");
-      fetchAvailableSlots();
-    } else {
-      form.reportValidity();
-    }
-  });
-
-  toStep1Btn.addEventListener("click", () => {
-    step2.classList.remove("active");
-    step1.classList.add("active");
-  });
-
-  async function fetchAvailableSlots() {
-    slotsLoader.style.display = "block";
-    timeSlotsContainer.innerHTML = "";
-    try {
-      const data = await requestSchedule("/slots");
-      displaySlots(data.slots ?? []);
-    } catch (error) {
-      console.error("Error fetching slots:", error);
-      timeSlotsContainer.innerHTML = `<p style="color: var(--danger);">Could not load available times. Please try again later.</p>`;
-    } finally {
-      slotsLoader.style.display = "none";
-    }
-  }
-
-  function displaySlots(slots) {
-    if (slots.length === 0) {
-      timeSlotsContainer.innerHTML = `<p style="color: var(--light);">No available slots in the next 7 days. Please check back later.</p>`;
-      return;
-    }
-
-    // Group slots by day
-    const slotsByDay = {};
-    slots.forEach((slotISO) => {
-      const dateObj = new Date(slotISO);
-      const dayKey = dateObj.toDateString();
-      if (!slotsByDay[dayKey]) {
-        slotsByDay[dayKey] = [];
-      }
-      slotsByDay[dayKey].push(slotISO);
-    });
-
-    // Get the next 7 days starting from today
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const weekDays = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(today);
-      day.setDate(today.getDate() + i);
-      weekDays.push(day);
-    }
-
-    // Build calendar HTML
-    let calendarHTML = '<div class="weekly-calendar">';
-    
-    weekDays.forEach((day) => {
-      const dayKey = day.toDateString();
-      const daySlots = slotsByDay[dayKey] || [];
-      const dayName = day.toLocaleDateString(undefined, { weekday: "short" });
-      const dayNumber = day.getDate();
-      const monthName = day.toLocaleDateString(undefined, { month: "short" });
-
-      calendarHTML += `
-        <div class="calendar-day">
-          <div class="calendar-day-header">
-            <span class="calendar-day-name">${dayName}</span>
-            <span class="calendar-day-number">${dayNumber}</span>
-            <span class="calendar-day-name" style="font-size: 0.7rem; margin-top: 0.25rem;">${monthName}</span>
-          </div>
-          <div class="calendar-time-slots">
-            ${daySlots.length > 0 
-              ? daySlots.map(slotISO => {
-                  const dateObj = new Date(slotISO);
-                  const time = dateObj.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", hour12: false });
-                  return `<button type="button" class="time-slot-btn" data-value="${slotISO}">${time}</button>`;
-                }).join("")
-              : `<div class="calendar-empty-day">No slots</div>`
-            }
-          </div>
-        </div>
-      `;
-    });
-
-    calendarHTML += '</div>';
-    timeSlotsContainer.innerHTML = calendarHTML;
-  }
-
-  timeSlotsContainer.addEventListener("click", (e) => {
-    const slotBtn = e.target.closest(".time-slot-btn");
-    if (slotBtn) {
-      timeSlotsContainer
-        .querySelectorAll(".time-slot-btn")
-        .forEach((slot) => slot.classList.remove("selected"));
-      slotBtn.classList.add("selected");
-      selectedSlot = slotBtn.dataset.value;
-    }
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!selectedSlot) {
-      alert("Please select a time slot.");
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Scheduling...";
-
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      details: formData.get("details"),
-      dateTime: selectedSlot,
-      lang: "en",
-    };
-
-    try {
-      const result = await requestSchedule("/book", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      form.style.display = "none";
-      formMessage.style.display = "block";
-      formMessage.className = "success";
-      formMessage.innerHTML = "<h3>Thank You!</h3><p>Your meeting is scheduled. A confirmation email has been sent to you.</p>";
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      formMessage.style.display = "block";
-      formMessage.className = "error";
-      formMessage.innerHTML = "<h3>Error</h3><p>Something went wrong. Please try again or contact me directly.</p>";
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Submit & Schedule";
-    }
-  });
-</script>
 
 </body>
 </html>

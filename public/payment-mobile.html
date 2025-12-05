@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "sxaf839npz");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D8GQDGVR08"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D8GQDGVR08');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="icon" type="image/svg+xml" href="/logos/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <title>Secure Payment - Mobile</title>
+    <style>
+        /* Base Mobile Styles from index-mobile.html */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+            background: #1E1E21;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            left: 0;
+            background: rgba(30, 30, 33, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #333;
+        }
+
+        #header img {
+            height: 32px;
+            width: auto;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(22, 22, 22, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 80px 24px 24px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        nav.active {
+            right: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 300;
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a:hover {
+            color: #72FFA3;
+        }
+
+        .dropdown-menu {
+            padding-left: 16px;
+            margin-top: 12px;
+        }
+
+        .dropdown-menu a {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 32px 20px;
+            font-size: 14px;
+            font-weight: 100;
+            border-top: 1px solid #333;
+        }
+
+        /* Payment Specific Styles */
+        .payment-wrapper {
+            padding: 100px 20px 40px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .payment-subtitle {
+            color: #C4C4C4;
+            font-size: 16px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .packages-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .package-card {
+            background: rgba(22, 22, 22, 0.6);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .package-card.selected {
+            border-color: #448aff;
+            background: rgba(68, 138, 255, 0.1);
+        }
+
+        .package-card.package-featured {
+            border-color: #00e676;
+            background: rgba(0, 230, 118, 0.05);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #00e676;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .package-header h3 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .price-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00e676;
+            display: block;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: #9e9e9e;
+        }
+
+        .package-title {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin: 16px 0;
+            font-weight: 500;
+        }
+
+        .package-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .package-features li {
+            padding: 8px 0;
+            color: #9e9e9e;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .package-features li strong {
+            color: #fff;
+        }
+
+        .package-select-btn {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid #00e676;
+            color: #00e676;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .package-card.selected .package-select-btn {
+            background: #448aff;
+            border-color: #448aff;
+            color: white;
+        }
+
+        .payment-section {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #333;
+        }
+
+        .selected-package-info {
+            background: rgba(68, 138, 255, 0.1);
+            border: 1px solid #448aff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .amount-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(45, 45, 48, 0.8);
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 16px;
+            color: #fbbc04;
+            font-size: 20px;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 16px 16px 16px 40px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 20px;
+            outline: none;
+        }
+
+        #paypal-button-container {
+            margin-top: 24px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(66, 133, 244, 0.2);
+            border-top-color: #00e676;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #result-message {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            background: rgba(52, 168, 83, 0.1);
+            border: 1px solid #34A853;
+            color: #34A853;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header">
+        <a href="index-mobile.html"><img src="ma_logo.svg" alt="Automations by Meir" /></a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <ul>
+            <li><a href="index-mobile.html#services">Services</a></li>
+            <li><a href="index-mobile.html#projects">Projects</a></li>
+            <li>
+                <a href="#showcases">Showcases</a>
+                <ul class="dropdown-menu">
+                    <li><a href="showcase1-mobile.html">Crypto Wallet Tracker</a></li>
+                    <li><a href="showcase2-mobile.html">Business Analytics System</a></li>
+                    <li><a href="showcase-job-post-pro-mobile.html">Job Post Pro</a></li>
+                </ul>
+            </li>
+            <li><a href="why-automation-mobile.html">Why Automate</a></li>
+            <li><a href="automation-playground-mobile.html">Try Live</a></li>
+            <li><a href="payment-mobile.html">Packages</a></li>
+            <li><a href="index-mobile.html#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="payment-wrapper">
+        <h1>Choose Your Package</h1>
+        <p class="payment-subtitle">Select a package that fits your needs</p>
+
+        <div class="packages-grid">
+            <div class="package-card" data-package="basic" data-price="300">
+                <div class="package-header">
+                    <h3>Basic</h3>
+                    <span class="price-amount">US$300</span>
+                    <span class="price-note">+ taxes & fees</span>
+                </div>
+                <div class="package-title">Prompt Engineering Kickstart</div>
+                <ul class="package-features">
+                    <li>Quick consultation (1 session)</li>
+                    <li>Integration of an AI model</li>
+                    <li>Database integration</li>
+                    <li>Include source code</li>
+                    <li>Detailed code comments</li>
+                    <li><strong>Revisions:</strong> 0</li>
+                    <li><strong>Delivery:</strong> 2 days</li>
+                </ul>
+                <button class="package-select-btn" data-package="basic">Select Basic</button>
+            </div>
+
+            <div class="package-card package-featured" data-package="standard" data-price="900">
+                <div class="package-badge">Popular</div>
+                <div class="package-header">
+                    <h3>Standard</h3>
+                    <span class="price-amount">US$900</span>
+                    <span class="price-note">+ taxes & fees</span>
+                </div>
+                <div class="package-title">Complete AI Integration & Support</div>
+                <ul class="package-features">
+                    <li>In-depth workflow analysis</li>
+                    <li>Setup of core AI prompts</li>
+                    <li>Integration of an AI model</li>
+                    <li>Database integration</li>
+                    <li>Include source code</li>
+                    <li>Detailed code comments</li>
+                    <li><strong>Revisions:</strong> 1</li>
+                    <li><strong>Delivery:</strong> 7 days</li>
+                </ul>
+                <button class="package-select-btn" data-package="standard">Select Standard</button>
+            </div>
+
+            <div class="package-card" data-package="premium" data-price="1500">
+                <div class="package-header">
+                    <h3>Premium</h3>
+                    <span class="price-amount">US$1,500</span>
+                    <span class="price-note">+ taxes & fees</span>
+                </div>
+                <div class="package-title">Premium – Complete AI Integration</div>
+                <ul class="package-features">
+                    <li>Full-scale workflow optimization</li>
+                    <li>Advanced prompt engineering</li>
+                    <li>Integration of an AI model</li>
+                    <li>Database integration</li>
+                    <li>Include source code</li>
+                    <li>Detailed code comments</li>
+                    <li><strong>Revisions:</strong> 2</li>
+                    <li><strong>Delivery:</strong> 21 days</li>
+                </ul>
+                <button class="package-select-btn" data-package="premium">Select Premium</button>
+            </div>
+        </div>
+
+        <div class="payment-section" id="payment-section" style="display: none;">
+            <h3>Complete Your Payment</h3>
+            <div class="selected-package-info" id="selected-package-info"></div>
+            <div class="form-group">
+                <label for="amount">Payment Amount (USD)</label>
+                <div class="amount-input-wrapper">
+                    <span class="currency-symbol">$</span>
+                    <input type="number" id="amount" name="amount" value="300.00" min="1.00" step="0.01" required>
+                </div>
+            </div>
+            <div id="paypal-button-container">
+                <div class="loading-spinner"></div>
+            </div>
+            <p id="result-message"></p>
+        </div>
+    </div>
+
+    <section id="footer">© 2025 Automations by Meir. All rights reserved.</section>
+
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AaSn2JSC0jwjh-bbre2EiOkOIbd-L-H7RsN-LUYb1fiQqLZGdCfDlaTn0FQrj_Dc7F28Xo0eUcicOi22&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"></script>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Payment Logic
+        const packages = {
+            basic: { name: 'Basic', title: 'Prompt Engineering Kickstart', price: 300 },
+            standard: { name: 'Standard', title: 'Complete AI Integration & Support', price: 900 },
+            premium: { name: 'Premium', title: 'Premium – Complete AI Integration', price: 1500 }
+        };
+
+        let selectedPackage = null;
+        let paypalButtons = null;
+
+        document.querySelectorAll('.package-select-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                selectPackage(this.dataset.package);
+            });
+        });
+
+        function selectPackage(packageType) {
+            document.querySelectorAll('.package-card').forEach(card => card.classList.remove('selected'));
+            document.querySelector(`[data-package="${packageType}"]`).classList.add('selected');
+
+            selectedPackage = packages[packageType];
+            document.getElementById('amount').value = selectedPackage.price.toFixed(2);
+
+            const paymentSection = document.getElementById('payment-section');
+            paymentSection.style.display = 'block';
+
+            document.getElementById('selected-package-info').innerHTML = `
+            <h4 style="margin:0 0 8px 0; color:#fff;">Selected: ${selectedPackage.name}</h4>
+            <p style="margin:0; color:#ccc;">${selectedPackage.title}</p>
+        `;
+
+            paymentSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            if (paypalButtons) paypalButtons.close();
+            renderPayPalButtons();
+        }
+
+        document.getElementById('amount').addEventListener('input', function () {
+            if (paypalButtons && parseFloat(this.value) > 0) {
+                paypalButtons.close();
+                renderPayPalButtons();
+            }
+        });
+
+        function renderPayPalButtons() {
+            const container = document.getElementById('paypal-button-container');
+            container.innerHTML = '<div class="loading-spinner"></div>';
+
+            paypalButtons = window.paypal.Buttons({
+                style: { shape: "rect", layout: "vertical", color: "white", label: "paypal" },
+                async createOrder(data, actions) {
+                    const amountValue = document.getElementById("amount").value;
+                    try {
+                        const response = await fetch("/api/orders", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ amount: amountValue }),
+                        });
+                        const orderData = await response.json();
+                        if (response.ok && orderData.id) return orderData.id;
+                        throw new Error(orderData.details?.[0]?.issue || "Order creation failed");
+                    } catch (error) {
+                        console.warn("Fallback to client-side order", error);
+                        return actions.order.create({
+                            purchase_units: [{ amount: { currency_code: "USD", value: amountValue } }]
+                        });
+                    }
+                },
+                async onApprove(data, actions) {
+                    try {
+                        const response = await fetch(`/api/orders/${data.orderID}/capture`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                        });
+                        const orderData = await response.json();
+                        if (orderData.status === "COMPLETED") {
+                            resultMessage(`Transaction Completed: ${orderData.id}`);
+                        } else {
+                            throw new Error("Transaction failed");
+                        }
+                    } catch (error) {
+                        console.error("Fallback to client-side capture", error);
+                        actions.order.capture().then(details => {
+                            resultMessage(`Transaction Completed: ${details.id}`);
+                        });
+                    }
+                }
+            });
+            paypalButtons.render("#paypal-button-container");
+        }
+
+        function resultMessage(message) {
+            const container = document.getElementById("result-message");
+            container.innerHTML = message;
+            container.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
